@@ -5,7 +5,7 @@ This package is in early testing phase to solve the needs of https://github.com/
 
 # Standards
 
-The package will follow standards defined at NASA's Global Change Master Directory (GCMD) (http://gcmd.gsfc.nasa.gov) and the NetCDF-CF conventions (http://cfconventions.org/), plus possibly others that will be added as needs emerge... The standards are added to Python dictinoaries and may be saved to json-files.
+The package will follow standards defined at NASA's Global Change Master Directory (GCMD) (http://gcmd.gsfc.nasa.gov) and the NetCDF-CF conventions (http://cfconventions.org/), plus possibly others that will be added as needs emerge... The standards are added to Python dictionaries and may be saved to json-files.
 
 ## Directory Interchange Format (DIF) 
 
