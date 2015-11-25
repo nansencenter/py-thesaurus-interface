@@ -14,6 +14,10 @@ import os
 import requests
 import json
 from copy import copy
+from pkg_resources import resource_filename
+
+json_path = resource_filename('nerscmetadata', 'json')
+json_filename = 'gcmd_keywords.json'
 
 def create_list_by_key(dict, key):
     if not dict.has_key(key):
@@ -23,7 +27,7 @@ def create_dict_by_key(dict, key):
     if not dict.has_key(key):
         dict[key] = {}
 
-def populate_dict(keywords, dict, keyword_groups, post_kw=None):
+def populate(keywords, dict, keyword_groups, post_kw=None):
     ''' Recursively populate dictionary (dict) with keys and values provided in
     the first argument (keywords)
 
@@ -50,7 +54,7 @@ def populate_dict(keywords, dict, keyword_groups, post_kw=None):
         post_kw = None
     else:
         create_dict_by_key(dict, this_keyword)
-        populate_dict(keywords, dict[this_keyword], keyword_groups, post_kw)
+        populate(keywords, dict[this_keyword], keyword_groups, post_kw)
 
 
 def gcmd_standard_dict(url, keyword_groups, dict={}):
@@ -85,13 +89,13 @@ def gcmd_standard_dict(url, keyword_groups, dict={}):
             # Remove last item (the ID is not needed)
             gcmd_keywords.pop(-1) 
             # Create copy of the keyword list for recursive population of dict
-            # in populate_dict method
+            # in populate method
             kw_copy = copy(gcmd_keywords)
             kwg_copy = copy(keyword_groups)
             # Populate dictionary 
             if len(kw_copy)!=len(kwg_copy):
                 continue
-            populate_dict(kw_copy, dict, kwg_copy)
+            populate(kw_copy, dict, kwg_copy)
         if line.split(',')[0].lower() == keyword_groups[0].lower():
             do_record = True
             kw_groups = line.split(',')
@@ -99,7 +103,7 @@ def gcmd_standard_dict(url, keyword_groups, dict={}):
             # Make sure the group items are as expected
             assert kw_groups==keyword_groups
 
-def write_json(filename='gcmd_keywords.json', path='.'):
+def write_json(filename=json_filename, path=json_path):
     base_url = 'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/'
     keywords = {'Instruments': {}, 'Platforms': {}}
     instruments_kw_groups = ['Category', 'Class', 'Type', 'Subtype',
@@ -114,3 +118,52 @@ def write_json(filename='gcmd_keywords.json', path='.'):
     gcmd_standard_dict(platforms_url, platforms_kw_groups, keywords['Platforms'])
     with open(os.path.join(path, filename), 'w') as out:
         json.dump(keywords, out, indent=4)
+
+def dict_from_json(update=False):
+    json_fn = os.path.join(json_path, json_filename)
+    if not os.path.isfile(json_fn) or update:
+        print('Updating json file')
+        write_json()
+    return json.load(open(os.path.join(json_path, json_filename)))
+
+def dict_depth(d, depth=0):
+    if not isinstance(d, dict) or not d:
+        return depth
+    return max(dict_depth(v, depth+1) for k, v in d.iteritems())
+
+def extract(dict_in, final, list_out=None):
+    ''' Recursively get a list of keyword lists
+
+    The returned list has a length equal to the depth of the dictionary
+    (dict_in), and the last item, e.g., list_out[0][0][0][:] for depth=4, has
+    the keyword list we're after. The list called final has "depth"=1 and is
+    easier to work with...
+
+    The code is a bit ugly and could probably be improved.. Alternatively, it
+    would be much easier to just read directly from the csv-file...
+    '''
+    if not list_out:
+        list_out = []
+    if isinstance(dict_in, unicode):
+        list_out=None
+        return []
+    if isinstance(dict_in, list):
+        retval = []
+        for item in dict_in:
+            retval.append(copy(list_out) + item)
+            final.append(copy(list_out) + item)
+        list_out = None
+        return retval
+    return [extract(dict_in[k], final, copy(list_out) + [k]) for k, v in
+            dict_in.iteritems()]
+
+def lists_from_dict(dd):
+    final = []
+    ll = extract(dd, final)
+    return final
+
+def get_keywords(list, **kwargs):
+    # Consider getting the keywords directly from a csv file instead of json
+    dd = dict_from_json(**kwargs)[list]
+    return lists_from_dict(dd)
+

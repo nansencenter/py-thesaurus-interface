@@ -10,12 +10,8 @@
 # Copyright:    (c) NERSC
 # License:      
 #-------------------------------------------------------------------------------
-
-# Download GCMD keywords from http://gcmd.nasa.gov/learn/keyword_list.html at
-# installation time to use as backup if no internet connection
-
+import sys, shutil
 from setuptools import setup, find_packages
-import sys
 
 readme_file = 'README.md'
 try:
@@ -27,25 +23,41 @@ except IOError:
 
 install_requires = []
 
-setup(name='nersc-metadata',
-      version=0.1,
-      description='Metadata conventions for geospatial data at NERSC',
-      long_description=long_description,
-      zip_safe=False,
-      author=('Morten W. Hansen', 'Anton Korosov', 'Aleksander Vines',),
-      author_email='mortenh@nersc.no',
-      url='#',
-      download_url='#',
-      packages = find_packages(),
-      include_package_data=True,
-      install_requires = install_requires,
-      test_suite='runtests.runtests',
-      classifiers = ['Development Status :: 0 - Beta',
-                     'Environment :: Web Environment',
-                     'Framework :: ',
-                     'Intended Audience :: Developers',
-                     'License :: OSI Approved :: BSD License',
-                     'Operating System :: OS Independent',
-                     'Programming Language :: Python',
-                     'Topic :: Utilities'],
-      )
+NAME = 'nerscmetadata'
+
+def run_setup():
+
+    from nerscmetadata.gcmd_keywords import write_json
+    write_json()
+
+    setup(name=NAME,
+        version=0.1,
+        description='Metadata conventions for geospatial data at NERSC',
+        long_description=long_description,
+        zip_safe=False,
+        author=('Morten W. Hansen', 'Anton Korosov', 'Aleksander Vines',),
+        author_email='mortenh@nersc.no',
+        url='#',
+        download_url='#',
+        packages = find_packages(),
+        package_data = {NAME: ['json/*.json']},
+        include_package_data=True,
+        install_requires = install_requires,
+        test_suite='runtests.runtests',
+        classifiers = [
+            'Development Status :: 0 - Beta',
+            'Environment :: Web Environment',
+            'Framework :: ',
+            'Intended Audience :: Developers',
+            'License :: OSI Approved :: BSD License',
+            'Operating System :: OS Independent',
+            'Programming Language :: Python',
+            'Topic :: Utilities'
+        ],
+    )
+    shutil.rmtree('dist')
+    shutil.rmtree('build')
+    shutil.rmtree('nerscmetadata.egg-info')
+
+run_setup()
+
