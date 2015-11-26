@@ -17,8 +17,7 @@ from nerscmetadata import gcmd_keywords
 class GetGCMDKeywordsTest(unittest.TestCase):
 
     def test_write_json(self):
-        fn = 'gcmd_keywords.json'
         gcmd_keywords.write_json()
-        dd = json.load(open(fn))
-        os.remove(fn)
+        dd = json.load(open(os.path.join(gcmd_keywords.json_path,
+            gcmd_keywords.json_filename)))
         self.assertEqual(type(dd), dict)
