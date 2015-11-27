@@ -15,6 +15,7 @@ import requests
 import json
 from copy import copy
 from pkg_resources import resource_filename
+import numpy as np
 
 json_path = resource_filename('nerscmetadata', 'json')
 json_filename = 'gcmd_keywords.json'
@@ -95,3 +96,19 @@ def dict_from_json(update=False):
 def get_keywords(list, **kwargs):
     # Consider getting the keywords directly from a csv file instead of json
     return dict_from_json(**kwargs)[list]
+
+def get_list_item(list, item):
+    ''' Return the dictionary containing item in provided list of dictionaries '''
+    indices = [('Short_Name' in d) and ( d['Short_Name']==item.upper() or
+        d['Long_Name']==item.upper()) for d in list]
+    d = np.where(indices)
+    if len(d)>1 or len(d[0])>1:
+        raise ValueError
+    index = d[0][0]
+    return list[index]
+
+def get_instrument(short_or_long_name):
+    return get_list_item(get_keywords('Instruments'), short_or_long_name)
+
+def get_platform(short_or_long_name):
+    return get_list_item(get_keywords('Platforms'), short_or_long_name)
