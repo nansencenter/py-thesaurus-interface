@@ -83,6 +83,8 @@ def write_json(filename=json_filename, path=json_path):
             'Instruments': gcmd_instruments, 
             'Platforms': gcmd_platforms,
         }
+    if not os.path.exists(path):
+        os.mkdir(path)
     with open(os.path.join(path, filename), 'w') as out:
         json.dump(keywords, out, indent=4)
 
