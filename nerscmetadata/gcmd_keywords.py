@@ -101,8 +101,8 @@ def get_keywords(list, **kwargs):
 
 def get_list_item(list, item):
     ''' Return the dictionary containing item in provided list of dictionaries '''
-    indices = [('Short_Name' in d) and ( d['Short_Name']==item.upper() or
-        d['Long_Name']==item.upper()) for d in list]
+    indices = [('Short_Name' in d) and ( d['Short_Name'].upper()==item.upper()
+        or d['Long_Name'].upper()==item.upper()) for d in list]
     d = np.where(indices)
     if len(d)>1 or len(d[0])>1:
         raise ValueError
