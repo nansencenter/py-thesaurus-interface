@@ -65,9 +65,5 @@ def run_setup():
     except:
         pass
 
-    shutil.rmtree('dist')
-    shutil.rmtree('build')
-    shutil.rmtree('nerscmetadata.egg-info')
-
 run_setup()
 
