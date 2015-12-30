@@ -1,0 +1,9 @@
+setup.py
+nerscmetadata/__init__.py
+nerscmetadata/gcmd_keywords.py
+nerscmetadata/tests.py
+nerscmetadata.egg-info/PKG-INFO
+nerscmetadata.egg-info/SOURCES.txt
+nerscmetadata.egg-info/dependency_links.txt
+nerscmetadata.egg-info/not-zip-safe
+nerscmetadata.egg-info/top_level.txt
