@@ -21,7 +21,13 @@ except IOError:
         "``long_description`` (%s)\n" % readme_file)
     sys.exit(1)
 
-install_requires = []
+import_error_msg = "nerscmetadata requires %s, which should be installed separately"
+try:
+    import numpy
+except ImportError:
+    raise ImportError(import_error_msg %'numpy')
+
+install_requires = ['requests']
 
 NAME = 'nerscmetadata'
 
