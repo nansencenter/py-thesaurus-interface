@@ -31,7 +31,7 @@ def run_setup():
     write_json()
 
     setup(name=NAME,
-        version=0.1,
+        version=0.1beta,
         description='Metadata conventions for geospatial data at NERSC',
         long_description=long_description,
         zip_safe=False,
