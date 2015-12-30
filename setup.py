@@ -34,7 +34,7 @@ NAME = 'nerscmetadata'
 def run_setup():
 
     setup(name=NAME,
-        version='0.1.2',
+        version='0.1.3',
         description='Metadata conventions for geospatial data at NERSC',
         long_description=long_description,
         zip_safe=False,
