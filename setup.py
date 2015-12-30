@@ -33,9 +33,6 @@ NAME = 'nerscmetadata'
 
 def run_setup():
 
-    from nerscmetadata.gcmd_keywords import write_json
-    write_json()
-
     setup(name=NAME,
         version=0.1,
         description='Metadata conventions for geospatial data at NERSC',
@@ -61,6 +58,13 @@ def run_setup():
             'Topic :: Utilities'
         ],
     )
+    try:
+        # write json file
+        from nerscmetadata.gcmd_keywords import write_json
+        write_json()
+    except:
+        pass
+
     shutil.rmtree('dist')
     shutil.rmtree('build')
     shutil.rmtree('nerscmetadata.egg-info')
