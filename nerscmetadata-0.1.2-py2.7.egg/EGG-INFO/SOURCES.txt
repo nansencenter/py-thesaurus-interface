@@ -6,4 +6,5 @@ nerscmetadata.egg-info/PKG-INFO
 nerscmetadata.egg-info/SOURCES.txt
 nerscmetadata.egg-info/dependency_links.txt
 nerscmetadata.egg-info/not-zip-safe
+nerscmetadata.egg-info/requires.txt
 nerscmetadata.egg-info/top_level.txt
