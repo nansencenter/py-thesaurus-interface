@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # Name:
-# Purpose:      
+# Purpose:
 #
 # Author:       Morten Wergeland Hansen
 # Modified:
@@ -8,7 +8,7 @@
 # Created:
 # Last modified:
 # Copyright:    (c) NERSC
-# License:      
+# License:
 #-------------------------------------------------------------------------------
 import sys, shutil
 from setuptools import setup, find_packages
@@ -21,12 +21,6 @@ except IOError:
         "``long_description`` (%s)\n" % readme_file)
     sys.exit(1)
 
-import_error_msg = "nerscmetadata requires %s, which should be installed separately"
-try:
-    import numpy
-except ImportError:
-    raise ImportError(import_error_msg %'numpy')
-
 install_requires = ['requests']
 
 NAME = 'nerscmetadata'
@@ -34,7 +28,7 @@ NAME = 'nerscmetadata'
 def run_setup():
 
     setup(name=NAME,
-        version='0.1.3',
+        version='0.1.4',
         description='Metadata conventions for geospatial data at NERSC',
         long_description=long_description,
         zip_safe=False,

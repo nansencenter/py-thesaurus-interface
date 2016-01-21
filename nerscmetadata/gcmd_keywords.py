@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # Name:
-# Purpose:      
+# Purpose:
 #
 # Author:       Morten Wergeland Hansen
 # Modified:
@@ -8,14 +8,13 @@
 # Created:
 # Last modified:
 # Copyright:    (c) NERSC
-# License:      
+# License:
 #-------------------------------------------------------------------------------
 import os
 import requests
 import json
 from copy import copy
 from pkg_resources import resource_filename
-import numpy as np
 
 json_path = resource_filename('nerscmetadata', 'json')
 json_filename = 'gcmd_keywords.json'
@@ -37,7 +36,7 @@ def gcmd_standard_list(url, keyword_groups):
     # Boolean to determine if line information in the response object should be
     # stored as keywords
     do_record = False
-    
+
     gcmd_list = []
     for line in response.iter_lines():
         if 'Keyword Version' and 'Revision' in line:
@@ -49,7 +48,7 @@ def gcmd_standard_list(url, keyword_groups):
             if gcmd_keywords[0] == 'NOT APPLICABLE':
                 continue
             # Remove last item (the ID is not needed)
-            gcmd_keywords.pop(-1) 
+            gcmd_keywords.pop(-1)
             if len(gcmd_keywords)!=len(kw_groups):
                 continue
             if not gcmd_keywords[-2] and not gcmd_keywords[-1]:
@@ -80,7 +79,7 @@ def write_json(filename=json_filename, path=json_path):
     gcmd_platforms = gcmd_standard_list(platforms_url, platforms_kw_groups)
 
     keywords = {
-            'Instruments': gcmd_instruments, 
+            'Instruments': gcmd_instruments,
             'Platforms': gcmd_platforms,
         }
     if not os.path.exists(path):
@@ -101,13 +100,18 @@ def get_keywords(list, **kwargs):
 
 def get_list_item(list, item):
     ''' Return the dictionary containing item in provided list of dictionaries '''
-    indices = [('Short_Name' in d) and ( d['Short_Name'].upper()==item.upper()
-        or d['Long_Name'].upper()==item.upper()) for d in list]
-    d = np.where(indices)
-    if len(d)>1 or len(d[0])>1:
-        raise ValueError
-    index = d[0][0]
-    return list[index]
+    matches = []
+    for d in list:
+        if (('Short_Name' in d and d['Short_Name'].upper()==item.upper()) or
+            ( 'Long_Name' in d and  d['Long_Name'].upper()==item.upper())):
+            matches.append(d)
+
+    if len(matches) > 1:
+        raise ValueError('More than one coincedence with %s' % item)
+    elif len(matches) == 0:
+        raise ValueError('Cannot find %s' % item)
+
+    return matches[0]
 
 def get_instrument(short_or_long_name):
     return get_list_item(get_keywords('Instruments'), short_or_long_name)

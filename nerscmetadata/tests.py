@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # Name:
-# Purpose:      
+# Purpose:
 #
 # Author:       Morten Wergeland Hansen
 # Modified:
@@ -8,7 +8,7 @@
 # Created:
 # Last modified:
 # Copyright:    (c) NERSC
-# License:      
+# License:
 #-------------------------------------------------------------------------------
 import unittest
 import os, json
@@ -21,3 +21,9 @@ class GetGCMDKeywordsTest(unittest.TestCase):
         dd = json.load(open(os.path.join(gcmd_keywords.json_path,
             gcmd_keywords.json_filename)))
         self.assertEqual(type(dd), dict)
+
+    def test_find_instrument(self):
+        gcmd_keywords.get_instrument('MODIS')
+
+    def test_find_platform(self):
+        gcmd_keywords.get_platform('AQUA')
