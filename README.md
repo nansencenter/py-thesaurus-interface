@@ -4,8 +4,8 @@ Metadata conventions for geospatial data at NERSC
 This package is in early testing phase to solve the needs of https://github.com/nansencenter/nansat and https://github.com/nansencenter/nansen-cloud.
 
 # Install
-```sh
-pip install pip install https://github.com/nansencenter/nersc-metadata/archive/master.tar.gz
+```
+pip install https://github.com/nansencenter/nersc-metadata/archive/master.tar.gz
 ```
 
 # Standards
