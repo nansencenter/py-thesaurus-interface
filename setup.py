@@ -40,7 +40,7 @@ def run_setup():
         package_data = {NAME: ['json/*.json']},
         include_package_data=True,
         install_requires = install_requires,
-        test_suite='runtests.runtests',
+        test_suite='nerscmetadata.tests',
         classifiers = [
             'Development Status :: 0 - Beta',
             'Environment :: Web Environment',
@@ -53,9 +53,12 @@ def run_setup():
         ],
     )
     try:
-        # write json file
+        # write json files to have local data
         from nerscmetadata.gcmd_keywords import write_json
-        write_json()
+        write_json('instruments')
+        write_json('platforms')
+        write_json('data_centers')
+        write_json('locations')
     except:
         pass
 
