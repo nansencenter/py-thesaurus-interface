@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/nansencenter/nansat.svg?branch=master)](https://travis-ci.org/nansencenter/nansat)
+[![Coverage Status](https://coveralls.io/repos/github/nansencenter/nersc-metadata/badge.svg?branch=master)](https://coveralls.io/github/nansencenter/nersc-metadata?branch=master)
+
 # nersc-metadata
 Metadata conventions for geospatial data at NERSC
 
