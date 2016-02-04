@@ -25,6 +25,16 @@ base_url = 'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/'
 # Note: The kw_groups are used in validating the keyword groups in each list
 # every time the list is downloaded from the gcmd services
 gcmd_lists = {
+    'science_keywords': {
+        'kw_groups': ['Category', 'Topic', 'Term', 'Variable_Level_1',
+            'Variable_Level_2', 'Variable_Level_3', 'Detailed_Variable'],
+        'url': base_url + 'sciencekeywords?format=csv'
+    },
+    'data_centers': {
+        'kw_groups': ['Bucket_Level0', 'Bucket_Level1', 'Bucket_Level2',
+            'Bucket_Level3', 'Short_Name', 'Long_Name', 'Data_Center_URL'],
+        'url': base_url + 'providers?format=csv'
+    },
     'instruments': {
         'kw_groups': ['Category', 'Class', 'Type', 'Subtype', 'Short_Name',
             'Long_Name'],
@@ -34,11 +44,6 @@ gcmd_lists = {
         'kw_groups': ['Category', 'Series_Entity', 'Short_Name',
             'Long_Name'],
         'url': base_url + 'platforms?format=csv'
-    },
-    'data_centers': {
-        'kw_groups': ['Bucket_Level0', 'Bucket_Level1', 'Bucket_Level2',
-            'Bucket_Level3', 'Short_Name', 'Long_Name', 'Data_Center_URL'],
-        'url': base_url + 'providers?format=csv'
     },
     'locations': {
         'kw_groups': ['Location_Category', 'Location_Type',
@@ -176,19 +181,22 @@ def get_list_item(list, item):
         if not any(val for val in remaining.itervalues()):
             return m
 
-def get_instrument(item):
-    return get_list_item(get_keywords('Instruments'), item)
+def get_instrument(item, **kwargs):
+    return get_list_item(get_keywords('Instruments', **kwargs), item)
 
-def get_platform(item):
-    return get_list_item(get_keywords('Platforms'), item)
+def get_platform(item, **kwargs):
+    return get_list_item(get_keywords('Platforms', **kwargs), item)
 
 def get_iso_topic_category(kw):
     for keyword in iso_topic_category_list.keywords:
         if keyword.upper()==kw.upper():
             return keyword
 
-def get_data_center(item):
-    return get_list_item(get_keywords('data_centers'), item)
+def get_science_keyword(item, **kwargs):
+    return get_list_item(get_keywords('science_keywords', **kwargs), item)
 
-def get_location(name):
-    return get_list_item(get_keywords('locations'), name)
+def get_data_center(item, **kwargs):
+    return get_list_item(get_keywords('data_centers', **kwargs), item)
+
+def get_location(name, **kwargs):
+    return get_list_item(get_keywords('locations', **kwargs), name)
