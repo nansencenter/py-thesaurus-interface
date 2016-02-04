@@ -27,6 +27,11 @@ class GetGCMDKeywordsTest(unittest.TestCase):
     def test_find_instrument(self):
         self.assertIsInstance(gcmd_keywords.get_instrument('MODIS'), dict)
 
+    def test_find_instrument_class(self):
+        self.assertIsInstance(
+                gcmd_keywords.get_instrument('active remote sensing'), 
+                dict)
+
     def test_find_platform(self):
         self.assertIsInstance(gcmd_keywords.get_platform('AQUA'), dict)
 
@@ -38,16 +43,16 @@ class GetGCMDKeywordsTest(unittest.TestCase):
         self.assertIsInstance(gcmd_keywords.get_data_center('NERSC'), dict)
 
     def test_find_location_category(self):
-        gcmd_keywords.get_continent('continent')
+        self.assertIsInstance(gcmd_keywords.get_location('continent'), dict)
 
     def test_find_location_type(self):
-        gcmd_keywords.get_location_type('africa')
+        self.assertIsInstance(gcmd_keywords.get_location('africa'), dict)
 
     def test_find_location_subregion1(self):
-        gcmd_keywords.get_location_type('central africa')
+        self.assertIsInstance(gcmd_keywords.get_location('central africa'), dict)
 
     def test_find_location_subregion2(self):
-        gcmd_keywords.get_location_type('Angola')
+        self.assertIsInstance(gcmd_keywords.get_location('Angola'), dict)
 
     def test_find_location_subregion3(self):
         self.assertIsInstance(gcmd_keywords.get_location('HONG KONG'), dict)

@@ -15,12 +15,15 @@ import requests
 import json
 from copy import copy
 from pkg_resources import resource_filename
+from collections import OrderedDict
 
 from nerscmetadata import iso_topic_category_list
 
 json_path = resource_filename('nerscmetadata', 'json')
 
 base_url = 'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/'
+# Note: The kw_groups are used in validating the keyword groups in each list
+# every time the list is downloaded from the gcmd services
 gcmd_lists = {
     'instruments': {
         'kw_groups': ['Category', 'Class', 'Type', 'Subtype', 'Short_Name',
@@ -109,80 +112,83 @@ def dicts_from_json(list_name, update=False):
     if not os.path.isfile(json_fn) or update:
         print('Updating json file')
         write_json(list_name)
-    return json.load(open(os.path.join(json_path, json_filename(list_name))))
+    keyword_list = json.load(open(os.path.join(json_path, json_filename(list_name))))
+    # Create list with ordered dictionaries
+    new_kw_list = []
+    for dd in keyword_list:
+        if dd.keys()[0]=='Revision':
+            new_kw_list.append(dd)
+            continue
+        new_dict = OrderedDict()
+        for key in gcmd_lists[list_name.lower()]['kw_groups']:
+            new_dict[key] = dd[key]
+        new_kw_list.append(new_dict)
+    return new_kw_list
 
 def get_keywords(list, **kwargs):
     return dicts_from_json(list, **kwargs)
 
-def list_item_from_short_or_long_name(d, item):
-    if (('Short_Name' in d and d['Short_Name'].upper()==item.upper()) or
-            ( 'Long_Name' in d and  d['Long_Name'].upper()==item.upper())):
-        return True
-    else:
-        return False
+def get_list_item(list, item):
+    ''' Return the dictionary containing the given item in the provided list of
+    dictionaries. The function returns only the lowest level match, i.e., the
+    dictionary where the subgroups of the matching group are empty or the only
+    match, if there is just one.
 
-def list_item_from_group_name(d, item, group_name):
-    if (group_name in d and d[group_name].upper()==item.upper()):
-        return True
-    else:
-        return False
+    Examples:
 
-def get_list_item(list, item, kwgroup=None):
-    ''' Return the dictionary containing item in provided list of dictionaries '''
+    1) Searching "Active Remote Sensing" in the instruments list will return
+        {
+            'Category': 'Earth Remote Sensing Instruments',
+            'Class': 'Active Remote Sensing',
+            'Type': '', 
+            'Subtype': '', 
+            'Short_Name': '', 
+            'Long_Name': ''
+        }
+
+    2) Searching "ASAR" in the instruments list will return
+        {
+            'Category': 'Earth Remote Sensing Instruments',
+            'Class': 'Active Remote Sensing',
+            'Type': 'Imaging Radars', 
+            'Subtype': '', 
+            'Short_Name': 'ASAR', 
+            'Long_Name': 'Advanced Synthetic Aperature Radar'
+        }
+    
+    '''
     matches = []
+    matching_key = ''
     for d in list:
-        if not kwgroup:
-            if list_item_from_short_or_long_name(d, item):
+        for key in d.keys():
+            if d[key].upper()==item.upper():
                 matches.append(d)
-        else:
-            if list_item_from_group_name(d, item, kwgroup):
-                matches.append(d)
+                matching_key = key
+    keys = matches[0].keys()
+    kw_group_index = keys.index(matching_key)
+    ii = range(kw_group_index+1, len(keys))
+    if len(matches)==1:
+        return matches[0]
+    for m in matches:
+        remaining = {}
+        for i in ii:
+            remaining[keys[i]] = m[keys[i]]
+        if not any(val for val in remaining.itervalues()):
+            return m
 
-    if len(matches) > 1:
-        raise ValueError('More than one keyword matching %s' % item)
-    elif len(matches) == 0:
-        raise ValueError('Cannot find %s' % item)
+def get_instrument(item):
+    return get_list_item(get_keywords('Instruments'), item)
 
-    return matches[0]
-
-def get_instrument(short_or_long_name):
-    return get_list_item(get_keywords('Instruments'), short_or_long_name)
-
-def get_platform(short_or_long_name):
-    return get_list_item(get_keywords('Platforms'), short_or_long_name)
+def get_platform(item):
+    return get_list_item(get_keywords('Platforms'), item)
 
 def get_iso_topic_category(kw):
     for keyword in iso_topic_category_list.keywords:
         if keyword.upper()==kw.upper():
             return keyword
 
-def get_data_center(short_or_long_name):
-    return get_list_item(get_keywords('data_centers'), short_or_long_name)
+def get_data_center(item):
+    return get_list_item(get_keywords('data_centers'), item)
 
 def get_location(name):
-    try:
-        ll = get_list_item(get_keywords('locations'), name, 'Location_Subregion3')
-    except ValueError:
-        ll = None
-    if not ll:
-        try:
-            ll = get_list_item(get_keywords('locations'), name, 'Location_Subregion2')
-        except ValueError:
-            ll = None
-    if not ll:
-        try:
-            ll = get_list_item(get_keywords('locations'), name, 'Location_Subregion1')
-        except ValueError:
-            ll = None
-    if not ll:
-        try:
-            ll = get_list_item(get_keywords('locations'), name, 'Location_Type')
-        except ValueError:
-            ll = None
-    if not ll:
-        try:
-            ll = get_list_item(get_keywords('locations'), name, 'Location_Category')
-        except ValueError:
-            ll = None
-    return ll
-
+    return get_list_item(get_keywords('locations'), name)
