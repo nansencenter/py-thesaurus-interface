@@ -1,4 +1,4 @@
-
+[![Build Status](https://travis-ci.org/nansencenter/py-thesaurus-interface.svg?branch=master)](https://travis-ci.org/nansencenter/py-thesaurus-interface)
 [![Coverage Status](https://coveralls.io/repos/github/nansencenter/py-thesaurus-interface/badge.svg?branch=master)](https://coveralls.io/github/nansencenter/py-thesaurus-interface?branch=master)
 
 # py-thesaurus-interface
