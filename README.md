@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/nansencenter/nansat.svg?branch=master)](https://travis-ci.org/nansencenter/nansat)
-[![Coverage Status](https://coveralls.io/repos/github/nansencenter/nersc-metadata/badge.svg?branch=master)](https://coveralls.io/github/nansencenter/nersc-metadata?branch=master)
+
+[![Coverage Status](https://coveralls.io/repos/github/nansencenter/py-thesaurus-interface/badge.svg?branch=master)](https://coveralls.io/github/nansencenter/py-thesaurus-interface?branch=master)
 
 # py-thesaurus-interface
 An interface to metadata conventions for geospatial data
