@@ -23,13 +23,13 @@ except IOError:
 
 install_requires = ['requests']
 
-NAME = 'nerscmetadata'
+NAME = 'pythesint'
 
 def run_setup():
 
     setup(name=NAME,
-        version='0.1.4',
-        description='Metadata conventions for geospatial data at NERSC',
+        version='0.3',
+        description='An interface to metadata conventions for geospatial data',
         long_description=long_description,
         zip_safe=False,
         author=('Morten W. Hansen', 'Anton Korosov', 'Aleksander Vines',),
@@ -40,7 +40,7 @@ def run_setup():
         package_data = {NAME: ['json/*.json']},
         include_package_data=True,
         install_requires = install_requires,
-        test_suite='nerscmetadata.tests',
+        test_suite='pythesint.tests',
         classifiers = [
             'Development Status :: 0 - Beta',
             'Environment :: Web Environment',
@@ -52,15 +52,15 @@ def run_setup():
             'Topic :: Utilities'
         ],
     )
-    try:
-        # write json files to have local data
-        from nerscmetadata.gcmd_keywords import write_json
-        write_json('instruments')
-        write_json('platforms')
-        write_json('data_centers')
-        write_json('locations')
-    except:
-        pass
+    #try:
+    #    # write json files to have local data
+    #    from pythesint.gcmd_keywords import write_json
+    #    write_json('instruments')
+    #    write_json('platforms')
+    #    write_json('data_centers')
+    #    write_json('locations')
+    #except:
+    #    pass
 
 run_setup()
 

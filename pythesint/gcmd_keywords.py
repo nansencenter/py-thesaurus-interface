@@ -17,9 +17,9 @@ from copy import copy
 from pkg_resources import resource_filename
 from collections import OrderedDict
 
-from nerscmetadata import iso_topic_category_list
+from pythesint import iso_topic_category_list
 
-json_path = resource_filename('nerscmetadata', 'json')
+json_path = resource_filename('pythesint', 'json')
 
 base_url = 'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/'
 # Note: The kw_groups are used in validating the keyword groups in each list

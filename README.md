@@ -1,23 +1,23 @@
 [![Build Status](https://travis-ci.org/nansencenter/nansat.svg?branch=master)](https://travis-ci.org/nansencenter/nansat)
 [![Coverage Status](https://coveralls.io/repos/github/nansencenter/nersc-metadata/badge.svg?branch=master)](https://coveralls.io/github/nansencenter/nersc-metadata?branch=master)
 
-# nersc-metadata
-Metadata conventions for geospatial data at NERSC
+# py-thesaurus-interface
+An interface to metadata conventions for geospatial data
 
-This package is in early testing phase to solve the needs of https://github.com/nansencenter/nansat and https://github.com/nansencenter/nansen-cloud.
+This package is in early development phase to solve the needs of https://github.com/nansencenter/nansat and https://github.com/nansencenter/nansen-cloud.
 
 # Install
 ```
-pip install https://github.com/nansencenter/nersc-metadata/archive/master.tar.gz
+pip install https://github.com/nansencenter/py-thesaurus-interface/archive/master.tar.gz
 ```
 
 # Standards
 
-The package will follow standards defined at NASA's Global Change Master Directory (GCMD) (http://gcmd.gsfc.nasa.gov) and the NetCDF-CF conventions (http://cfconventions.org/), plus possibly others that will be added as needs emerge... The standards are added to Python dictionaries and may be saved to json-files.
+The package follows the standards defined at NASA's Global Change Master Directory (GCMD) (http://gcmd.gsfc.nasa.gov) and the NetCDF-CF conventions (http://cfconventions.org/), plus possibly others that will be added as needs emerge... The standards are mapped in Python dictionaries and saved to json-files.
 
 ## Directory Interchange Format (DIF) 
 
-The DIF format is a descriptive and standardized format for exchanging information about scientific data sets. The nersc-metadata package will contain a validator to check that the format is followed, however with more strict requirements compared to http://gcmd.nasa.gov/add/difguide/WRITEADIF.pdf.
+The DIF format is a descriptive and standardized format for exchanging information about scientific data sets. The py-thesaurus-interface package provides an interface to the keywords and formats defined at GCMD.
 
 See: Directory Interchange Format (DIF) Writer's Guide, 2015. Global Change Master Directory. National Aeronautics and Space Administration. [http://gcmd.nasa.gov/add/difguide/]. 
 

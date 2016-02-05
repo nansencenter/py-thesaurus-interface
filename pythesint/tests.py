@@ -12,7 +12,7 @@
 #-------------------------------------------------------------------------------
 import unittest
 import os, json
-from nerscmetadata import gcmd_keywords
+from pythesint import gcmd_keywords
 
 class GetGCMDKeywordsTest(unittest.TestCase):
 
