@@ -4,8 +4,6 @@
 # py-thesaurus-interface
 An interface to metadata conventions for geospatial data
 
-This package is in early development phase to solve the needs of https://github.com/nansencenter/nansat and https://github.com/nansencenter/nansen-cloud.
-
 # Install
 ```
 pip install https://github.com/nansencenter/py-thesaurus-interface/archive/master.tar.gz
