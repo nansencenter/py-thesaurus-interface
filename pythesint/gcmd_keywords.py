@@ -10,6 +10,7 @@
 # Copyright:    (c) NERSC
 # License:
 #-------------------------------------------------------------------------------
+from __future__ import absolute_import
 import os
 import requests
 import json

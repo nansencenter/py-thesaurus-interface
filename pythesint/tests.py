@@ -10,6 +10,8 @@
 # Copyright:    (c) NERSC
 # License:
 #-------------------------------------------------------------------------------
+from __future__ import absolute_import
+
 import unittest
 import os, json
 from pythesint import gcmd_keywords
