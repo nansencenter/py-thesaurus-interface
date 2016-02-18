@@ -11,38 +11,45 @@ from pythesint import iso_topic_category_list
 
 json_path = resource_filename('pythesint', 'json')
 
+GCMD_INSTRUMENTS = 'gcmd_instruments'
+GCMD_PLATFORMS = 'gcmd_platforms'
+GCMD_SCIENCE_KEYWORDS = 'gcmd_science_keywords'
+GCMD_DATA_CENTERS = 'gcmd_data_centers'
+GCMD_LOCATIONS = 'gcmd_locations'
+CF_STANDARD_NAMES = 'cf_standard_names'
+
 # Note: The kw_groups are used in validating the keyword groups in each list
 # every time the list is downloaded from the gcmd services
 gcmd_base_url = 'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/'
 cf_url = 'http://cfconventions.org/Data/cf-standard-names/30/src/cf-standard-name-table.xml'
 standard_lists = {
-    'gcmd_science_keywords': {
+    GCMD_SCIENCE_KEYWORDS: {
         'kw_groups': ['Category', 'Topic', 'Term', 'Variable_Level_1',
             'Variable_Level_2', 'Variable_Level_3', 'Detailed_Variable'],
         'url': gcmd_base_url + 'sciencekeywords?format=csv'
     },
-    'gcmd_data_centers': {
+    GCMD_DATA_CENTERS: {
         'kw_groups': ['Bucket_Level0', 'Bucket_Level1', 'Bucket_Level2',
             'Bucket_Level3', 'Short_Name', 'Long_Name', 'Data_Center_URL'],
         'url': gcmd_base_url + 'providers?format=csv'
     },
-    'gcmd_instruments': {
+    GCMD_INSTRUMENTS: {
         'kw_groups': ['Category', 'Class', 'Type', 'Subtype', 'Short_Name',
             'Long_Name'],
         'url': gcmd_base_url + 'instruments?format=csv'
     },
-    'gcmd_platforms': {
+    GCMD_PLATFORMS: {
         'kw_groups': ['Category', 'Series_Entity', 'Short_Name',
             'Long_Name'],
         'url': gcmd_base_url + 'platforms?format=csv'
     },
-    'gcmd_locations': {
+    GCMD_LOCATIONS: {
         'kw_groups': ['Location_Category', 'Location_Type',
             'Location_Subregion1', 'Location_Subregion2',
             'Location_Subregion3'],
         'url': gcmd_base_url + 'locations?format=csv'
     },
-    'cf_standard_names': {
+    CF_STANDARD_NAMES: {
         'kw_groups': ['standard_name', 'canonical_units', 'grib', 'amip',
             'description'],
         'url': cf_url
@@ -97,7 +104,7 @@ def dicts_from_json(list_name, update=False):
         new_kw_list.append(new_dict)
     return new_kw_list
 
-def get_keywords(list, **kwargs):
+def get_keyword_list(list, **kwargs):
     return dicts_from_json(list, **kwargs)
 
 def get_list_item(list, item):
@@ -156,27 +163,45 @@ def get_list_item(list, item):
         if not any(val for val in remaining.itervalues()):
             return m
 
+def get_keyword(list, item, **kwargs):
+    ''' Get dictionary for given item in given list
 
-def get_instrument(item, **kwargs):
-    return get_list_item(get_keywords('gcmd_instruments', **kwargs), item)
-
-def get_platform(item, **kwargs):
-    return get_list_item(get_keywords('gcmd_platforms', **kwargs), item)
+    Usage: 
+    >>> import pythesint.pythesint as pi
+    >>> pi.get_keyword(pi.GCMD_LOCATIONS, 'africa')
+    OrderedDict([('Location_Category', u'CONTINENT'), 
+                 ('Location_Type', u'AFRICA'), 
+                 ('Location_Subregion1', u''), 
+                 ('Location_Subregion2', u''), 
+                 ('Location_Subregion3', u'')])
+    '''
+    assert list in standard_lists.keys()
+    return get_list_item(get_keyword_list(list, **kwargs), item)
 
 def get_iso_topic_category(kw):
+    '''
+    Get GCMD ISO Topic Category
+    
+    OBS: must be like this at the moment
+    '''
     for keyword in iso_topic_category_list.keywords:
         if keyword.upper()==kw.upper():
             return keyword
 
+def get_instrument(item, **kwargs):
+    return get_keyword(GCMD_INSTRUMENTS, item, **kwargs)
+
+def get_platform(item, **kwargs):
+    return get_keyword(GCMD_PLATFORMS, item, **kwargs)
+
 def get_science_keyword(item, **kwargs):
-    return get_list_item(get_keywords('gcmd_science_keywords', **kwargs), item)
+    return get_keyword(GCMD_SCIENCE_KEYWORDS, item, **kwargs)
 
 def get_data_center(item, **kwargs):
-    return get_list_item(get_keywords('gcmd_data_centers', **kwargs), item)
+    return get_keyword(GCMD_DATA_CENTERS, item, **kwargs)
 
 def get_location(name, **kwargs):
-    return get_list_item(get_keywords('gcmd_locations', **kwargs), name)
+    return get_keyword(GCMD_LOCATIONS, name, **kwargs)
 
 def get_cf_standard_name(standard_name, **kwargs):
-    return get_list_item(get_keywords('cf_standard_names', **kwargs),
-            standard_name)
+    return get_keyword(CF_STANDARD_NAMES, standard_name, **kwargs)

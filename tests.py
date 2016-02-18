@@ -2,6 +2,8 @@ from __future__ import absolute_import
 
 import unittest
 import os, json
+#import doctest
+#doctest.testfile('pythesint/pythesint.py')
 
 from pythesint import pythesint, gcmd_keywords, cf_standard_names
 

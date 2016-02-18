@@ -7,7 +7,6 @@ from copy import copy
 from pkg_resources import resource_filename
 from collections import OrderedDict
 
-from pythesint.pythesint import get_keywords
 from pythesint.pythesint import get_list_item
 from pythesint.pythesint import standard_lists
 
