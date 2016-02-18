@@ -2,23 +2,23 @@ from __future__ import absolute_import
 
 import unittest
 import os, json
-pythesint import gcmd_keywords, cf_standard_names
 
 class GetGCMDKeywordsTest(unittest.TestCase):
 
     def test_write_json(self):
-        for gcmd_list in gcmd_keywords.gcmd_lists.keys():
+        import pythesint
+        for gcmd_list in pythesint.gcmd_keywords.gcmd_lists.keys():
             list_name = 'gcmd_'+gcmd_list
             pythesint.write_json(list_name)
-            fn = os.path.join(gcmd_keywords.json_path,
-                    gcmd_keywords.json_filename(list_name))
+            fn = os.path.join(pythesint.json_path,
+                    pythesint.json_filename(list_name))
             dd = json.load(open(fn))
             self.assertIsInstance(dd, list)
 
         list_name = 'cf_standard_names'
         pythesint.write_json(list_name)
-        fn = os.path.join(gcmd_keywords.json_path,
-                    gcmd_keywords.json_filename(list_name))
+        fn = os.path.join(pythesint.json_path,
+                    pythesint.json_filename(list_name))
         dd = json.load(open(fn))
         self.assertIsInstance(dd, list)
 
@@ -28,9 +28,9 @@ class GetGCMDKeywordsTest(unittest.TestCase):
         with self.assertRaises(OSError):
             pythesint.write_json(gcmd_list, path=path)
         path = 'json_test'
-        gcmd_keywords.write_json(gcmd_list, path=path)
+        pythesint.write_json(gcmd_list, path=path)
         fn = os.path.join(path,
-                    gcmd_keywords.json_filename(gcmd_list))
+                    pythesint.json_filename(gcmd_list))
         dd = json.load(open(fn))
         self.assertIsInstance(dd, list)
         os.unlink(fn)
