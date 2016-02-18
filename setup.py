@@ -40,7 +40,7 @@ def run_setup():
         package_data = {NAME: ['json/*.json']},
         include_package_data=True,
         install_requires = install_requires,
-        test_suite='pythesint.tests',
+        test_suite='tests',
         classifiers = [
             'Development Status :: 0 - Beta',
             'Environment :: Web Environment',
