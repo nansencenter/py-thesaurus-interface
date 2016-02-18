@@ -1,36 +1,32 @@
-#-------------------------------------------------------------------------------
-# Name:
-# Purpose:
-#
-# Author:       Morten Wergeland Hansen
-# Modified:
-#
-# Created:
-# Last modified:
-# Copyright:    (c) NERSC
-# License:
-#-------------------------------------------------------------------------------
 from __future__ import absolute_import
 
 import unittest
 import os, json
-from pythesint import gcmd_keywords
+pythesint import gcmd_keywords, cf_standard_names
 
 class GetGCMDKeywordsTest(unittest.TestCase):
 
     def test_write_json(self):
         for gcmd_list in gcmd_keywords.gcmd_lists.keys():
-            gcmd_keywords.write_json(gcmd_list)
+            list_name = 'gcmd_'+gcmd_list
+            pythesint.write_json(list_name)
             fn = os.path.join(gcmd_keywords.json_path,
-                    gcmd_keywords.json_filename(gcmd_list))
+                    gcmd_keywords.json_filename(list_name))
             dd = json.load(open(fn))
             self.assertIsInstance(dd, list)
 
+        list_name = 'cf_standard_names'
+        pythesint.write_json(list_name)
+        fn = os.path.join(gcmd_keywords.json_path,
+                    gcmd_keywords.json_filename(list_name))
+        dd = json.load(open(fn))
+        self.assertIsInstance(dd, list)
+
     def test_write_json_to_path(self):
-        gcmd_list = 'instruments'
+        gcmd_list = 'gcmd_instruments'
         path = 'tmp/json_test'
         with self.assertRaises(OSError):
-            gcmd_keywords.write_json(gcmd_list, path=path)
+            pythesint.write_json(gcmd_list, path=path)
         path = 'json_test'
         gcmd_keywords.write_json(gcmd_list, path=path)
         fn = os.path.join(path,
