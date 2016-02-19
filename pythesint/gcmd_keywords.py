@@ -7,7 +7,7 @@ from copy import copy
 from pkg_resources import resource_filename
 from collections import OrderedDict
 
-from pythesint.tools import (write_keywords_to_json,
+from pythesint.tools import (write_json,
                              read_json,
                              find_keyword_in_list,
                              json_filename)
@@ -20,7 +20,7 @@ def _read_list(list_name):
 
 def _update_list(list_name):
     new_keyword_list = _get_new_list(list_name)
-    write_keywords_to_json(list_name, new_keyword_list)
+    write_json(list_name, new_keyword_list)
 
 GCMD_INSTRUMENTS = 'gcmd_instruments'
 GCMD_PLATFORMS = 'gcmd_platforms'

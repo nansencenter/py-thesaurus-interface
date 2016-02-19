@@ -12,9 +12,10 @@ def json_filename(list_name):
     return os.path.join(json_path, '%s_list.json' % list_name.lower())
 
 def read_json(list_name):
+    ''' Read list with keywrod dicts from a json file '''
     return json.load(open(json_filename(list_name)))
 
-def write_keywords_to_json(list_name, new_keyword_list):
+def write_json(list_name, new_keyword_list):
     ''' Write list with keywrod dicts into a json file '''
     print('Writing json file %s' % list_name)
     json_path = os.path.split(json_filename(list_name))[0]
@@ -78,4 +79,3 @@ def find_keyword_in_list(keyword_list, item):
             remaining[keys[i]] = m[keys[i]]
         if not any(val for val in remaining.itervalues()):
             return m
-

@@ -4,11 +4,20 @@ import os, urllib2, json
 from xml.dom.minidom import parse, parseString
 from pkg_resources import resource_filename
 
-from pythesint.tools import update_json_file, read_json, find_keyword_in_list
+from pythesint.tools import (write_json,
+                             read_json,
+                             find_keyword_in_list,
+                             json_filename)
+
+def _read_list(list_name):
+    if not os.path.exists(json_filename(list_name)):
+        _update_list(list_name)
+
+    return read_json(list_name)
 
 def _update_list(list_name):
     new_keyword_list = _get_new_list(list_name)
-    update_json_file(list_name, new_keyword_list)
+    write_json(list_name, new_keyword_list)
 
 
 CF_STANDARD_NAMES = 'cf_standard_names'
@@ -18,7 +27,7 @@ controller = {
         'kw_groups': ['standard_name', 'canonical_units', 'grib', 'amip',
             'description'],
         'url': cf_url,
-        'get_list' : read_json,
+        'get_list' : _read_list,
         'update_list' : _update_list,
     },
 }
@@ -66,4 +75,4 @@ def _get_new_list(list_name):
     return cf_list
 
 def get_standard_name(item):
-    return find_keyword_in_list(read_json(CF_STANDARD_NAMES), item)
+    return find_keyword_in_list(_read_list(CF_STANDARD_NAMES), item)
