@@ -49,5 +49,12 @@ class PythesintTest(unittest.TestCase):
         self.assertIsInstance(pti.get_cf_standard_name(item), dict)
         self.assertIsInstance(pti.cf_thesaurus.get_standard_name(item), dict)
 
+    def test_get_iso19115_topic_category(self):
+        item = 'Oceans'
+        self.assertIsInstance(pti.get_keyword('iso19115_topic_categories', item), dict)
+        self.assertIsInstance(pti.get_keyword(pti.ISO19115_TOPIC_CATEGORIES, item), dict)
+        self.assertIsInstance(pti.get_iso19115_topic_category(item), dict)
+        self.assertIsInstance(pti.iso19115_thesaurus.get_topic_category(item), dict)
+
 if __name__ == "__main__":
     unittest.main()
