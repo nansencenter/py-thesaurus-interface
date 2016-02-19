@@ -71,7 +71,7 @@ def find_keyword_in_list(keyword_list, item):
         if not any(val for val in remaining.itervalues()):
             return m
 
-def update_json_file(list_name, new_keyword_list):
+def update_json_file(list_name, new_keyword_list, path=json_path):
     ''' Write list with keywrod dicts into a json file '''
     json_fn = os.path.join(json_path, json_filename(list_name))
     print('Updating json file %s' % list_name)

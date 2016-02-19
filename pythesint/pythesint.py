@@ -9,11 +9,12 @@ from pkg_resources import resource_filename
 
 from pythesint.tools import find_keyword_in_list
 from pythesint.gcmd_keywords import controller as gcmd_controller
+from pythesint.cf_keywords import controller as cf_controller
 
 # collect information about all thesauri
 controller = {}
 controller.update(gcmd_controller)
-#controller.update(cf_controller)
+controller.update(cf_controller)
 #controller.update(iso_controller)
 
 
@@ -26,5 +27,5 @@ def get_keyword(list_name, item):
 
 def update_list(list_name):
     ''' Update local copy of the list with the newest release '''
-    controller[list_name]['update_list']()
+    controller[list_name]['update_list'](list_name)
 

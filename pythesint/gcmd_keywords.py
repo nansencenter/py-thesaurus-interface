@@ -70,8 +70,8 @@ def _get_new_list(list_name):
         keyword_groups is a list containing the grouping of the keywords, e.g.,
         ['Category', 'Short_Name', 'Long_Name'] - used for verification
     '''
-    url = standard_lists[list_name.lower()]['url']
-    keyword_groups = standard_lists[list_name.lower()]['kw_groups']
+    url = controller[list_name.lower()]['url']
+    keyword_groups = controller[list_name.lower()]['kw_groups']
 
     # Get data from url
     response = requests.get(url)
