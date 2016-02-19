@@ -27,3 +27,15 @@ def update_list(list_name):
     ''' Update local copy of the list with the newest release '''
     controller[list_name]['update_list'](list_name)
 
+"""
+
+from pythesint.gcmd_thesaurus import thesauri as gcmd_thesauri
+thesauri = {}
+thesauri.update(gcmd_thesauri)
+
+def get_keyword(thes_name, item):
+    ''' Gets keyword from existing thesauri '''
+    # collect thesauri from gcmd, etc (as 'controller' above)
+    return thesauri[thes_name].find_keyword(item)
+
+"""
