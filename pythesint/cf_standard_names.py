@@ -4,20 +4,33 @@ import os, urllib2, json
 from xml.dom.minidom import parse, parseString
 from pkg_resources import resource_filename
 
-from pythesint.pythesint import standard_lists
+from pythesint.pythesint import tools
 
-''' 
+CF_STANDARD_NAMES = 'cf_standard_names'
+
+# Note: The kw_groups are used in validating the keyword groups in each list
+# every time the list is downloaded from the gcmd services
+cf_url = 'http://cfconventions.org/Data/cf-standard-names/30/src/cf-standard-name-table.xml'
+standard_lists = {
+    CF_STANDARD_NAMES: {
+        'kw_groups': ['standard_name', 'canonical_units', 'grib', 'amip',
+            'description'],
+        'url': cf_url
+    },
+}
+
+'''
 Note: this module has a lot of repetition from gcmd_keywords.py - it works but
 we have to generalize the code and add tests
 '''
 
-def cf_standard_list():
+def cf_standard_list(list_name):
     # Note the version number... Would probably be better to make it always
     # take the last version..
-    u1 = urllib2.urlopen(standard_lists['cf_standard_names']['url'])
+    u1 = urllib2.urlopen(standard_lists[list_name]['url'])
     dom = parse(u1)
     node = dom.childNodes[0] # should only contain the standard_name_table
-    
+
     cf_list = []
     for entry in node.getElementsByTagName('entry'):
         standard_name = entry.attributes['id'].value
@@ -48,3 +61,6 @@ def cf_standard_list():
         cf_list.append(stdname)
     return cf_list
 
+
+def get_standard_name(item, **kwargs):
+    return _get_keyword_generic(cf_standard_list, CF_STANDARD_NAMES, item, **kwargs)

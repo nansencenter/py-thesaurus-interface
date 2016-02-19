@@ -5,7 +5,7 @@ http://gcmd.gsfc.nasa.gov/add/difguide/iso_topic_category.html
 It seem to not be (freely) available in the ISO 19115 - Geographic Information
 Metadata (http://www.isotc211.org/) Topic Category Code List
 '''
-keywords = {
+iso_topic_category_list_keywords = {
     'Farming',
     'Biota',
     'Boundaries',
@@ -26,3 +26,5 @@ keywords = {
     'Transportation',
     'Utilities/Communications',
 }
+
+

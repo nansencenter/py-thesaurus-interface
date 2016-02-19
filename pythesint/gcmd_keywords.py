@@ -7,10 +7,59 @@ from copy import copy
 from pkg_resources import resource_filename
 from collections import OrderedDict
 
-from pythesint.pythesint import get_list_item
-from pythesint.pythesint import standard_lists
+from pythesint.tools import update_json_file, read_json, find_keyword_in_list
 
-def gcmd_standard_list(list_name):
+def _update_list(list_name):
+    new_keyword_list = _get_new_list(list_name)
+    update_json_file(list_name, new_keyword_list)
+
+GCMD_INSTRUMENTS = 'gcmd_instruments'
+GCMD_PLATFORMS = 'gcmd_platforms'
+GCMD_SCIENCE_KEYWORDS = 'gcmd_science_keywords'
+GCMD_DATA_CENTERS = 'gcmd_data_centers'
+GCMD_LOCATIONS = 'gcmd_locations'
+
+gcmd_base_url = 'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/'
+
+controller = {
+    GCMD_SCIENCE_KEYWORDS: {
+        'kw_groups': ['Category', 'Topic', 'Term', 'Variable_Level_1',
+            'Variable_Level_2', 'Variable_Level_3', 'Detailed_Variable'],
+        'url': gcmd_base_url + 'sciencekeywords?format=csv',
+        'get_list' : read_json,
+        'update_list' : _update_list,
+    },
+    GCMD_DATA_CENTERS: {
+        'kw_groups': ['Bucket_Level0', 'Bucket_Level1', 'Bucket_Level2',
+            'Bucket_Level3', 'Short_Name', 'Long_Name', 'Data_Center_URL'],
+        'url': gcmd_base_url + 'providers?format=csv',
+        'get_list' : read_json,
+        'update_list' : _update_list,
+    },
+    GCMD_INSTRUMENTS: {
+        'kw_groups': ['Category', 'Class', 'Type', 'Subtype', 'Short_Name',
+            'Long_Name'],
+        'url': gcmd_base_url + 'instruments?format=csv',
+        'get_list' : read_json,
+        'update_list' : _update_list,
+    },
+    GCMD_PLATFORMS: {
+        'kw_groups': ['Category', 'Series_Entity', 'Short_Name', 'Long_Name'],
+        'url': gcmd_base_url + 'platforms?format=csv',
+        'get_list' : read_json,
+        'update_list' : _update_list,
+    },
+    GCMD_LOCATIONS: {
+        'kw_groups': ['Location_Category', 'Location_Type',
+            'Location_Subregion1', 'Location_Subregion2',
+            'Location_Subregion3'],
+        'url': gcmd_base_url + 'locations?format=csv',
+        'get_list' : read_json,
+        'update_list' : _update_list,
+    },
+}
+
+def _get_new_list(list_name):
     ''' Return list of GCMD standard keywords at provided url
 
     Parameters
@@ -56,26 +105,25 @@ def gcmd_standard_list(list_name):
             assert kw_groups==keyword_groups
     return gcmd_list
 
-def get_instrument(item, **kwargs):
-    from pythesint.pythesint import get_instrument
-    return get_instrument(item, **kwargs)
+def get_instrument(item):
+    return find_keyword_in_list(read_json(GCMD_INSTRUMENTS), item)
 
-def get_platform(item, **kwargs):
-    from pythesint.pythesint import get_platform
-    return get_platform(item, **kwargs)
+def get_platform(item):
+    return find_keyword_in_list(read_json(GCMD_PLATFORMS), item)
 
-def get_iso_topic_category(kw):
-    from pythesint.pythesint import get_iso_topic_category
-    return get_iso_topic_category(kw)
+def get_science_keyword(item):
+    return find_keyword_in_list(read_json(GCMD_SCIENCE_KEYWORDS), item)
 
-def get_science_keyword(item, **kwargs):
-    from pythesint.pythesint import get_science_keyword
-    return get_science_keyword(item, **kwargs)
+def get_data_center(item):
+    return find_keyword_in_list(read_json(GCMD_DATA_CENTERS), item)
 
-def get_data_center(item, **kwargs):
-    from pythesint.pythesint import get_data_center
-    return get_data_center(item, **kwargs)
+def get_location(item):
+    return find_keyword_in_list(read_json(GCMD_LOCATIONS), item)
 
-def get_location(name, **kwargs):
-    from pythesint.pythesint import get_location
-    return get_location(name, **kwargs)
+def update_gcmd_lists():
+    _update_list(GCMD_INSTRUMENTS)
+    _update_list(GCMD_PLATFORMS)
+    _update_list(GCMD_SCIENCE_KEYWORDS)
+    _update_list(GCMD_DATA_CENTERS)
+    _update_list(GCMD_LOCATIONS)
+
