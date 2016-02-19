@@ -49,7 +49,7 @@ controller = {
         'kw_groups': ['Category', 'Class', 'Type', 'Subtype', 'Short_Name',
             'Long_Name'],
         'url': gcmd_base_url + 'instruments?format=csv',
-        'get_list' : read_json,
+        'get_list' : _read_list,
         'update_list' : _update_list,
     },
     GCMD_PLATFORMS: {
