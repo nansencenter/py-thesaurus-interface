@@ -14,10 +14,10 @@ class JSONThesaurus(Thesaurus):
     def _read_list(self):
         ''' Read list from JSON '''
         if not os.path.exists(self.json_filename()):
-            self._update_list()
+            self.update()
         return json.load(open(self.json_filename()))
 
-    def _update_list(self):
+    def update(self):
         ''' Write thesaurus to a JSON '''
         print('Writing json file %s' % self.name)
         json_path = os.path.split(self.json_filename())[0]

@@ -54,3 +54,7 @@ class Thesaurus(object):
                 remaining[keys[i]] = m[keys[i]]
             if not any(val for val in remaining.itervalues()):
                 return m
+
+    def update(self):
+        pass
+        

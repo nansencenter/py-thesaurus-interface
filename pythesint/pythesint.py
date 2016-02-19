@@ -16,3 +16,6 @@ def get_keyword(name, item):
     ''' Gets keyword from existing thesauri '''
     return thesauri[name].find_keyword(item)
 
+def update_thesaurus(name):
+    ''' Update thesaurus content '''
+    thesauri[name].update()
