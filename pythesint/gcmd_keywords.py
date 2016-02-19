@@ -7,11 +7,20 @@ from copy import copy
 from pkg_resources import resource_filename
 from collections import OrderedDict
 
-from pythesint.tools import update_json_file, read_json, find_keyword_in_list
+from pythesint.tools import (write_keywords_to_json,
+                             read_json,
+                             find_keyword_in_list,
+                             json_filename)
+
+def _read_list(list_name):
+    if not os.path.exists(json_filename(list_name)):
+        _update_list(list_name)
+
+    return read_json(list_name)
 
 def _update_list(list_name):
     new_keyword_list = _get_new_list(list_name)
-    update_json_file(list_name, new_keyword_list)
+    write_keywords_to_json(list_name, new_keyword_list)
 
 GCMD_INSTRUMENTS = 'gcmd_instruments'
 GCMD_PLATFORMS = 'gcmd_platforms'
@@ -26,14 +35,14 @@ controller = {
         'kw_groups': ['Category', 'Topic', 'Term', 'Variable_Level_1',
             'Variable_Level_2', 'Variable_Level_3', 'Detailed_Variable'],
         'url': gcmd_base_url + 'sciencekeywords?format=csv',
-        'get_list' : read_json,
+        'get_list' : _read_list,
         'update_list' : _update_list,
     },
     GCMD_DATA_CENTERS: {
         'kw_groups': ['Bucket_Level0', 'Bucket_Level1', 'Bucket_Level2',
             'Bucket_Level3', 'Short_Name', 'Long_Name', 'Data_Center_URL'],
         'url': gcmd_base_url + 'providers?format=csv',
-        'get_list' : read_json,
+        'get_list' : _read_list,
         'update_list' : _update_list,
     },
     GCMD_INSTRUMENTS: {
@@ -46,7 +55,7 @@ controller = {
     GCMD_PLATFORMS: {
         'kw_groups': ['Category', 'Series_Entity', 'Short_Name', 'Long_Name'],
         'url': gcmd_base_url + 'platforms?format=csv',
-        'get_list' : read_json,
+        'get_list' : _read_list,
         'update_list' : _update_list,
     },
     GCMD_LOCATIONS: {
@@ -54,7 +63,7 @@ controller = {
             'Location_Subregion1', 'Location_Subregion2',
             'Location_Subregion3'],
         'url': gcmd_base_url + 'locations?format=csv',
-        'get_list' : read_json,
+        'get_list' : _read_list,
         'update_list' : _update_list,
     },
 }
@@ -106,24 +115,16 @@ def _get_new_list(list_name):
     return gcmd_list
 
 def get_instrument(item):
-    return find_keyword_in_list(read_json(GCMD_INSTRUMENTS), item)
+    return find_keyword_in_list(_read_list(GCMD_INSTRUMENTS), item)
 
 def get_platform(item):
-    return find_keyword_in_list(read_json(GCMD_PLATFORMS), item)
+    return find_keyword_in_list(_read_list(GCMD_PLATFORMS), item)
 
 def get_science_keyword(item):
-    return find_keyword_in_list(read_json(GCMD_SCIENCE_KEYWORDS), item)
+    return find_keyword_in_list(_read_list(GCMD_SCIENCE_KEYWORDS), item)
 
 def get_data_center(item):
-    return find_keyword_in_list(read_json(GCMD_DATA_CENTERS), item)
+    return find_keyword_in_list(_read_list(GCMD_DATA_CENTERS), item)
 
 def get_location(item):
-    return find_keyword_in_list(read_json(GCMD_LOCATIONS), item)
-
-def update_gcmd_lists():
-    _update_list(GCMD_INSTRUMENTS)
-    _update_list(GCMD_PLATFORMS)
-    _update_list(GCMD_SCIENCE_KEYWORDS)
-    _update_list(GCMD_DATA_CENTERS)
-    _update_list(GCMD_LOCATIONS)
-
+    return find_keyword_in_list(_read_list(GCMD_LOCATIONS), item)
