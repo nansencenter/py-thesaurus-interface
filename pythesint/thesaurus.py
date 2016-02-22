@@ -40,6 +40,10 @@ class Thesaurus(object):
                 if d[key].upper()==item.upper():
                     matches.append(d)
                     matching_key = key
+
+        if len(matches) == 0:
+            raise IndexError('%s is not found in %s!' % (item, self.name))
+
         keys = matches[0].keys()
         kw_group_index = keys.index(matching_key)
         ii = range(kw_group_index+1, len(keys))
@@ -57,4 +61,4 @@ class Thesaurus(object):
 
     def update(self):
         pass
-        
+

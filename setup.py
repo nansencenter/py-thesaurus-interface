@@ -1,14 +1,13 @@
 #-------------------------------------------------------------------------------
-# Name:
-# Purpose:
+# Name:     Python Thesaurus Interface
+# Purpose:  Python interface to various metadata thesauri
 #
-# Author:       Morten Wergeland Hansen
-# Modified:
+# Author:   Morten Wergeland Hansen, Anton A. Korosov, Aleksander Vines
+# Modified: 22.02.2016
 #
-# Created:
-# Last modified:
-# Copyright:    (c) NERSC
-# License:
+# Created:  07.12.2015
+# Copyright:(c) NERSC
+# License:  GPLv3
 #-------------------------------------------------------------------------------
 from setuptools import setup, find_packages
 from os import path
@@ -37,7 +36,7 @@ setup(
 
     version='1.0.0',
 
-    description='A Python interface to various metadata vocabularies',
+    description='A Python interface to various metadata thesauri',
     long_description=long_description,
 
     zip_safe=False,

@@ -11,6 +11,7 @@ Metadata (http://www.isotc211.org/) Topic Category Code List
 '''
 
 class ISO19115Thesaurus(Thesaurus):
+    name = 'iso19115_topic_category'
     iso_topic_category_list_keywords = [
         'Farming',
         'Biota',
@@ -39,7 +40,7 @@ class ISO19115Thesaurus(Thesaurus):
             self.iso_topic_category_list_keywords]
 
 ISO19115_TOPIC_CATEGORIES = 'iso19115_topic_categories'
-        
+
 thesauri = {
     ISO19115_TOPIC_CATEGORIES : ISO19115Thesaurus()
 }

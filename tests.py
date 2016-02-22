@@ -56,6 +56,10 @@ class PythesintTest(unittest.TestCase):
         self.assertIsInstance(pti.get_iso19115_topic_category(item), dict)
         self.assertIsInstance(pti.iso19115_thesaurus.get_topic_category(item), dict)
 
+    def test_get_fake_instrument(self):
+        item = 'FakeItem'
+        self.assertRaises(IndexError, pti.gcmd_thesaurus.get_instrument, item)
+
     def test_update(self):
         pti.update_thesaurus('gcmd_instruments')
         pti.update_thesaurus('gcmd_platforms')

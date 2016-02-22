@@ -1,6 +1,3 @@
-'''
-pythesint.pythesint : Main module for the py-thesaurus-interface package
-'''
 from __future__ import absolute_import
 
 from pythesint.gcmd_thesaurus import thesauri as gcmd_thesauri
