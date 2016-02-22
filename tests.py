@@ -21,6 +21,9 @@ class PythesintTest(unittest.TestCase):
     def test_get_list_directly_from_gcmd_thesaurus(self):
        from pythesint import gcmd_thesaurus
        self.assertIsInstance(gcmd_thesaurus.get_list('Instruments'), list)
+       # IMHO above is not needed
+       # pti.get_list('gcmd_instruments')
+       # is way more verbose and convenient
 
     def test_get_gcmd_instrument(self):
         item = 'MERIS'
