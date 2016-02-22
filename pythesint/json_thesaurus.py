@@ -19,7 +19,7 @@ class JSONThesaurus(Thesaurus):
 
     def update(self):
         ''' Write thesaurus to a JSON '''
-        print('Writing json file %s' % self.name)
+        print('Downloading and writing json file for %s' % self.name)
         json_path = os.path.split(self.json_filename())[0]
         if not os.path.exists(json_path):
             os.makedirs(json_path)

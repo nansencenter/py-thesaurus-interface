@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-import requests
+import urllib2
 from collections import OrderedDict
 
 from pythesint.json_thesaurus import  JSONThesaurus
@@ -14,7 +14,7 @@ class GCMDThesaurus(JSONThesaurus):
 
     def _fetch_data(self):
         ''' Return list of GCMD standard keywords at provided url
-    
+
         Parameters
         ----------
         list_name : the GCMD list name (must be one of the items in the standard_lists
@@ -22,14 +22,14 @@ class GCMDThesaurus(JSONThesaurus):
             url is the URL of the desired GCMD list of valid keywords
             keyword_groups is a list containing the grouping of the keywords, e.g.,
             ['Category', 'Short_Name', 'Long_Name'] - used for verification
-        '''    
-        response = requests.get(self.url)
+        '''
+        response = urllib2.urlopen(self.url)
         # Boolean to determine if line information in the response object should be
         # stored as keywords
         do_record = False
-    
+
         gcmd_list = []
-        for line in response.iter_lines():
+        for line in response.readlines():
             if 'Keyword Version' and 'Revision' in line:
                 meta = line.split('","')
                 gcmd_list.append({'Revision': meta[1][10:]})
@@ -90,10 +90,10 @@ def get_instrument(item):
 
 def get_platform(item):
     return thesauri[GCMD_PLATFORMS].find_keyword(item)
-    
+
 def get_science_keyword(item):
     return thesauri[GCMD_SCIENCE_KEYWORDS].find_keyword(item)
-    
+
 def get_data_center(item):
     return thesauri[GCMD_DATA_CENTERS].find_keyword(item)
 
