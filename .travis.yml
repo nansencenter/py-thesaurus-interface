@@ -4,9 +4,10 @@ python:
 sudo: false
 
 install:
+  - pip install .
   - pip install coveralls
 
-script: #"cd ..; nosetests --with-coverage --cover-package=nansat nansat.tests"
+script:
   - coverage run --source=pythesint setup.py test
 
 after_success:

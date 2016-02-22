@@ -10,57 +10,76 @@
 # Copyright:    (c) NERSC
 # License:
 #-------------------------------------------------------------------------------
-import sys, shutil
 from setuptools import setup, find_packages
+from os import path
 
+from pythesint import update_thesaurus
+
+here = path.abspath(path.dirname(__file__))
 readme_file = 'README.md'
-try:
-    long_description = open(readme_file).read()
-except IOError:
-    sys.stderr.write("[ERROR] Cannot find file specified as "
-        "``long_description`` (%s)\n" % readme_file)
-    sys.exit(1)
-
-install_requires = ['requests']
-
+install_requires = None
 NAME = 'pythesint'
 
-def run_setup():
+# Get the long description from the README file
+with open(path.join(here, readme_file)) as f:
+    long_description = f.read()
 
-    setup(name=NAME,
-        version='0.3',
-        description='An interface to metadata conventions for geospatial data',
-        long_description=long_description,
-        zip_safe=False,
-        author=('Morten W. Hansen', 'Anton Korosov', 'Aleksander Vines',),
-        author_email='mortenh@nersc.no',
-        url='#',
-        download_url='#',
-        packages = find_packages(),
-        package_data = {NAME: ['json/*.json']},
-        include_package_data=True,
-        install_requires = install_requires,
-        test_suite='tests',
-        classifiers = [
-            'Development Status :: 0 - Beta',
-            'Environment :: Web Environment',
-            'Framework :: ',
-            'Intended Audience :: Developers',
-            'License :: OSI Approved :: BSD License',
-            'Operating System :: OS Independent',
-            'Programming Language :: Python',
-            'Topic :: Utilities'
-        ],
-    )
-    #try:
-    #    # write json files to have local data
-    #    from pythesint.gcmd_keywords import write_json
-    #    write_json('instruments')
-    #    write_json('platforms')
-    #    write_json('data_centers')
-    #    write_json('locations')
-    #except:
-    #    pass
+# fetch all thesausri from internet
+update_thesaurus('gcmd_instruments')
+update_thesaurus('gcmd_platforms')
+update_thesaurus('gcmd_science_keywords')
+update_thesaurus('gcmd_data_centers')
+update_thesaurus('gcmd_locations')
+update_thesaurus('cf_standard_names')
 
-run_setup()
+setup(
+    name=NAME,
+
+    version='1.0.0',
+
+    description='A Python interface to various metadata vocabularies',
+    long_description=long_description,
+
+    zip_safe=False,
+
+    author=('Morten W. Hansen', 'Anton A. Korosov', 'Aleksander Vines',),
+
+    author_email='morten.hansen@nersc.no',
+
+    url='https://github.com/nansencenter/py-thesaurus-interface',
+
+    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.0.0.tar.gz',
+
+    packages=find_packages(),
+
+    package_data={NAME: ['json/*.json']},
+
+    include_package_data=True,
+
+    install_requires=install_requires,
+
+    test_suite='tests',
+
+    license='GPLv3',
+
+    classifiers = [
+        'Development Status :: 5 - Production/Stable',
+        'Environment :: Plugins',
+        'Environment :: Console',
+        'Intended Audience :: Information Technology',
+        'Intended Audience :: Science/Research',
+        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'Natural Language :: English',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python :: 2',
+        'Programming Language :: Python :: 2.7',
+        'Topic :: Scientific/Engineering',
+        'Topic :: Scientific/Engineering :: Atmospheric Science',
+        'Topic :: Scientific/Engineering :: Oceanography',
+        'Topic :: Scientific/Engineering :: Information Analysis',
+        'Topic :: Utilities',
+    ],
+
+    keywords='metadata standards thesaurus',
+)
 
