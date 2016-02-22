@@ -5,10 +5,11 @@ from xml.dom.minidom import parse
 
 from pythesint.json_thesaurus import  JSONThesaurus
 
+CF_STANDARD_NAMES = 'cf_standard_names'
+
 class CFThesaurus(JSONThesaurus):
     url = 'http://cfconventions.org/Data/cf-standard-names/30/src/cf-standard-name-table.xml'
-    def __init__(self, name):
-        self.name = name
+    name = CF_STANDARD_NAMES
 
     def _fetch_data(self):
         # Note the version number... Would probably be better to make it always
@@ -47,11 +48,8 @@ class CFThesaurus(JSONThesaurus):
             cf_list.append(stdname)
         return cf_list
 
-
-CF_STANDARD_NAMES = 'cf_standard_names'
-
 thesauri = {
-    CF_STANDARD_NAMES : CFThesaurus(CF_STANDARD_NAMES),
+    CF_STANDARD_NAMES : CFThesaurus(),
 }
 
 def get_standard_name(item):

@@ -31,6 +31,7 @@ update_thesaurus('gcmd_science_keywords')
 update_thesaurus('gcmd_data_centers')
 update_thesaurus('gcmd_locations')
 update_thesaurus('cf_standard_names')
+update_thesaurus('wkv_variables')
 
 setup(
     name=NAME,

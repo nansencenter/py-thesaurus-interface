@@ -16,3 +16,6 @@ from pythesint.cf_thesaurus import get_standard_name as get_cf_standard_name
 
 from pythesint.iso19115_thesaurus import ISO19115_TOPIC_CATEGORIES
 from pythesint.iso19115_thesaurus import get_topic_category as get_iso19115_topic_category
+
+from pythesint.wkv_thesaurus import WKV_VARIABLES
+from pythesint.wkv_thesaurus import get_variable as get_wkv_variable
