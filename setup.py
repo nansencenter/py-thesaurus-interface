@@ -13,54 +13,52 @@
 import sys, shutil
 from setuptools import setup, find_packages
 
+here = path.abspath(path.dirname(__file__))
 readme_file = 'README.md'
-try:
-    long_description = open(readme_file).read()
-except IOError:
-    sys.stderr.write("[ERROR] Cannot find file specified as "
-        "``long_description`` (%s)\n" % readme_file)
-    sys.exit(1)
-
 install_requires = ['requests']
-
 NAME = 'pythesint'
 
-def run_setup():
+# Get the long description from the README file
+with open(path.join(here, readme_file), encoding='utf-8') as f:
+    long_description = f.read()
 
-    setup(name=NAME,
-        version='0.3',
-        description='An interface to metadata conventions for geospatial data',
-        long_description=long_description,
-        zip_safe=False,
-        author=('Morten W. Hansen', 'Anton Korosov', 'Aleksander Vines',),
-        author_email='mortenh@nersc.no',
-        url='#',
-        download_url='#',
-        packages = find_packages(),
-        package_data = {NAME: ['json/*.json']},
-        include_package_data=True,
-        install_requires = install_requires,
-        test_suite='tests',
-        classifiers = [
-            'Development Status :: 0 - Beta',
-            'Environment :: Web Environment',
-            'Framework :: ',
-            'Intended Audience :: Developers',
-            'License :: OSI Approved :: BSD License',
-            'Operating System :: OS Independent',
-            'Programming Language :: Python',
-            'Topic :: Utilities'
-        ],
-    )
-    #try:
-    #    # write json files to have local data
-    #    from pythesint.gcmd_keywords import write_json
-    #    write_json('instruments')
-    #    write_json('platforms')
-    #    write_json('data_centers')
-    #    write_json('locations')
-    #except:
-    #    pass
+setup(
+    name=NAME,
 
-run_setup()
+    version='0.4.0',
+
+    description='A Python interface to various metadata vocabularies',
+    long_description=long_description,
+
+    zip_safe=False,
+
+    author=('Morten W. Hansen', 'Anton A. Korosov', 'Aleksander Vines',),
+
+    author_email='morten.hansen@nersc.no',
+
+    url='https://github.com/nansencenter/py-thesaurus-interface',
+
+    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v0.4.0.tar.gz',
+
+    packages=find_packages(),
+
+    package_data={NAME: ['json/*.json']},
+
+    include_package_data=True,
+
+    install_requires=install_requires,
+
+    test_suite='tests',
+
+    classifiers = [
+        'Development Status :: 0 - Beta',
+        'Environment :: Web Environment',
+        'Framework :: ',
+        'Intended Audience :: Developers',
+        'License :: OSI Approved :: BSD License',
+        'Operating System :: OS Independent',
+        'Programming Language :: Python',
+        'Topic :: Utilities'
+    ],
+)
 
