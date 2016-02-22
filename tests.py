@@ -8,6 +8,12 @@ import pythesint as pti
 
 class PythesintTest(unittest.TestCase):
 
+    # Missing tests
+    #def test_write_json
+    #def test_write_json_to_path
+    #def test_get_keywords_list
+    #def test_get_keywords_list_from_path
+
     def test_get_gcmd_instrument(self):
         item = 'MERIS'
         self.assertIsInstance(pti.get_keyword('gcmd_instruments', item), dict)
