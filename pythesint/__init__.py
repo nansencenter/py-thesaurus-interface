@@ -4,6 +4,8 @@ from pythesint.gcmd_keywords import (GCMD_INSTRUMENTS, GCMD_PLATFORMS,
                                     GCMD_SCIENCE_KEYWORDS, GCMD_DATA_CENTERS,
                                     GCMD_LOCATIONS)
 
+from pythesint.cf_keywords import CF_STANDARD_NAMES
+
 from pythesint.pythesint import get_keyword
 
 from pythesint.gcmd_keywords import get_instrument as get_gcmd_instrument

@@ -7,13 +7,22 @@ import os, json
 from collections import OrderedDict
 from pkg_resources import resource_filename
 
-json_path = resource_filename('pythesint', 'json')
+def json_filename(list_name):
+    json_path = resource_filename('pythesint', 'json')
+    return os.path.join(json_path, '%s_list.json' % list_name.lower())
 
 def read_json(list_name):
-    return json.load(open(os.path.join(json_path, json_filename(list_name))))
+    ''' Read list with keywrod dicts from a json file '''
+    return json.load(open(json_filename(list_name)))
 
-def json_filename(list_name):
-    return '%s_list.json' % list_name.lower()
+def write_json(list_name, new_keyword_list):
+    ''' Write list with keywrod dicts into a json file '''
+    print('Writing json file %s' % list_name)
+    json_path = os.path.split(json_filename(list_name))[0]
+    if not os.path.exists(json_path):
+        os.makedirs(json_path)
+    with open(json_filename(list_name), 'w') as out:
+        json.dump(new_keyword_list, out, indent=4)
 
 def find_keyword_in_list(keyword_list, item):
     ''' Return the dictionary containing the given item in the provided list.
@@ -70,12 +79,3 @@ def find_keyword_in_list(keyword_list, item):
             remaining[keys[i]] = m[keys[i]]
         if not any(val for val in remaining.itervalues()):
             return m
-
-def update_json_file(list_name, new_keyword_list, path=json_path):
-    ''' Write list with keywrod dicts into a json file '''
-    json_fn = os.path.join(json_path, json_filename(list_name))
-    print('Updating json file %s' % list_name)
-    if not os.path.exists(path):
-        os.mkdir(path)
-    with open(os.path.join(path, json_filename(list_name)), 'w') as out:
-        json.dump(new_keyword_list, out, indent=4)
