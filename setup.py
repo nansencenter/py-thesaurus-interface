@@ -74,7 +74,6 @@ setup(
         'Programming Language :: Python :: 2.7',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Atmospheric Science',
-        'Topic :: Scientific/Engineering :: Oceanography',
         'Topic :: Scientific/Engineering :: Information Analysis',
         'Topic :: Utilities',
     ],
