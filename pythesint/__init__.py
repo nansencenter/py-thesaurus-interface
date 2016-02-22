@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from pythesint.pythesint import get_keyword, update_thesaurus
+from pythesint.pythesint import get_keyword, update_thesaurus, get_list
 
 from pythesint.gcmd_thesaurus import (GCMD_INSTRUMENTS, GCMD_PLATFORMS,
                                     GCMD_SCIENCE_KEYWORDS, GCMD_DATA_CENTERS,

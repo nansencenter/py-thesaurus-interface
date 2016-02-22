@@ -9,8 +9,13 @@ thesauri.update(gcmd_thesauri)
 thesauri.update(cf_thesauri)
 thesauri.update(iso19115_thesauri)
 
+def get_list(name):
+    ''' Get list of keywords from given thesaurus <name>
+    '''
+    return thesauri[name].get_list()
+
 def get_keyword(name, item):
-    ''' Gets keyword from existing thesauri '''
+    ''' Get keyword <item> from given thesaurus <name> '''
     return thesauri[name].find_keyword(item)
 
 def update_thesaurus(name):

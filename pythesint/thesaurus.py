@@ -35,7 +35,7 @@ class Thesaurus(object):
         '''
         matches = []
         matching_key = ''
-        for d in self._read_list():
+        for d in self.get_list():
             for key in d.keys():
                 if d[key].upper()==item.upper():
                     matches.append(d)

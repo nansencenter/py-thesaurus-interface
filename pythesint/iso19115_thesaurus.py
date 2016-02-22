@@ -34,7 +34,7 @@ class ISO19115Thesaurus(Thesaurus):
         'Utilities/Communications',
         ]
 
-    def _read_list(self):
+    def get_list(self):
         ''' Convert list of keywords into list of dicts '''
         return [{'iso_topic_category' : keyword} for keyword in
             self.iso_topic_category_list_keywords]

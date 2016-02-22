@@ -11,7 +11,7 @@ class JSONThesaurus(Thesaurus):
         json_path = resource_filename('pythesint', 'json')
         return os.path.join(json_path, '%s_list.json' % self.name.lower())
 
-    def _read_list(self):
+    def get_list(self):
         ''' Read list from JSON '''
         if not os.path.exists(self.json_filename()):
             self.update()
