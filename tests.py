@@ -1,13 +1,23 @@
 from __future__ import absolute_import
 
 import unittest
-import os, json
+import os, json, shutil
+from pkg_resources import resource_filename
 
 import pythesint as pti
 
 class PythesintTest(unittest.TestCase):
 
     def test_get_gcmd_instrument(self):
+        item = 'MERIS'
+        self.assertIsInstance(pti.get_keyword('gcmd_instruments', item), dict)
+        self.assertIsInstance(pti.get_keyword(pti.GCMD_INSTRUMENTS, item), dict)
+        self.assertIsInstance(pti.get_gcmd_instrument(item), dict)
+        self.assertIsInstance(pti.gcmd_thesaurus.get_instrument(item), dict)
+
+    def test_remove_and_get_gcmd_instrument(self):
+        if os.path.exists(resource_filename('pythesint', 'json')):
+            shutil.rmtree(resource_filename('pythesint', 'json'))
         item = 'MERIS'
         self.assertIsInstance(pti.get_keyword('gcmd_instruments', item), dict)
         self.assertIsInstance(pti.get_keyword(pti.GCMD_INSTRUMENTS, item), dict)
