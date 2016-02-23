@@ -3,9 +3,9 @@ from __future__ import absolute_import
 import urllib2
 from collections import OrderedDict
 
-from pythesint.json_thesaurus import  JSONThesaurus
+from pythesint.json_vocabulary import  JSONVocabulary
 
-class GCMDThesaurus(JSONThesaurus):
+class GCMDVocabulary(JSONVocabulary):
 
     base_url = 'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/'
 
@@ -63,46 +63,49 @@ GCMD_SCIENCE_KEYWORDS = 'gcmd_science_keywords'
 GCMD_DATA_CENTERS = 'gcmd_data_centers'
 GCMD_LOCATIONS = 'gcmd_locations'
 
-thesauri = {
-    GCMD_SCIENCE_KEYWORDS: GCMDThesaurus(GCMD_SCIENCE_KEYWORDS,
+vocabularies = {
+    GCMD_SCIENCE_KEYWORDS: GCMDVocabulary(GCMD_SCIENCE_KEYWORDS,
             ['Category', 'Topic', 'Term', 'Variable_Level_1',
             'Variable_Level_2', 'Variable_Level_3', 'Detailed_Variable'],
             'sciencekeywords?format=csv'),
-    GCMD_DATA_CENTERS: GCMDThesaurus(GCMD_DATA_CENTERS,
+    GCMD_DATA_CENTERS: GCMDVocabulary(GCMD_DATA_CENTERS,
             ['Bucket_Level0', 'Bucket_Level1', 'Bucket_Level2',
             'Bucket_Level3', 'Short_Name', 'Long_Name', 'Data_Center_URL'],
             'providers?format=csv'),
-    GCMD_INSTRUMENTS: GCMDThesaurus(GCMD_INSTRUMENTS,
+    GCMD_INSTRUMENTS: GCMDVocabulary(GCMD_INSTRUMENTS,
         ['Category', 'Class', 'Type', 'Subtype', 'Short_Name',
             'Long_Name'],
         'instruments?format=csv'),
-    GCMD_PLATFORMS: GCMDThesaurus(GCMD_PLATFORMS,
+    GCMD_PLATFORMS: GCMDVocabulary(GCMD_PLATFORMS,
         ['Category', 'Series_Entity', 'Short_Name', 'Long_Name'],
         'platforms?format=csv'),
-    GCMD_LOCATIONS: GCMDThesaurus(GCMD_LOCATIONS,
+    GCMD_LOCATIONS: GCMDVocabulary(GCMD_LOCATIONS,
         ['Location_Category', 'Location_Type',
         'Location_Subregion1', 'Location_Subregion2',
         'Location_Subregion3'],
         'locations?format=csv')
 }
 
-def get_list(name):
-    ''' Return list of standards <name>, e.g., instruments, platforms, etc.
-    '''
-    return thesauri[name].get_list()
+#def _get_list(name):
+#    ''' Return list of standards <name>, e.g., instruments, platforms, etc.
+#    '''
+#    return vocabularies[name].get_list()
 
-def get_instrument(item):
-    return thesauri[GCMD_INSTRUMENTS].find_keyword(item)
+def _get_instruments():
+    return vocabularies[GCMD_INSTRUMENTS].get_list()
 
-def get_platform(item):
-    return thesauri[GCMD_PLATFORMS].find_keyword(item)
+def _get_instrument(item):
+    return vocabularies[GCMD_INSTRUMENTS].find_keyword(item)
 
-def get_science_keyword(item):
-    return thesauri[GCMD_SCIENCE_KEYWORDS].find_keyword(item)
+def _get_platform(item):
+    return vocabularies[GCMD_PLATFORMS].find_keyword(item)
 
-def get_data_center(item):
-    return thesauri[GCMD_DATA_CENTERS].find_keyword(item)
+def _get_science_keyword(item):
+    return vocabularies[GCMD_SCIENCE_KEYWORDS].find_keyword(item)
 
-def get_location(item):
-    return thesauri[GCMD_LOCATIONS].find_keyword(item)
+def _get_data_center(item):
+    return vocabularies[GCMD_DATA_CENTERS].find_keyword(item)
+
+def _get_location(item):
+    return vocabularies[GCMD_LOCATIONS].find_keyword(item)
 

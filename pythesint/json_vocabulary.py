@@ -4,9 +4,9 @@ import os
 import json
 from pkg_resources import resource_filename
 
-from pythesint.thesaurus import Thesaurus
+from pythesint.vocabulary import Vocabulary
 
-class JSONThesaurus(Thesaurus):
+class JSONVocabulary(Vocabulary):
     def json_filename(self):
         json_path = resource_filename('pythesint', 'json')
         return os.path.join(json_path, '%s_list.json' % self.name.lower())
@@ -18,7 +18,7 @@ class JSONThesaurus(Thesaurus):
         return json.load(open(self.json_filename()))
 
     def update(self):
-        ''' Write thesaurus to a JSON file '''
+        ''' Write vocabulary to a JSON file '''
         print('Downloading and writing json file for %s' % self.name)
         json_path = os.path.split(self.json_filename())[0]
         if not os.path.exists(json_path):

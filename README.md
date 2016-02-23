@@ -2,7 +2,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/nansencenter/py-thesaurus-interface/badge.svg?branch=master)](https://coveralls.io/github/nansencenter/py-thesaurus-interface?branch=master)
 
 ## py-thesaurus-interface
-An interface to metadata thesauri for geospatial and other geophysical data
+An interface to metadata vocabularies for geospatial and other geophysical data
 
 ## Install
 ```

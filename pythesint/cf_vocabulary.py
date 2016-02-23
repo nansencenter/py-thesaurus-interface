@@ -3,9 +3,9 @@ from __future__ import absolute_import
 import urllib2
 from xml.dom.minidom import parse
 
-from pythesint.json_thesaurus import  JSONThesaurus
+from pythesint.json_vocabulary import  JSONVocabulary
 
-class CFThesaurus(JSONThesaurus):
+class CFVocabulary(JSONVocabulary):
     url = 'http://cfconventions.org/Data/cf-standard-names/30/src/cf-standard-name-table.xml'
     def __init__(self, name):
         self.name = name
@@ -50,11 +50,11 @@ class CFThesaurus(JSONThesaurus):
 
 CF_STANDARD_NAMES = 'cf_standard_names'
 
-thesauri = {
-    CF_STANDARD_NAMES : CFThesaurus(CF_STANDARD_NAMES),
+vocabularies = {
+    CF_STANDARD_NAMES : CFVocabulary(CF_STANDARD_NAMES),
 }
 
-def get_standard_name(item):
-    return thesauri[CF_STANDARD_NAMES].find_keyword(item)
+def _get_standard_name(item):
+    return vocabularies[CF_STANDARD_NAMES].find_keyword(item)
 
 

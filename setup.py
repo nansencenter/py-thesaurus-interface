@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
 # Name:     Python Thesaurus Interface
-# Purpose:  Python interface to various metadata thesauri
+# Purpose:  Python interface to various metadata vocabularies
 #
 # Author:   Morten Wergeland Hansen, Anton A. Korosov, Aleksander Vines
 # Modified: 22.02.2016
@@ -12,7 +12,7 @@
 from setuptools import setup, find_packages
 from os import path
 
-from pythesint import update_thesaurus
+from pythesint import update_vocabulary
 
 here = path.abspath(path.dirname(__file__))
 readme_file = 'README.md'
@@ -24,20 +24,20 @@ long_description = ''
 if path.exists(path.join(here, readme_file)):
     long_description = open(path.join(here, readme_file)).read()
 
-# fetch all thesausri from internet
-update_thesaurus('gcmd_instruments')
-update_thesaurus('gcmd_platforms')
-update_thesaurus('gcmd_science_keywords')
-update_thesaurus('gcmd_data_centers')
-update_thesaurus('gcmd_locations')
-update_thesaurus('cf_standard_names')
+# fetch all vocabularies from internet
+update_vocabulary('gcmd_instruments')
+update_vocabulary('gcmd_platforms')
+update_vocabulary('gcmd_science_keywords')
+update_vocabulary('gcmd_data_centers')
+update_vocabulary('gcmd_locations')
+update_vocabulary('cf_standard_names')
 
 setup(
     name=NAME,
 
     version='1.0.1',
 
-    description='A Python interface to various metadata thesauri',
+    description='A Python interface to various metadata vocabularies',
     long_description=long_description,
 
     zip_safe=False,
@@ -75,6 +75,6 @@ setup(
         'Topic :: Utilities',
     ],
 
-    keywords='metadata standards thesaurus',
+    keywords='metadata standards thesaurus vocabulary',
 )
 

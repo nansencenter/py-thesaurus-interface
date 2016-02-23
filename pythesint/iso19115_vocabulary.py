@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 
-from pythesint.json_thesaurus import  Thesaurus
+from pythesint.json_vocabulary import  Vocabulary
 
 '''
 This module contains the ISO Topic Category list as listed at
@@ -10,7 +10,7 @@ It seem to not be (freely) available in the ISO 19115 - Geographic Information
 Metadata (http://www.isotc211.org/) Topic Category Code List
 '''
 
-class ISO19115Thesaurus(Thesaurus):
+class ISO19115Vocabulary(Vocabulary):
     name = 'iso19115_topic_category'
     iso_topic_category_list_keywords = [
         'Farming',
@@ -41,9 +41,9 @@ class ISO19115Thesaurus(Thesaurus):
 
 ISO19115_TOPIC_CATEGORIES = 'iso19115_topic_categories'
 
-thesauri = {
-    ISO19115_TOPIC_CATEGORIES : ISO19115Thesaurus()
+vocabularies = {
+    ISO19115_TOPIC_CATEGORIES : ISO19115Vocabulary()
 }
 
-def get_topic_category(item):
-    return thesauri[ISO19115_TOPIC_CATEGORIES].find_keyword(item)
+def _get_topic_category(item):
+    return vocabularies[ISO19115_TOPIC_CATEGORIES].find_keyword(item)
