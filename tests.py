@@ -5,6 +5,7 @@ import os, json, shutil
 from pkg_resources import resource_filename
 
 import pythesint as pti
+from pythesint import gcmd_thesaurus
 
 class PythesintTest(unittest.TestCase):
 
@@ -19,8 +20,9 @@ class PythesintTest(unittest.TestCase):
     #def test_get_list_from_path
 
     def test_get_list_directly_from_gcmd_thesaurus(self):
-       from pythesint import gcmd_thesaurus
-       self.assertIsInstance(gcmd_thesaurus.get_list('Instruments'), list)
+       self.assertIsInstance(gcmd_thesaurus.get_list('gcmd_instruments'), list)
+       # NOTE: this should also be possible:
+       #self.assertIsInstance(gcmd_thesaurus.get_list('Instruments'), list)
 
     def test_get_gcmd_instrument(self):
         item = 'MERIS'

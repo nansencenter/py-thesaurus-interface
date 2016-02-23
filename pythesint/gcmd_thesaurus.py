@@ -6,13 +6,15 @@ from collections import OrderedDict
 from pythesint.json_thesaurus import  JSONThesaurus
 
 class GCMDThesaurus(JSONThesaurus):
+
     base_url = 'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/'
+
     def __init__(self, name, categories, url):
         self.name = name
         self.categories = categories
         self.url = self.base_url + url
 
-    def _fetch_data(self):
+    def _fetch_online_data(self):
         ''' Return list of GCMD standard keywords at provided url
 
         Parameters
@@ -55,7 +57,6 @@ class GCMDThesaurus(JSONThesaurus):
 
         return gcmd_list
 
-
 GCMD_INSTRUMENTS = 'gcmd_instruments'
 GCMD_PLATFORMS = 'gcmd_platforms'
 GCMD_SCIENCE_KEYWORDS = 'gcmd_science_keywords'
@@ -85,6 +86,11 @@ thesauri = {
         'locations?format=csv')
 }
 
+def get_list(name):
+    ''' Return list of standards <name>, e.g., instruments, platforms, etc.
+    '''
+    return thesauri[name].get_list()
+
 def get_instrument(item):
     return thesauri[GCMD_INSTRUMENTS].find_keyword(item)
 
@@ -99,3 +105,4 @@ def get_data_center(item):
 
 def get_location(item):
     return thesauri[GCMD_LOCATIONS].find_keyword(item)
+

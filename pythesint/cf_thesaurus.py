@@ -10,7 +10,7 @@ class CFThesaurus(JSONThesaurus):
     def __init__(self, name):
         self.name = name
 
-    def _fetch_data(self):
+    def _fetch_online_data(self):
         # Note the version number... Would probably be better to make it always
         # take the last version..
         u1 = urllib2.urlopen(self.url)

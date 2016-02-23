@@ -18,10 +18,10 @@ class JSONThesaurus(Thesaurus):
         return json.load(open(self.json_filename()))
 
     def update(self):
-        ''' Write thesaurus to a JSON '''
+        ''' Write thesaurus to a JSON file '''
         print('Downloading and writing json file for %s' % self.name)
         json_path = os.path.split(self.json_filename())[0]
         if not os.path.exists(json_path):
             os.makedirs(json_path)
         with open(self.json_filename(), 'w') as out:
-            json.dump(self._fetch_data(), out, indent=4)
+            json.dump(self._fetch_online_data(), out, indent=4)
