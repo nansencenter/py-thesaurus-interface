@@ -31,6 +31,8 @@ update_vocabulary('gcmd_science_keywords')
 update_vocabulary('gcmd_data_centers')
 update_vocabulary('gcmd_locations')
 update_vocabulary('cf_standard_names')
+update_vocabulary('wkv_variables')
+
 
 setup(
     name=NAME,
