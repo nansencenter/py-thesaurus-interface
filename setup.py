@@ -12,7 +12,6 @@
 from setuptools import setup, find_packages
 from os import path
 
-from pythesint import update_vocabulary
 
 here = path.abspath(path.dirname(__file__))
 readme_file = 'README.md'
@@ -23,16 +22,6 @@ NAME = 'pythesint'
 long_description = ''
 if path.exists(path.join(here, readme_file)):
     long_description = open(path.join(here, readme_file)).read()
-
-# fetch all vocabularies from internet
-update_vocabulary('gcmd_instruments')
-update_vocabulary('gcmd_platforms')
-update_vocabulary('gcmd_science_keywords')
-update_vocabulary('gcmd_data_centers')
-update_vocabulary('gcmd_locations')
-update_vocabulary('cf_standard_names')
-update_vocabulary('wkv_variables')
-
 
 setup(
     name=NAME,
@@ -80,3 +69,12 @@ setup(
     keywords='metadata standards thesaurus vocabulary',
 )
 
+# fetch all vocabularies from internet
+from pythesint import update_vocabulary
+update_vocabulary('gcmd_instruments')
+update_vocabulary('gcmd_platforms')
+update_vocabulary('gcmd_science_keywords')
+update_vocabulary('gcmd_data_centers')
+update_vocabulary('gcmd_locations')
+update_vocabulary('cf_standard_names')
+update_vocabulary('wkv_variables')
