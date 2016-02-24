@@ -71,6 +71,29 @@ class PythesintTest(unittest.TestCase):
         self.assertIsInstance(pti.get_keyword(pti.ISO19115_TOPIC_CATEGORIES, item), dict)
         self.assertIsInstance(pti.get_iso19115_topic_category(item), dict)
 
+    def test_get_vertical_resolution_range(self):
+        item = 'Point Resolution'
+        self.assertIsInstance(pti.get_gcmd_vertical_resolution_range(item),
+                dict)
+
+    def test_get_temporal_resolution_range(self):
+        item = 'Weekly Climatology'
+        self.assertIsInstance(pti.get_gcmd_temporal_resolution_range(item),
+                dict)
+
+    def test_get_horizontal_resolution_range(self):
+        item = 'Point Resolution'
+        self.assertIsInstance(pti.get_gcmd_horizontal_resolution_range(item),
+                dict)
+
+    def test_get_project(self):
+        item = 'aeronet'
+        self.assertIsInstance(pti.get_gcmd_project(item), dict)
+
+    def test_get_url_content_type(self):
+        item = 'kml'
+        self.assertIsInstance(pti.get_gcmd_url_content_type(item), dict)
+
     def test_get_fake_instrument(self):
         item = 'FakeItem'
         self.assertRaises(IndexError, pti.get_gcmd_instrument, item)

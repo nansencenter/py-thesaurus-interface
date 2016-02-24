@@ -62,6 +62,11 @@ GCMD_PLATFORMS = 'gcmd_platforms'
 GCMD_SCIENCE_KEYWORDS = 'gcmd_science_keywords'
 GCMD_DATA_CENTERS = 'gcmd_data_centers'
 GCMD_LOCATIONS = 'gcmd_locations'
+GCMD_HORIZONTAL_DATA_RESOLUTION = 'gcmd_horizontal_data_resolution'
+GCMD_VERTICAL_DATA_RESOLUTION = 'gcmd_vertical_data_resolution'
+GCMD_TEMPORAL_DATA_RESOLUTION = 'gcmd_temporal_data_resolution'
+GCMD_PROJECTS = 'gcmd_projects'
+GCMD_URL_CONTENT_TYPES = 'gcmd_url_content_types'
 
 vocabularies = {
     GCMD_SCIENCE_KEYWORDS: GCMDVocabulary(GCMD_SCIENCE_KEYWORDS,
@@ -83,7 +88,22 @@ vocabularies = {
         ['Location_Category', 'Location_Type',
         'Location_Subregion1', 'Location_Subregion2',
         'Location_Subregion3'],
-        'locations?format=csv')
+        'locations?format=csv'),
+    GCMD_HORIZONTAL_DATA_RESOLUTION: GCMDVocabulary(
+        GCMD_HORIZONTAL_DATA_RESOLUTION, ['Horizontal_Resolution_Range'],
+        'horizontalresolutionrange?format=csv'),
+    GCMD_VERTICAL_DATA_RESOLUTION: GCMDVocabulary(
+        GCMD_VERTICAL_DATA_RESOLUTION, ['Vertical_Resolution_Range'],
+        'verticalresolutionrange?format=csv'),
+    GCMD_TEMPORAL_DATA_RESOLUTION: GCMDVocabulary(
+        GCMD_TEMPORAL_DATA_RESOLUTION, ['Temporal_Resolution_Range'],
+        'temporalresolutionrange?format=csv'),
+    GCMD_PROJECTS: GCMDVocabulary(
+        GCMD_PROJECTS, ['Bucket', 'Short_Name', 'Long_Name'],
+        'projects?format=csv'),
+    GCMD_URL_CONTENT_TYPES: GCMDVocabulary(
+        GCMD_URL_CONTENT_TYPES, ['Type', 'Subtype'],
+        'rucontenttype?format=csv'),
 }
 
 #def _get_list(name):
@@ -109,3 +129,17 @@ def _get_data_center(item):
 def _get_location(item):
     return vocabularies[GCMD_LOCATIONS].find_keyword(item)
 
+def _get_horizontal_resolution_range(item):
+    return vocabularies[GCMD_HORIZONTAL_DATA_RESOLUTION].find_keyword(item)
+
+def _get_vertical_resolution_range(item):
+    return vocabularies[GCMD_HORIZONTAL_DATA_RESOLUTION].find_keyword(item)
+
+def _get_temporal_resolution_range(item):
+    return vocabularies[GCMD_TEMPORAL_DATA_RESOLUTION].find_keyword(item)
+
+def _get_project(item):
+    return vocabularies[GCMD_PROJECTS].find_keyword(item)
+
+def _get_url_content_type(item):
+    return vocabularies[GCMD_URL_CONTENT_TYPES].find_keyword(item)
