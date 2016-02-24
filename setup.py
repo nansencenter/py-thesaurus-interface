@@ -16,7 +16,7 @@ from pythesint import update_vocabulary
 
 here = path.abspath(path.dirname(__file__))
 readme_file = 'README.md'
-install_requires = None
+install_requires = ['PyYAML']
 NAME = 'pythesint'
 
 # Get the long description from the README file
