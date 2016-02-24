@@ -58,6 +58,8 @@ class PythesintTest(unittest.TestCase):
         self.assertIsInstance(pti.get_keyword('gcmd_locations', item), dict)
         self.assertIsInstance(pti.get_keyword(pti.GCMD_LOCATIONS, item), dict)
         self.assertIsInstance(pti.get_gcmd_location(item), dict)
+        self.assertEquals(pti.get_gcmd_location(item)['Location_Subregion1'],
+                '')
 
     def test_get_cf_standard_name(self):
         item = 'surface_backwards_scattering_coefficient_of_radar_wave'
