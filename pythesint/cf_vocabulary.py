@@ -3,12 +3,13 @@ from __future__ import absolute_import
 import urllib2
 from xml.dom.minidom import parse
 
-from pythesint.json_vocabulary import  JSONVocabulary
+from pythesint.json_vocabulary import JSONVocabulary
+
+CF_STANDARD_NAMES = 'cf_standard_names'
 
 class CFVocabulary(JSONVocabulary):
     url = 'http://cfconventions.org/Data/cf-standard-names/30/src/cf-standard-name-table.xml'
-    def __init__(self, name):
-        self.name = name
+    name = CF_STANDARD_NAMES
 
     def _fetch_online_data(self):
         # Note the version number... Would probably be better to make it always
@@ -48,10 +49,8 @@ class CFVocabulary(JSONVocabulary):
         return cf_list
 
 
-CF_STANDARD_NAMES = 'cf_standard_names'
-
 vocabularies = {
-    CF_STANDARD_NAMES : CFVocabulary(CF_STANDARD_NAMES),
+    CF_STANDARD_NAMES : CFVocabulary(),
 }
 
 def _get_standard_name(item):

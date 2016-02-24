@@ -3,7 +3,7 @@
 # Purpose:  Python interface to various metadata vocabularies
 #
 # Author:   Morten Wergeland Hansen, Anton A. Korosov, Aleksander Vines
-# Modified: 22.02.2016
+# Modified: 24.02.2016
 #
 # Created:  07.12.2015
 # Copyright:(c) NERSC
@@ -12,30 +12,23 @@
 from setuptools import setup, find_packages
 from os import path
 
-from pythesint import update_vocabulary
+from pip.req import parse_requirements
 
-here = path.abspath(path.dirname(__file__))
 readme_file = 'README.md'
-install_requires = None
 NAME = 'pythesint'
+REQS = None
+
+here = path.abspath(path.dirname(path.realpath(__file__)))
 
 # Get the long description from the README file
 long_description = ''
 if path.exists(path.join(here, readme_file)):
     long_description = open(path.join(here, readme_file)).read()
 
-# fetch all vocabularies from internet
-update_vocabulary('gcmd_instruments')
-update_vocabulary('gcmd_platforms')
-update_vocabulary('gcmd_science_keywords')
-update_vocabulary('gcmd_data_centers')
-update_vocabulary('gcmd_locations')
-update_vocabulary('cf_standard_names')
-
 setup(
     name=NAME,
 
-    version='1.0.1',
+    version='1.0.2',
 
     description='A Python interface to various metadata vocabularies',
     long_description=long_description,
@@ -48,11 +41,11 @@ setup(
 
     url='https://github.com/nansencenter/py-thesaurus-interface',
 
-    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.0.0.tar.gz',
+    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.0.2.tar.gz',
 
     packages=find_packages(),
 
-    install_requires=install_requires,
+    install_requires=REQS,
 
     test_suite='tests',
 
@@ -78,3 +71,12 @@ setup(
     keywords='metadata standards thesaurus vocabulary',
 )
 
+# fetch all vocabularies from internet
+from pythesint import update_vocabulary
+update_vocabulary('gcmd_instruments')
+update_vocabulary('gcmd_platforms')
+update_vocabulary('gcmd_science_keywords')
+update_vocabulary('gcmd_data_centers')
+update_vocabulary('gcmd_locations')
+update_vocabulary('cf_standard_names')
+update_vocabulary('wkv_variables')

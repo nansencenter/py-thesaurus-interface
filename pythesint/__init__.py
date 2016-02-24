@@ -26,3 +26,6 @@ from pythesint.cf_vocabulary import _get_standard_name as get_cf_standard_name
 
 from pythesint.iso19115_vocabulary import ISO19115_TOPIC_CATEGORIES
 from pythesint.iso19115_vocabulary import _get_topic_category as get_iso19115_topic_category
+
+from pythesint.wkv_vocabulary import WKV_VARIABLES
+from pythesint.wkv_vocabulary import get_variable as get_wkv_variable

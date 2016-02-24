@@ -65,6 +65,12 @@ class PythesintTest(unittest.TestCase):
         self.assertIsInstance(pti.get_keyword(pti.CF_STANDARD_NAMES, item), dict)
         self.assertIsInstance(pti.get_cf_standard_name(item), dict)
 
+    def test_get_wkv_variable(self):
+        item = 'surface_backwards_doppler_frequency_shift_of_radar_wave_due_to_surface_velocity'
+        self.assertIsInstance(pti.get_keyword('wkv_variables', item), dict)
+        self.assertIsInstance(pti.get_keyword(pti.WKV_VARIABLES, item), dict)
+        self.assertIsInstance(pti.get_wkv_variable(item), dict)
+
     def test_get_iso19115_topic_category(self):
         item = 'Oceans'
         self.assertIsInstance(pti.get_keyword('iso19115_topic_categories', item), dict)
@@ -106,6 +112,7 @@ class PythesintTest(unittest.TestCase):
         pti.update_vocabulary('gcmd_locations')
         pti.update_vocabulary('cf_standard_names')
         pti.update_vocabulary('iso19115_topic_categories')
+        pti.update_vocabulary('wkv_variables')
 
 if __name__ == "__main__":
     unittest.main()
