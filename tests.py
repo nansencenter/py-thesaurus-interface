@@ -73,6 +73,10 @@ class PythesintTest(unittest.TestCase):
         self.assertIsInstance(pti.get_keyword(pti.WKV_VARIABLES, item), dict)
         self.assertIsInstance(pti.get_wkv_variable(item), dict)
 
+    def test_get_wkv_latitude(self):
+        item = 'latitude'
+        self.assertIsInstance(pti.get_wkv_variable(item), dict)
+
     def test_get_iso19115_topic_category(self):
         item = 'Oceans'
         self.assertIsInstance(pti.get_keyword('iso19115_topic_categories', item), dict)
