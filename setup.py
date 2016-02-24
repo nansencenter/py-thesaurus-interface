@@ -12,11 +12,13 @@
 from setuptools import setup, find_packages
 from os import path
 
+from pip.req import parse_requirements
 
-here = path.abspath(path.dirname(__file__))
 readme_file = 'README.md'
-install_requires = ['PyYAML']
 NAME = 'pythesint'
+REQS = None
+
+here = path.abspath(path.dirname(path.realpath(__file__)))
 
 # Get the long description from the README file
 long_description = ''
@@ -43,7 +45,7 @@ setup(
 
     packages=find_packages(),
 
-    install_requires=install_requires,
+    install_requires=REQS,
 
     test_suite='tests',
 
