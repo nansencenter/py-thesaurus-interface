@@ -1,25 +1,26 @@
 from __future__ import absolute_import
 
-from pythesint.gcmd_thesaurus import thesauri as gcmd_thesauri
-from pythesint.cf_thesaurus import thesauri as cf_thesauri
-from pythesint.iso19115_thesaurus import thesauri as iso19115_thesauri
-from pythesint.wkv_thesaurus import thesauri as wkv_thesauri
+from pythesint.gcmd_vocabulary import vocabularies as gcmd_vocabularies
+from pythesint.cf_vocabulary import vocabularies as cf_vocabularies
+from pythesint.iso19115_vocabulary import vocabularies as iso19115_vocabularies
+from pythesint.wkv_vocabulary import vocabularies as wkv_vocabularies
 
-thesauri = {}
-thesauri.update(gcmd_thesauri)
-thesauri.update(cf_thesauri)
-thesauri.update(iso19115_thesauri)
-thesauri.update(wkv_thesauri)
+vocabularies = {}
+vocabularies.update(gcmd_vocabularies)
+vocabularies.update(cf_vocabularies)
+vocabularies.update(iso19115_vocabularies)
+vocabularies.update(wkv_vocabularies)
+
 
 def get_list(name):
-    ''' Get list of keywords from given thesaurus <name>
+    ''' Get list of keywords from given vocabulary <name>
     '''
-    return thesauri[name].get_list()
+    return vocabularies[name].get_list()
 
 def get_keyword(name, item):
-    ''' Get keyword <item> from given thesaurus <name> '''
-    return thesauri[name].find_keyword(item)
+    ''' Get keyword <item> from given vocabulary <name> '''
+    return vocabularies[name].find_keyword(item)
 
-def update_thesaurus(name):
-    ''' Update thesaurus content '''
-    thesauri[name].update()
+def update_vocabulary(name):
+    ''' Update vocabulary content '''
+    vocabularies[name].update()

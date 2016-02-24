@@ -4,21 +4,22 @@ import yaml
 import urllib2
 from collections import OrderedDict
 
-from pythesint.json_thesaurus import JSONThesaurus
+from pythesint.json_vocabulary import JSONVocabulary
 
 WKV_VARIABLES = 'wkv_variables'
 
-class WKVThesaurus(JSONThesaurus):
+class WKVVocabulary(JSONVocabulary):
     base_url = 'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/'
     name = WKV_VARIABLES
-    def _fetch_data(self):
+
+    def _fetch_online_data(self):
         ''' Return list of Well Known Variables from Nansat        '''
-        response = urllib2.urlopen('https://raw.githubusercontent.com/nansencenter/nansat/wkvxml2wkvyml/nansat/wkv.yml')
+        response = urllib2.urlopen('https://raw.githubusercontent.com/nansencenter/nersc-vocabularies/master/nansat_wkv.yml')
         return yaml.load(response.read())
 
-thesauri = {
-    WKV_VARIABLES: WKVThesaurus(),
+vocabularies = {
+    WKV_VARIABLES: WKVVocabulary(),
 }
 
 def get_variable(item):
-    return thesauri[WKV_VARIABLES].find_keyword(item)
+    return vocabularies[WKV_VARIABLES].find_keyword(item)
