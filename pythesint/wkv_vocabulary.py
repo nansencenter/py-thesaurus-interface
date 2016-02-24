@@ -8,7 +8,6 @@ from pythesint.json_vocabulary import JSONVocabulary
 WKV_VARIABLES = 'wkv_variables'
 
 class WKVVocabulary(JSONVocabulary):
-    base_url = 'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/'
     name = WKV_VARIABLES
     categories = ['standard_name', 'long_name', 'short_name', 'units', 'minmax', 'colormap']
 
