@@ -56,7 +56,7 @@ setup(
 
     install_requires=REQS,
 
-    test_suite='pythesint.tests',
+    test_suite='tests',
 
     license='GPLv3',
 
