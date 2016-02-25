@@ -28,7 +28,7 @@ class update_vocabularies(install_scripts):
     def run(self):
         install_scripts.run(self)
         from pythesint import update_vocabulary
-        update_vocabulary('wkv_variables')
+        pti.update_vocabulary('gcmd_instruments')
 
 
 setup(

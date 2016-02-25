@@ -1,0 +1,12 @@
+- name: wkv_variable
+  module: wkv_vocabulary
+  class: WKVVocabulary
+  kwargs:
+    url: https://raw.githubusercontent.com/nansencenter/nersc-vocabularies/master/nansat_wkv.yml
+    categories:
+      - standard_name
+      - long_name
+      - short_name
+      - units
+      - minmax
+      - colormap

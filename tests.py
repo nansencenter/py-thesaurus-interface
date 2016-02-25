@@ -69,8 +69,6 @@ class PythesintTest(unittest.TestCase):
 
     def test_get_wkv_variable(self):
         item = 'surface_backwards_doppler_frequency_shift_of_radar_wave_due_to_surface_velocity'
-        self.assertIsInstance(pti.get_keyword('wkv_variables', item), dict)
-        self.assertIsInstance(pti.get_keyword(pti.WKV_VARIABLES, item), dict)
         self.assertIsInstance(pti.get_wkv_variable(item), dict)
 
     def test_get_wkv_latitude(self):
@@ -118,7 +116,7 @@ class PythesintTest(unittest.TestCase):
         pti.update_vocabulary('gcmd_locations')
         pti.update_vocabulary('cf_standard_names')
         pti.update_vocabulary('iso19115_topic_categories')
-        pti.update_vocabulary('wkv_variables')
+        pti.update_wkv_variable()
 
 if __name__ == "__main__":
     unittest.main()
