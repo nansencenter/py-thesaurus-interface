@@ -58,11 +58,11 @@ setup(
 
     install_requires=REQS,
 
-    test_suite='tests',
+    test_suite='pythesint.tests',
 
     license='GPLv3',
 
-    classifiers = [
+    classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Plugins',
         'Environment :: Console',
