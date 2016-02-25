@@ -11,8 +11,7 @@ Metadata (http://www.isotc211.org/) Topic Category Code List
 '''
 
 class ISO19115Vocabulary(Vocabulary):
-    name = 'iso19115_topic_category'
-    iso_topic_category_list_keywords = [
+    iso_topic_category_list = [
         'Farming',
         'Biota',
         'Boundaries',
@@ -36,14 +35,5 @@ class ISO19115Vocabulary(Vocabulary):
 
     def get_list(self):
         ''' Convert list of keywords into list of dicts '''
-        return [{'iso_topic_category' : keyword} for keyword in
-            self.iso_topic_category_list_keywords]
-
-ISO19115_TOPIC_CATEGORIES = 'iso19115_topic_categories'
-
-vocabularies = {
-    ISO19115_TOPIC_CATEGORIES : ISO19115Vocabulary()
-}
-
-def _get_topic_category(item):
-    return vocabularies[ISO19115_TOPIC_CATEGORIES].find_keyword(item)
+        return [{self.category : keyword} for keyword in
+            self.iso_topic_category_list]

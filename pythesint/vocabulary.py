@@ -1,5 +1,10 @@
 class Vocabulary(object):
 
+    def __init__(self, name, **kwargs):
+        self.name = name
+        for key in kwargs:
+            setattr(self, key, kwargs[key])
+
     def find_keyword(self, item):
         ''' Return the dictionary containing the given item in the provided list.
         The function returns only the lowest level match, i.e., the
