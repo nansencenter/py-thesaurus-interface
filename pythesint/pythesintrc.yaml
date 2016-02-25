@@ -52,3 +52,68 @@
       - Long_Name
       - Data_Center_URL
 
+- name: gcmd_platform
+  module: gcmd_vocabulary
+  class: GCMDVocabulary
+  kwargs:
+    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/platforms?format=csv
+    categories:
+      - Category
+      - Series_Entity
+      - Short_Name
+      - Long_Name
+
+- name: gcmd_location
+  module: gcmd_vocabulary
+  class: GCMDVocabulary
+  kwargs:
+    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/locations?format=csv
+    categories:
+      - Location_Category
+      - Location_Type
+      - Location_Subregion1
+      - Location_Subregion2
+      - Location_Subregion3
+
+- name: gcmd_horizontalresolutionrange
+  module: gcmd_vocabulary
+  class: GCMDVocabulary
+  kwargs:
+    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/horizontalresolutionrange?format=csv
+    categories:
+      - Horizontal_Resolution_Range
+
+- name: gcmd_verticalresolutionrange
+  module: gcmd_vocabulary
+  class: GCMDVocabulary
+  kwargs:
+    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/verticalresolutionrange?format=csv
+    categories:
+      - Vertical_Resolution_Range
+
+- name: gcmd_temporalresolutionrange
+  module: gcmd_vocabulary
+  class: GCMDVocabulary
+  kwargs:
+    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/temporalresolutionrange?format=csv
+    categories:
+      - Temporal_Resolution_Range
+
+- name: gcmd_project
+  module: gcmd_vocabulary
+  class: GCMDVocabulary
+  kwargs:
+    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/projects?format=csv
+    categories:
+      - Bucket
+      - Short_Name
+      - Long_Name
+
+- name: gcmd_rucontenttype
+  module: gcmd_vocabulary
+  class: GCMDVocabulary
+  kwargs:
+    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/rucontenttype?format=csv
+    categories:
+      - Type
+      - Subtype

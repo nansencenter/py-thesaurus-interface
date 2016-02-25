@@ -17,6 +17,14 @@ class PythesintTest(unittest.TestCase):
         self.assertIsInstance(pti.get_gcmd_instrument_list(), list)
         self.assertIsInstance(pti.get_gcmd_science_keyword_list(), list)
         self.assertIsInstance(pti.get_gcmd_provider_list(), list)
+        self.assertIsInstance(pti.get_gcmd_platform_list(), list)
+#        self.assertIsInstance(pti.get__list(), list)
+        self.assertIsInstance(pti.get_gcmd_location_list(), list)
+        self.assertIsInstance(pti.get_gcmd_horizontalresolutionrange_list(), list)
+        self.assertIsInstance(pti.get_gcmd_verticalresolutionrange_list(), list)
+        self.assertIsInstance(pti.get_gcmd_temporalresolutionrange_list(), list)
+        self.assertIsInstance(pti.get_gcmd_project_list(), list)
+        self.assertIsInstance(pti.get_gcmd_rucontenttype_list(), list)
 
     def test_remove_and_get_gcmd_instrument(self):
         if os.path.exists(resource_filename('pythesint', 'json')):
@@ -36,51 +44,38 @@ class PythesintTest(unittest.TestCase):
         item = 'NERSC'
         self.assertIsInstance(pti.get_gcmd_provider(item), dict)
 
-
-    '''
     def test_get_gcmd_platform(self):
         item = 'AQUA'
-        self.assertIsInstance(pti.get_keyword('gcmd_platforms', item), dict)
-        self.assertIsInstance(pti.get_keyword(pti.GCMD_PLATFORMS, item), dict)
         self.assertIsInstance(pti.get_gcmd_platform(item), dict)
 
-    def test_get_gcmd_data_center(self):
-        item = 'NERSC'
-        self.assertIsInstance(pti.get_keyword('gcmd_data_centers', item), dict)
-        self.assertIsInstance(pti.get_keyword(pti.GCMD_DATA_CENTERS, item), dict)
-        self.assertIsInstance(pti.get_gcmd_data_center(item), dict)
-
     def test_get_gcmd_location(self):
-        item = 'europe'
-        self.assertIsInstance(pti.get_keyword('gcmd_locations', item), dict)
-        self.assertIsInstance(pti.get_keyword(pti.GCMD_LOCATIONS, item), dict)
+        item = 'NORWEGIAN SEA'
         self.assertIsInstance(pti.get_gcmd_location(item), dict)
-        self.assertEquals(pti.get_gcmd_location(item)['Location_Subregion1'],
-                '')
 
-    def test_get_gcmd_vertical_resolution_range(self):
-        item = 'Point Resolution'
-        self.assertIsInstance(pti.get_gcmd_vertical_resolution_range(item),
-                dict)
+    def test_get_gcmd_horizontalresolutionrange(self):
+        item = '< 1 meter'
+        self.assertIsInstance(pti.get_gcmd_horizontalresolutionrange(item), dict)
 
-    def test_get_gcmd_temporal_resolution_range(self):
-        item = 'Weekly Climatology'
-        self.assertIsInstance(pti.get_gcmd_temporal_resolution_range(item),
-                dict)
+    def test_get_gcmd_verticalresolutionrange(self):
+        item = '< 1 meter'
+        self.assertIsInstance(pti.get_gcmd_verticalresolutionrange(item), dict)
 
-    def test_get_gcmd_horizontal_resolution_range(self):
-        item = 'Point Resolution'
-        self.assertIsInstance(pti.get_gcmd_horizontal_resolution_range(item),
-                dict)
+    def test_get_gcmd_temporalresolutionrange(self):
+        item = 'Decadal'
+        self.assertIsInstance(pti.get_gcmd_temporalresolutionrange(item), dict)
 
     def test_get_gcmd_project(self):
-        item = 'aeronet'
+        item = 'IPCC'
         self.assertIsInstance(pti.get_gcmd_project(item), dict)
 
-    def test_get_gcmd_url_content_type(self):
-        item = 'kml'
-        self.assertIsInstance(pti.get_gcmd_url_content_type(item), dict)
-    '''
+    def test_get_gcmd_rucontenttype(self):
+        item = 'THREDDS DATA'
+        self.assertIsInstance(pti.get_gcmd_rucontenttype(item), dict)
+
+#    def test_get_(self):
+#        item = 'AQUA'
+#        self.assertIsInstance(pti.get_(item), dict)
+
 
     def test_get_cf_standard_name(self):
         item = 'surface_backwards_scattering_coefficient_of_radar_wave'
