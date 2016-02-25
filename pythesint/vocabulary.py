@@ -43,7 +43,7 @@ class Vocabulary(object):
         matching_key = ''
         for d in self.get_list():
             for key in d.keys():
-                if d[key].upper()==item.upper():
+                if d[key].upper() == item.upper():
                     matches.append(d)
                     matching_key = key
                     break
@@ -54,7 +54,7 @@ class Vocabulary(object):
         keys = matches[0].keys()
         kw_group_index = keys.index(matching_key)
         ii = range(kw_group_index+1, len(keys))
-        if len(matches)==1:
+        if len(matches) == 1:
             return matches[0]
         # OBS: This works for the gcmd keywords but makes no sense for the cf
         # standard names - therefore always search the cf standard names by
@@ -68,4 +68,7 @@ class Vocabulary(object):
 
     def update(self):
         pass
+
+    def get_list(self):
+        raise NotImplementedError
 
