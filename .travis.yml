@@ -6,6 +6,7 @@ sudo: false
 install:
   - pip install .
   - pip install coveralls
+  - python -c 'import mock; print mock.__file__'
 
 script:
   - coverage run --omit=pythesint/tests/* --source=pythesint setup.py test
