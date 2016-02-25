@@ -6,6 +6,7 @@ sudo: false
 install:
   - pip install .
   - pip install coveralls
+  - pip install mock --upgrade
   - python -c 'import mock; print mock.__file__; print mock.__version__'
   - python -c 'from mock.mock import MagicMock'
 
