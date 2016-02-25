@@ -4,6 +4,7 @@ python:
 sudo: false
 
 install:
+  - pip install pip --upgrade
   - pip install .
   - pip install coveralls
 
