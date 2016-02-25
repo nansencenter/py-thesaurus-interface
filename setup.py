@@ -33,7 +33,7 @@ class update_vocabularies(install_scripts):
 setup(
     name=NAME,
 
-    version='1.1.0',
+    version='1.1.1',
 
     description='A Python interface to various metadata vocabularies',
     long_description=long_description,
@@ -46,7 +46,7 @@ setup(
 
     url='https://github.com/nansencenter/py-thesaurus-interface',
 
-    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.1.0.tar.gz',
+    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.1.1.tar.gz',
 
     packages=find_packages(),
 
