@@ -6,13 +6,10 @@ from collections import OrderedDict
 from pythesint.json_vocabulary import  JSONVocabulary
 
 class GCMDVocabulary(JSONVocabulary):
-
-    base_url = 'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/'
-
     def __init__(self, name, categories, url):
         self.name = name
         self.categories = categories
-        self.url = self.base_url + url
+        self.url = url
 
     def _fetch_online_data(self):
         ''' Return list of GCMD standard keywords at provided url
@@ -57,6 +54,7 @@ class GCMDVocabulary(JSONVocabulary):
 
         return gcmd_list
 
+"""
 GCMD_INSTRUMENTS = 'gcmd_instruments'
 GCMD_PLATFORMS = 'gcmd_platforms'
 GCMD_SCIENCE_KEYWORDS = 'gcmd_science_keywords'
@@ -143,3 +141,4 @@ def _get_project(item):
 
 def _get_url_content_type(item):
     return vocabularies[GCMD_URL_CONTENT_TYPES].find_keyword(item)
+"""

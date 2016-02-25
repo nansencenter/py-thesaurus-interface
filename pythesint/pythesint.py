@@ -1,15 +1,16 @@
 from __future__ import absolute_import
 
 from os import path
+from pkg_resources import resource_string
 
 import yaml
 
-from pythesint.gcmd_vocabulary import vocabularies as gcmd_vocabularies
+#from pythesint.gcmd_vocabulary import vocabularies as gcmd_vocabularies
 from pythesint.cf_vocabulary import vocabularies as cf_vocabularies
 from pythesint.iso19115_vocabulary import vocabularies as iso19115_vocabularies
 
 vocabularies = {}
-vocabularies.update(gcmd_vocabularies)
+#vocabularies.update(gcmd_vocabularies)
 vocabularies.update(cf_vocabularies)
 vocabularies.update(iso19115_vocabularies)
 
@@ -31,8 +32,11 @@ def update_vocabulary(name):
 # http://stackoverflow.com/questions/4821104/python-dynamic-instantiation-from-string-name-of-a-class-in-dynamically-imported
 
 ## load config file
-here = path.abspath(path.dirname(path.realpath(__file__)))
-config = yaml.load(open(path.join(here, '.pythesintrc.yaml')))
+print '-------------\n--------------\n\n HERE COMES YAML:'
+print resource_string(__name__, '.pythesintrc.yaml')
+print '\n\n\n-------------'
+
+config = yaml.load(resource_string(__name__, '.pythesintrc.yaml'))
 current_module = __import__(__name__)
 
 # add get_ and update_ functions
@@ -41,6 +45,7 @@ for cnf in config:
     voc_class = getattr(voc_module, cnf['class'])
     vocabulary = voc_class(cnf['name'], **cnf['kwargs'])
 
-    setattr(current_module, 'get_' + cnf['name'], vocabulary.find_keyword)
-    setattr(current_module, 'update_' + cnf['name'], vocabulary.update)
+    setattr(current_module, 'get_'+cnf['name'], vocabulary.find_keyword)
+    setattr(current_module, 'get_'+cnf['name']+'_list', vocabulary.get_list)
+    setattr(current_module, 'update_'+cnf['name'], vocabulary.update)
 

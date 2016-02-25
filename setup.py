@@ -27,8 +27,8 @@ if path.exists(path.join(here, readme_file)):
 class update_vocabularies(install_scripts):
     def run(self):
         install_scripts.run(self)
-        from pythesint import update_vocabulary
-        pti.update_vocabulary('gcmd_instruments')
+        import pythesint as pti
+        pti.update_gcmd_instrument()
 
 
 setup(
@@ -50,6 +50,10 @@ setup(
     download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.0.2.tar.gz',
 
     packages=find_packages(),
+
+    include_package_data=True,
+
+    package_data = {'': ['*.yaml']},
 
     install_requires=REQS,
 

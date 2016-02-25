@@ -10,3 +10,16 @@
       - units
       - minmax
       - colormap
+
+- name: gcmd_instrument
+  module: gcmd_vocabulary
+  class: GCMDVocabulary
+  kwargs:
+    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/instruments?format=csv
+    categories:
+      - Category
+      - Class
+      - Type
+      - Subtype
+      - Short_Name
+      - Long_Name
