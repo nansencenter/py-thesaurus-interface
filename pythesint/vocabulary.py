@@ -1,5 +1,4 @@
 class Vocabulary(object):
-
     def __init__(self, name, **kwargs):
         self.name = name
         for key in kwargs:
