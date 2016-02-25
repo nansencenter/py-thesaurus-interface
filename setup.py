@@ -17,6 +17,7 @@ from pip.req import parse_requirements
 readme_file = 'README.md'
 NAME = 'pythesint'
 REQS = None
+TEST_REQS = ['mock']
 
 here = path.abspath(path.dirname(path.realpath(__file__)))
 
@@ -45,13 +46,15 @@ setup(
 
     packages=find_packages(),
 
+    tests_require=TEST_REQS,
+
     install_requires=REQS,
 
     test_suite='pythesint.tests',
 
     license='GPLv3',
 
-    classifiers = [
+    classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Plugins',
         'Environment :: Console',
