@@ -4,13 +4,16 @@ ENV=$HOME/test_pythesint
 
 echo 'Build dist'
 cd $SRC
+rm dist -rf
+rm pythesint.egg-info -rf
+rm build -rf
 python setup.py sdist
 echo
 echo
 
 echo 'Install dist'
 cd $HOME
-export PATH=/home/antonk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/antonk/bin:/bin:/usr/local/java/jre1.7.0_60/bin:/opt/gdal/1.11.0/bin:/opt/hdf/4.2.10/bin:/opt/matlab/bin/:/home/antonk/bin
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 export PYTHONPATH=
 rm  $ENV -rf
 virtualenv $ENV

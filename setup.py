@@ -52,8 +52,6 @@ setup(
 
     include_package_data=True,
 
-    package_data = {'': ['*.yaml']},
-
     setup_requires=REQS,
 
     install_requires=REQS,
