@@ -14,7 +14,8 @@ class TestVocabulary(unittest.TestCase):
         self.cat = {'Category': 'Animal', 'Type': 'Cat'}
         self.dog = {'Category': 'Animal', 'Type': 'Dog'}
         self.mouse = {'Category': 'Animal', 'Type': 'Mouse'}
-    
+        self.house = {'Category': 'Construction', 'Type': 'house'}
+
     def test_find_keyword_get_list_not_implemented(self):
         vocab = Vocabulary()
         with self.assertRaises(NotImplementedError):
@@ -32,7 +33,7 @@ class TestVocabulary(unittest.TestCase):
         vocab = Vocabulary()
         vocab.name = 'VOCAB MOCK'
         vocab.get_list = MagicMock(return_value=[self.cat, self.dog,
-                                                 self.mouse])
+                                                 self.mouse, self.house])
         self.assertDictEqual(vocab.find_keyword('dog'), self.dog)
 
 if __name__ == "__main__":
