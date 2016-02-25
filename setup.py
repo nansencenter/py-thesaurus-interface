@@ -28,7 +28,7 @@ class update_vocabularies(install_scripts):
     def run(self):
         install_scripts.run(self)
         import pythesint as pti
-        pti.update_gcmd_instrument()
+        pti.update_all_vocabularies()
 
 setup(
     name=NAME,
