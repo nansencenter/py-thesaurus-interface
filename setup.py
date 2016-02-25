@@ -3,20 +3,19 @@
 # Purpose:  Python interface to various metadata vocabularies
 #
 # Author:   Morten Wergeland Hansen, Anton A. Korosov, Aleksander Vines
-# Modified: 24.02.2016
+# Modified: 25.02.2016
 #
 # Created:  07.12.2015
 # Copyright:(c) NERSC
 # License:  GPLv3
 #-------------------------------------------------------------------------------
 from setuptools import setup, find_packages
+from setuptools.command.install_scripts import install_scripts
 from os import path
-
-from pip.req import parse_requirements
 
 readme_file = 'README.md'
 NAME = 'pythesint'
-REQS = None
+REQS = ['PyYAML']
 
 here = path.abspath(path.dirname(path.realpath(__file__)))
 
@@ -25,10 +24,16 @@ long_description = ''
 if path.exists(path.join(here, readme_file)):
     long_description = open(path.join(here, readme_file)).read()
 
+class update_vocabularies(install_scripts):
+    def run(self):
+        install_scripts.run(self)
+        import pythesint as pti
+        pti.update_all_vocabularies()
+
 setup(
     name=NAME,
 
-    version='1.0.2',
+    version='1.1.0',
 
     description='A Python interface to various metadata vocabularies',
     long_description=long_description,
@@ -41,17 +46,21 @@ setup(
 
     url='https://github.com/nansencenter/py-thesaurus-interface',
 
-    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.0.2.tar.gz',
+    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.1.0.tar.gz',
 
     packages=find_packages(),
 
+    include_package_data=True,
+
+    setup_requires=REQS,
+
     install_requires=REQS,
 
-    test_suite='pythesint.tests',
+    test_suite='tests',
 
     license='GPLv3',
 
-    classifiers = [
+    classifiers=[
         'Development Status :: 5 - Production/Stable',
         'Environment :: Plugins',
         'Environment :: Console',
@@ -69,14 +78,6 @@ setup(
     ],
 
     keywords='metadata standards thesaurus vocabulary',
-)
 
-# fetch all vocabularies from internet
-from pythesint import update_vocabulary
-update_vocabulary('gcmd_instruments')
-update_vocabulary('gcmd_platforms')
-update_vocabulary('gcmd_science_keywords')
-update_vocabulary('gcmd_data_centers')
-update_vocabulary('gcmd_locations')
-update_vocabulary('cf_standard_names')
-update_vocabulary('wkv_variables')
+    cmdclass = {'install_scripts': update_vocabularies},
+)
