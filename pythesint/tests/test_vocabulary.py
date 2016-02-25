@@ -8,7 +8,7 @@ from pythesint.vocabulary import Vocabulary
 from mock.mock import MagicMock
 
 
-class TestVocabulary(unittest.TestCase):
+class VocabularyTest(unittest.TestCase):
 
     def setUp(self):
         self.cat = {'Category': 'Animal', 'Type': 'Cat'}
