@@ -6,10 +6,13 @@ sudo: false
 install:
   - python setup.py sdist
   - pip install dist/*.tar.gz
+  - pip install mock --upgrade
   - pip install coveralls
+  - python -c 'import mock; print mock.__file__; print mock.__version__'
+  - python -c 'from mock.mock import MagicMock'
 
 script:
-  - coverage run --source=pythesint setup.py test
+  - coverage run --omit=pythesint/tests/* --source=pythesint setup.py test
 
 after_success:
   - coveralls
