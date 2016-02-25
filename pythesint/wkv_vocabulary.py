@@ -3,6 +3,8 @@ from __future__ import absolute_import
 import urllib2
 from xml.dom.minidom import parse
 
+import yaml
+
 from pythesint.json_vocabulary import JSONVocabulary
 
 WKV_VARIABLES = 'wkv_variables'

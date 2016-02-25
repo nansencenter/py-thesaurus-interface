@@ -24,3 +24,6 @@ def get_keyword(name, item):
 def update_vocabulary(name):
     ''' Update vocabulary content '''
     vocabularies[name].update()
+
+# http://stackoverflow.com/questions/1621350/dynamically-adding-functions-to-a-python-module
+# http://stackoverflow.com/questions/4821104/python-dynamic-instantiation-from-string-name-of-a-class-in-dynamically-imported
