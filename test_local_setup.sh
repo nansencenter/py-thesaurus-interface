@@ -16,7 +16,7 @@ rm  $ENV -rf
 virtualenv $ENV
 source $ENV/bin/activate
 which pip
-pip install nose
 pip install $SRC/dist/pythesint-1.0.2.tar.gz
+python -c 'import pythesint as pti; print pti.get_gcmd_instrument("MERIS")'
 deactivate
 

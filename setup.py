@@ -30,7 +30,6 @@ class update_vocabularies(install_scripts):
         import pythesint as pti
         pti.update_gcmd_instrument()
 
-
 setup(
     name=NAME,
 
