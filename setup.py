@@ -54,6 +54,8 @@ setup(
 
     package_data = {'': ['*.yaml']},
 
+    setup_requires=REQS,
+
     install_requires=REQS,
 
     test_suite='tests',
