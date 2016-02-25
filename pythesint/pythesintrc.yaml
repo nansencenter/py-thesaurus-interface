@@ -3,13 +3,6 @@
   class: WKVVocabulary
   kwargs:
     url: https://raw.githubusercontent.com/nansencenter/nersc-vocabularies/master/nansat_wkv.yml
-    categories:
-      - standard_name
-      - long_name
-      - short_name
-      - units
-      - minmax
-      - colormap
 
 - name: gcmd_instrument
   module: gcmd_vocabulary
@@ -117,3 +110,15 @@
     categories:
       - Type
       - Subtype
+
+- name: cf_standard_name
+  module: cf_vocabulary
+  class: CFVocabulary
+  kwargs:
+    url: http://cfconventions.org/Data/cf-standard-names/30/src/cf-standard-name-table.xml
+
+- name: iso19115_topic_category
+  module: iso19115_vocabulary
+  class: ISO19115Vocabulary
+  kwargs:
+    category: iso_topic_category

@@ -6,11 +6,6 @@ from collections import OrderedDict
 from pythesint.json_vocabulary import  JSONVocabulary
 
 class GCMDVocabulary(JSONVocabulary):
-    def __init__(self, name, categories, url):
-        self.name = name
-        self.categories = categories
-        self.url = url
-
     def _fetch_online_data(self):
         ''' Return list of GCMD standard keywords at provided url
 

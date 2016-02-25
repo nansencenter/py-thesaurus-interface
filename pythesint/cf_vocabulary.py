@@ -5,12 +5,7 @@ from xml.dom.minidom import parse
 
 from pythesint.json_vocabulary import JSONVocabulary
 
-CF_STANDARD_NAMES = 'cf_standard_names'
-
 class CFVocabulary(JSONVocabulary):
-    url = 'http://cfconventions.org/Data/cf-standard-names/30/src/cf-standard-name-table.xml'
-    name = CF_STANDARD_NAMES
-
     def _fetch_online_data(self):
         # Note the version number... Would probably be better to make it always
         # take the last version..
@@ -47,13 +42,4 @@ class CFVocabulary(JSONVocabulary):
                 }
             cf_list.append(stdname)
         return cf_list
-
-
-vocabularies = {
-    CF_STANDARD_NAMES : CFVocabulary(),
-}
-
-def _get_standard_name(item):
-    return vocabularies[CF_STANDARD_NAMES].find_keyword(item)
-
 

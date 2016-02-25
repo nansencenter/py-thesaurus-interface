@@ -2,9 +2,3 @@ from __future__ import absolute_import
 
 from pythesint.pythesint import get_keyword, update_vocabulary, get_list
 
-from pythesint.cf_vocabulary import CF_STANDARD_NAMES
-from pythesint.cf_vocabulary import _get_standard_name as get_cf_standard_name
-
-from pythesint.iso19115_vocabulary import ISO19115_TOPIC_CATEGORIES
-from pythesint.iso19115_vocabulary import _get_topic_category as get_iso19115_topic_category
-

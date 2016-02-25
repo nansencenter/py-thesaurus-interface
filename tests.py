@@ -18,13 +18,15 @@ class PythesintTest(unittest.TestCase):
         self.assertIsInstance(pti.get_gcmd_science_keyword_list(), list)
         self.assertIsInstance(pti.get_gcmd_provider_list(), list)
         self.assertIsInstance(pti.get_gcmd_platform_list(), list)
-#        self.assertIsInstance(pti.get__list(), list)
         self.assertIsInstance(pti.get_gcmd_location_list(), list)
         self.assertIsInstance(pti.get_gcmd_horizontalresolutionrange_list(), list)
         self.assertIsInstance(pti.get_gcmd_verticalresolutionrange_list(), list)
         self.assertIsInstance(pti.get_gcmd_temporalresolutionrange_list(), list)
         self.assertIsInstance(pti.get_gcmd_project_list(), list)
         self.assertIsInstance(pti.get_gcmd_rucontenttype_list(), list)
+        self.assertIsInstance(pti.get_cf_standard_name_list(), list)
+        self.assertIsInstance(pti.get_iso19115_topic_category_list(), list)
+#        self.assertIsInstance(pti.get__list(), list)
 
     def test_remove_and_get_gcmd_instrument(self):
         if os.path.exists(resource_filename('pythesint', 'json')):
@@ -72,15 +74,8 @@ class PythesintTest(unittest.TestCase):
         item = 'THREDDS DATA'
         self.assertIsInstance(pti.get_gcmd_rucontenttype(item), dict)
 
-#    def test_get_(self):
-#        item = 'AQUA'
-#        self.assertIsInstance(pti.get_(item), dict)
-
-
     def test_get_cf_standard_name(self):
         item = 'surface_backwards_scattering_coefficient_of_radar_wave'
-        self.assertIsInstance(pti.get_keyword('cf_standard_names', item), dict)
-        self.assertIsInstance(pti.get_keyword(pti.CF_STANDARD_NAMES, item), dict)
         self.assertIsInstance(pti.get_cf_standard_name(item), dict)
 
     def test_get_wkv_variable(self):
@@ -93,8 +88,6 @@ class PythesintTest(unittest.TestCase):
 
     def test_get_iso19115_topic_category(self):
         item = 'Oceans'
-        self.assertIsInstance(pti.get_keyword('iso19115_topic_categories', item), dict)
-        self.assertIsInstance(pti.get_keyword(pti.ISO19115_TOPIC_CATEGORIES, item), dict)
         self.assertIsInstance(pti.get_iso19115_topic_category(item), dict)
 
     def test_get_fake_instrument(self):
@@ -102,12 +95,19 @@ class PythesintTest(unittest.TestCase):
         self.assertRaises(IndexError, pti.get_gcmd_instrument, item)
 
     def test_update(self):
-        pti.update_vocabulary('cf_standard_names')
-        pti.update_vocabulary('iso19115_topic_categories')
         pti.update_wkv_variable()
         pti.update_gcmd_instrument()
         pti.update_gcmd_science_keyword()
         pti.update_gcmd_provider()
+        pti.update_gcmd_platform()
+        pti.update_gcmd_location()
+        pti.update_gcmd_horizontalresolutionrange()
+        pti.update_gcmd_verticalresolutionrange()
+        pti.update_gcmd_temporalresolutionrange()
+        pti.update_gcmd_project()
+        pti.update_gcmd_rucontenttype()
+        pti.update_cf_standard_name()
+        pti.update_iso19115_topic_category()
 
 if __name__ == "__main__":
     unittest.main()

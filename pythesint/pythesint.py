@@ -5,13 +5,6 @@ from pkg_resources import resource_string
 
 import yaml
 
-from pythesint.cf_vocabulary import vocabularies as cf_vocabularies
-from pythesint.iso19115_vocabulary import vocabularies as iso19115_vocabularies
-
-vocabularies = {}
-vocabularies.update(cf_vocabularies)
-vocabularies.update(iso19115_vocabularies)
-
 def get_list(name):
     ''' Get list of keywords from given vocabulary <name>
     '''
