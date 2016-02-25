@@ -13,17 +13,10 @@ class PythesintTest(unittest.TestCase):
     #def test_write_json_to_path
 
     def test_get_list(self):
-        self.assertIsInstance(pti.get_gcmd_instrument_list(), list)
         self.assertIsInstance(pti.get_wkv_variable_list(), list)
-
-    #def test_get_list_from_path
-
-    #def test_get_gcmd_instruments_list(self):
-    #   self.assertIsInstance(pti.get_gcmd_instruments(), list)
-
-    def test_get_gcmd_instrument(self):
-        item = 'MERIS'
-        self.assertIsInstance(pti.get_gcmd_instrument(item), dict)
+        self.assertIsInstance(pti.get_gcmd_instrument_list(), list)
+        self.assertIsInstance(pti.get_gcmd_science_keyword_list(), list)
+        self.assertIsInstance(pti.get_gcmd_provider_list(), list)
 
     def test_remove_and_get_gcmd_instrument(self):
         if os.path.exists(resource_filename('pythesint', 'json')):
@@ -31,18 +24,25 @@ class PythesintTest(unittest.TestCase):
         item = 'MERIS'
         self.assertIsInstance(pti.get_gcmd_instrument(item), dict)
 
+    def test_get_gcmd_instrument(self):
+        item = 'MERIS'
+        self.assertIsInstance(pti.get_gcmd_instrument(item), dict)
+
+    def test_get_gcmd_science_keyword(self):
+        item = 'sigma naught'
+        self.assertIsInstance(pti.get_gcmd_science_keyword(item), dict)
+
+    def test_get_gcmd_provider(self):
+        item = 'NERSC'
+        self.assertIsInstance(pti.get_gcmd_provider(item), dict)
+
+
     '''
     def test_get_gcmd_platform(self):
         item = 'AQUA'
         self.assertIsInstance(pti.get_keyword('gcmd_platforms', item), dict)
         self.assertIsInstance(pti.get_keyword(pti.GCMD_PLATFORMS, item), dict)
         self.assertIsInstance(pti.get_gcmd_platform(item), dict)
-
-    def test_get_gcmd_science_keyword(self):
-        item = 'sigma naught'
-        self.assertIsInstance(pti.get_keyword('gcmd_science_keywords', item), dict)
-        self.assertIsInstance(pti.get_keyword(pti.GCMD_SCIENCE_KEYWORDS, item), dict)
-        self.assertIsInstance(pti.get_gcmd_science_keyword(item), dict)
 
     def test_get_gcmd_data_center(self):
         item = 'NERSC'
@@ -111,6 +111,8 @@ class PythesintTest(unittest.TestCase):
         pti.update_vocabulary('iso19115_topic_categories')
         pti.update_wkv_variable()
         pti.update_gcmd_instrument()
+        pti.update_gcmd_science_keyword()
+        pti.update_gcmd_provider()
 
 if __name__ == "__main__":
     unittest.main()
