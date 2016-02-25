@@ -4,7 +4,8 @@ python:
 sudo: false
 
 install:
-  - pip install .
+  - python setup.py sdist
+  - pip install dist/*.tar.gz
   - pip install coveralls
 
 script:
