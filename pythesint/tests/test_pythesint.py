@@ -14,20 +14,19 @@ class PythesintTest(unittest.TestCase):
     # def test_write_json_to_path
 
     def test_get_list(self):
-        self.assertIsInstance(pti.get_wkv_variable_list(), list)
-        self.assertIsInstance(pti.get_gcmd_instrument_list(), list)
-        self.assertIsInstance(pti.get_gcmd_science_keyword_list(), list)
-        self.assertIsInstance(pti.get_gcmd_provider_list(), list)
-        self.assertIsInstance(pti.get_gcmd_platform_list(), list)
-        self.assertIsInstance(pti.get_gcmd_location_list(), list)
-        self.assertIsInstance(pti.get_gcmd_horizontalresolutionrange_list(), list)
-        self.assertIsInstance(pti.get_gcmd_verticalresolutionrange_list(), list)
-        self.assertIsInstance(pti.get_gcmd_temporalresolutionrange_list(), list)
-        self.assertIsInstance(pti.get_gcmd_project_list(), list)
-        self.assertIsInstance(pti.get_gcmd_rucontenttype_list(), list)
-        self.assertIsInstance(pti.get_cf_standard_name_list(), list)
-        self.assertIsInstance(pti.get_iso19115_topic_category_list(), list)
-#        self.assertIsInstance(pti.get__list(), list)
+        # TODO - these should be generated from rc file!
+        functions = ['get_wkv_variable_list', 'get_gcmd_instrument_list',
+                     'get_gcmd_science_keyword_list', 'get_gcmd_provider_list',
+                     'get_gcmd_platform_list', 'get_gcmd_location_list',
+                     'get_gcmd_horizontalresolutionrange_list',
+                     'get_gcmd_verticalresolutionrange_list',
+                     'get_gcmd_temporalresolutionrange_list',
+                     'get_gcmd_project_list', 'get_gcmd_rucontenttype_list',
+                     'get_cf_standard_name_list',
+                     'get_iso19115_topic_category_list']
+        for function_name in functions:
+            function = getattr(pti, function_name)
+            self.assertIsInstance(function(), list)
 
     def test_remove_and_get_gcmd_instrument(self):
         if os.path.exists(resource_filename('pythesint', 'json')):
