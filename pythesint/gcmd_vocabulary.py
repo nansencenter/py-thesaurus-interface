@@ -49,4 +49,3 @@ def _read_line(line, gcmd_list, categories):
         for i, key in enumerate(categories):
             line_kw[key] = gcmd_keywords[i]
         gcmd_list.append(line_kw)
-    return
