@@ -10,8 +10,8 @@ from mock.mock import MagicMock
 class PythesintTest(unittest.TestCase):
 
     # Missing tests
-    #def test_write_json
-    #def test_write_json_to_path
+    # def test_write_json
+    # def test_write_json_to_path
 
     def test_get_list(self):
         self.assertIsInstance(pti.get_wkv_variable_list(), list)
@@ -95,24 +95,20 @@ class PythesintTest(unittest.TestCase):
         item = 'FakeItem'
         self.assertRaises(IndexError, pti.get_gcmd_instrument, item)
 
-    # TODO: this method should NOT actually update - we don't want any network
-    # activity on the unit tests - this only slows it down
-    # It doesn't actually test anything other than that the method exists and
-    # does not cast an exception.
-    def test_update(self):
-        pti.update_wkv_variable()
-        pti.update_gcmd_instrument()
-        pti.update_gcmd_science_keyword()
-        pti.update_gcmd_provider()
-        pti.update_gcmd_platform()
-        pti.update_gcmd_location()
-        pti.update_gcmd_horizontalresolutionrange()
-        pti.update_gcmd_verticalresolutionrange()
-        pti.update_gcmd_temporalresolutionrange()
-        pti.update_gcmd_project()
-        pti.update_gcmd_rucontenttype()
-        pti.update_cf_standard_name()
-        pti.update_iso19115_topic_category()
+    def test_update_functions_exists(self):
+        # TODO - these should be generated from rc file!
+        functions = ['update_wkv_variable', 'update_gcmd_instrument',
+                     'update_gcmd_science_keyword', 'update_gcmd_provider',
+                     'update_gcmd_platform', 'update_gcmd_location',
+                     'update_gcmd_horizontalresolutionrange',
+                     'update_gcmd_verticalresolutionrange',
+                     'update_gcmd_temporalresolutionrange',
+                     'update_gcmd_project', 'update_gcmd_rucontenttype',
+                     'update_cf_standard_name',
+                     'update_iso19115_topic_category']
+        for function in functions:
+            self.assertTrue(hasattr(pti, function), 'Function is missing:%s' %
+                            (function))
 
     def test_update_all(self):
         orig_vocab = pti.pythesint.vocabularies
