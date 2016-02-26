@@ -17,7 +17,7 @@ class JSONVocabulary(Vocabulary):
         ''' Read list from JSON '''
         if not os.path.exists(self.json_filename()):
             self.update()
-        return json.load(open(self.json_filename()))
+        return self.sort_list(json.load(open(self.json_filename())))
 
     def update(self):
         ''' Write vocabulary to a JSON file '''

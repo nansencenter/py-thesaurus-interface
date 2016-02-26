@@ -93,6 +93,10 @@ class GCMDVocabularyTest(unittest.TestCase):
         self.assertEqual(len(gcmd_list), 1)
         self.assertEqual(gcmd_list[0], {'Revision': '2016-01-08 13:40:40'})
 
+    def test_get_location_by_type(self):
+        type = 'africa'
+        a = pti.get_gcmd_location(type)
+        self.assertEqual(a['Location_Type'], 'AFRICA')
 
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']

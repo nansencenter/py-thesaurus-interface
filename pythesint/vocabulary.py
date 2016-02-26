@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 class Vocabulary(object):
     def __init__(self, name, **kwargs):
         self.name = name
@@ -50,14 +52,15 @@ class Vocabulary(object):
         if len(matches) == 0:
             raise IndexError('%s is not found in %s!' % (item, self.name))
 
-        keys = matches[0].keys()
-        kw_group_index = keys.index(matching_key)
-        ii = range(kw_group_index+1, len(keys))
         if len(matches) == 1:
             return matches[0]
+
         # OBS: This works for the gcmd keywords but makes no sense for the cf
         # standard names - therefore always search the cf standard names by
         # standard_name only..
+        keys = matches[0].keys()
+        kw_group_index = keys.index(matching_key)
+        ii = range(kw_group_index+1, len(keys))
         for m in matches:
             remaining = {}
             for i in ii:
@@ -67,6 +70,18 @@ class Vocabulary(object):
 
     def update(self):
         pass
+
+    def sort_list(self, list):
+        retlist = []
+        for dd in list:
+            line_kw = OrderedDict()
+            for i, key in enumerate(self.categories):
+                try:
+                    line_kw[key] = dd[key]
+                except:
+                    line_kw = dd
+            retlist.append(line_kw)
+        return retlist
 
     def get_list(self):
         raise NotImplementedError

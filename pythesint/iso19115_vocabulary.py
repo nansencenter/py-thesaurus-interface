@@ -1,5 +1,6 @@
 from __future__ import absolute_import
 
+import collections
 from pythesint.json_vocabulary import  Vocabulary
 
 '''
@@ -35,5 +36,5 @@ class ISO19115Vocabulary(Vocabulary):
 
     def get_list(self):
         ''' Convert list of keywords into list of dicts '''
-        return [{self.category : keyword} for keyword in
+        return [collections.OrderedDict({self.category : keyword}) for keyword in
             self.iso_topic_category_list]
