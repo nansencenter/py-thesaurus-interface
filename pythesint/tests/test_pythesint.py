@@ -5,6 +5,7 @@ import os, json, shutil
 from pkg_resources import resource_filename
 
 import pythesint as pti
+from mock.mock import MagicMock
 
 class PythesintTest(unittest.TestCase):
 
@@ -108,6 +109,19 @@ class PythesintTest(unittest.TestCase):
         pti.update_gcmd_rucontenttype()
         pti.update_cf_standard_name()
         pti.update_iso19115_topic_category()
+
+    def test_update_all(self):
+        orig_vocab = pti.pythesint.vocabularies
+        pti.pythesint.vocabularies = {'1': MagicMock(),
+                                      'anothervocab': MagicMock(),
+                                      'thirdvocab': MagicMock(),
+                                      'instruments': MagicMock(),
+                                      'something': MagicMock()}
+        pti.update_all_vocabularies()
+        for _, mock in pti.pythesint.vocabularies.iteritems():
+            mock.update.assert_called_once_with()
+        pti.pythesint.vocabularies = orig_vocab
+
 
 if __name__ == "__main__":
     unittest.main()
