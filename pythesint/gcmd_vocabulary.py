@@ -21,6 +21,9 @@ class GCMDVocabulary(JSONVocabulary):
 
 
 def _read_revision(line, gcmd_list):
+    ''' Reads the line, extracts the Revision into a new dictionary and appends
+    it to gcmd_list
+    '''
     # TODO: Cast exception if not found?
     if 'Keyword Version' and 'Revision' in line:
         meta = line.split('","')
@@ -28,6 +31,8 @@ def _read_revision(line, gcmd_list):
 
 
 def _check_categories(line, categories):
+    ''' Throws an exception if the line does not match categories
+    '''
     kw_groups = line.split(',')
     kw_groups.pop(-1)
     # Make sure the group items are as expected
@@ -36,6 +41,9 @@ def _check_categories(line, categories):
 
 
 def _read_line(line, gcmd_list, categories):
+    ''' Converts line into dictionary values for elements in the categories
+    appends the dictionary to gcmd_list
+    '''
     gcmd_keywords = line.split('","')
     gcmd_keywords[0] = gcmd_keywords[0].strip('"')
     if gcmd_keywords[0] == 'NOT APPLICABLE':
