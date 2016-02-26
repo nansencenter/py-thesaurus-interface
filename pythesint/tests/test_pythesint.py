@@ -3,9 +3,7 @@ from __future__ import print_function
 
 import unittest
 import os
-import json
 import shutil
-import sys
 from pkg_resources import resource_filename, resource_string
 
 import pythesint as pti
@@ -28,7 +26,6 @@ class PythesintTest(unittest.TestCase):
                  'gcmd_rucontenttype', 'cf_standard_name',
                  'iso19115_topic_category']
         for name in dicts:
-            print("Doing: "+name, file=sys.stderr)
             if name != 'iso19115_topic_category':
                 resource = resource_string(__name__, '../basedata/'+name)
                 with patch.object(pti.json_vocabulary, 'openURL',
