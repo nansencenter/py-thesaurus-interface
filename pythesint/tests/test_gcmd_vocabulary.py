@@ -19,37 +19,22 @@ class GCMDVocabularyTest(unittest.TestCase):
                 ' representations can be found here: '
                 'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme'
                 '/instruments/?format=xml"')
-        categories = ['Does not matter here']
-        pti.gcmd_vocabulary._read_line(line, gcmd_list, categories)
+        pti.gcmd_vocabulary._read_revision(line, gcmd_list)
         self.assertEqual(len(gcmd_list), 1)
         self.assertDictEqual(gcmd_list[0], {'Revision': '2016-01-08 13:40:40'})
 
-    def test_read_line_categories(self):
-        gcmd_list = []
+    def test_check_categories(self):
         line = ('Category,Class,Type,Subtype,Short_Name,Long_Name,UUID')
         categories = ['Category', 'Class', 'Type', 'Subtype', 'Short_Name',
                       'Long_Name']
-        pti.gcmd_vocabulary._read_line(line, gcmd_list, categories)
-        self.assertEqual(len(gcmd_list), 0)
+        pti.gcmd_vocabulary._check_categories(line, categories)
 
-    def test_read_line_categories_advanced(self):
-        gcmd_list = [{'Revision': '2016-01-08 13:40:40'}]
-        line = ('Category,Type,UUID')
-        categories = ['Category', 'Type']
-        pti.gcmd_vocabulary._read_line(line, gcmd_list, categories)
-        self.assertEqual(len(gcmd_list), 1)
-        self.assertDictEqual(gcmd_list[0], {'Revision': '2016-01-08 13:40:40'})
-
-    def test_read_line_categories_wrong(self):
-        gcmd_list = [{'Revision': '2016-01-08 13:40:40'}]
+    def test_check_categories_wrong(self):
         line = ('Category,Class,Type,Subtype,Short_Name,Long_Name,UUID')
         categories = ['Category', 'Type', 'Class', 'Subtype', 'Short_Name',
                       'Long_Name']
         with self.assertRaises(TypeError):
-            pti.gcmd_vocabulary._read_line(line, gcmd_list, categories)
-        self.assertEqual(len(gcmd_list), 1)
-        self.assertDictEqual(gcmd_list[0], {'Revision': '2016-01-08 13:40:40'})
-
+            pti.gcmd_vocabulary._check_categories(line, categories)
 
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']
