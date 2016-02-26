@@ -22,15 +22,13 @@ class GCMDVocabulary(JSONVocabulary):
         # stored as keywords
         do_record = False
         gcmd_list = []
-        kw_groups = []
         for line in response.readlines():
-            do_record, kw_groups = _read_line(line, gcmd_list, do_record,
-                                              kw_groups, self.categories)
+            do_record = _read_line(line, gcmd_list, do_record, self.categories)
 
         return gcmd_list
 
 
-def _read_line(line, gcmd_list, do_record, kw_groups, categories):
+def _read_line(line, gcmd_list, do_record, categories):
     if 'Keyword Version' and 'Revision' in line:
         meta = line.split('","')
         gcmd_list.append({'Revision': meta[1][10:]})
@@ -38,13 +36,13 @@ def _read_line(line, gcmd_list, do_record, kw_groups, categories):
         gcmd_keywords = line.split('","')
         gcmd_keywords[0] = gcmd_keywords[0].strip('"')
         if gcmd_keywords[0] == 'NOT APPLICABLE':
-            return do_record, kw_groups
+            return do_record
         # Remove last item (the ID is not needed)
         gcmd_keywords.pop(-1)
-        if len(gcmd_keywords) != len(kw_groups):
-            return do_record, kw_groups
+        if len(gcmd_keywords) != len(categories):
+            return do_record
         line_kw = OrderedDict()
-        for i, key in enumerate(kw_groups):
+        for i, key in enumerate(categories):
             line_kw[key] = gcmd_keywords[i]
         gcmd_list.append(line_kw)
     if line.split(',')[0].lower() == categories[0].lower():
@@ -55,4 +53,4 @@ def _read_line(line, gcmd_list, do_record, kw_groups, categories):
         if kw_groups != categories:
             raise TypeError('%s is not equal to %s' %
                             (kw_groups, categories))
-    return do_record, kw_groups
+    return do_record
