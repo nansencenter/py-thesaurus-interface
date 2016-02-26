@@ -1,11 +1,16 @@
 from __future__ import absolute_import
+from __future__ import print_function
 
 import unittest
-import os, json, shutil
-from pkg_resources import resource_filename
+import os
+import json
+import shutil
+import sys
+from pkg_resources import resource_filename, resource_string
 
 import pythesint as pti
-from mock.mock import MagicMock
+from mock.mock import MagicMock, patch
+
 
 class PythesintTest(unittest.TestCase):
 
@@ -15,18 +20,24 @@ class PythesintTest(unittest.TestCase):
 
     def test_get_list(self):
         # TODO - these should be generated from rc file!
-        functions = ['get_wkv_variable_list', 'get_gcmd_instrument_list',
-                     'get_gcmd_science_keyword_list', 'get_gcmd_provider_list',
-                     'get_gcmd_platform_list', 'get_gcmd_location_list',
-                     'get_gcmd_horizontalresolutionrange_list',
-                     'get_gcmd_verticalresolutionrange_list',
-                     'get_gcmd_temporalresolutionrange_list',
-                     'get_gcmd_project_list', 'get_gcmd_rucontenttype_list',
-                     'get_cf_standard_name_list',
-                     'get_iso19115_topic_category_list']
-        for function_name in functions:
-            function = getattr(pti, function_name)
-            self.assertIsInstance(function(), list)
+        dicts = ['wkv_variable', 'gcmd_instrument', 'gcmd_science_keyword',
+                 'gcmd_provider', 'gcmd_platform', 'gcmd_location',
+                 'gcmd_horizontalresolutionrange',
+                 'gcmd_verticalresolutionrange',
+                 'gcmd_temporalresolutionrange', 'gcmd_project',
+                 'gcmd_rucontenttype', 'cf_standard_name',
+                 'iso19115_topic_category']
+        for name in dicts:
+            print("Doing: "+name, file=sys.stderr)
+            if name != 'iso19115_topic_category':
+                resource = resource_string(__name__, '../basedata/'+name)
+                with patch.object(pti.json_vocabulary, 'openURL',
+                                  return_value=resource):
+                    function = getattr(pti, 'get_' + name + '_list')
+                    self.assertIsInstance(function(), list)
+            else:
+                function = getattr(pti, 'get_' + name + '_list')
+                self.assertIsInstance(function(), list)
 
     def test_remove_and_get_gcmd_instrument(self):
         if os.path.exists(resource_filename('pythesint', 'json')):
@@ -106,7 +117,7 @@ class PythesintTest(unittest.TestCase):
                      'update_cf_standard_name',
                      'update_iso19115_topic_category']
         for function in functions:
-            self.assertTrue(hasattr(pti, function), 'Function is missing:%s' %
+            self.assertTrue(hasattr(pti, function), 'Function is missing:%s' % 
                             (function))
 
     def test_update_all(self):

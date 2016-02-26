@@ -1,9 +1,9 @@
 from __future__ import absolute_import
 
-import urllib2
 from collections import OrderedDict
 
-from pythesint.json_vocabulary import  JSONVocabulary
+from pythesint.json_vocabulary import JSONVocabulary, openURL
+
 
 class GCMDVocabulary(JSONVocabulary):
     def _fetch_online_data(self):
@@ -17,7 +17,7 @@ class GCMDVocabulary(JSONVocabulary):
             keyword_groups is a list containing the grouping of the keywords, e.g.,
             ['Category', 'Short_Name', 'Long_Name'] - used for verification
         '''
-        response = urllib2.urlopen(self.url)
+        response = openURL(self.url)
         # Boolean to determine if line information in the response object should be
         # stored as keywords
         do_record = False
@@ -34,7 +34,7 @@ class GCMDVocabulary(JSONVocabulary):
                     continue
                 # Remove last item (the ID is not needed)
                 gcmd_keywords.pop(-1)
-                if len(gcmd_keywords)!=len(kw_groups):
+                if len(gcmd_keywords) != len(kw_groups):
                     continue
                 line_kw = OrderedDict()
                 for i, key in enumerate(kw_groups):
@@ -46,6 +46,7 @@ class GCMDVocabulary(JSONVocabulary):
                 kw_groups.pop(-1)
                 # Make sure the group items are as expected
                 if kw_groups != self.categories:
-                    raise TypeError('%s is not equal to %s' % (kw_groups, self.categories))
+                    raise TypeError('%s is not equal to %s' %
+                                    (kw_groups, self.categories))
 
         return gcmd_list
