@@ -40,33 +40,30 @@ class Vocabulary(object):
         DOCTESTS:
 
         '''
-        matches = []
-        matching_key = ''
+        best_match = None
+        best_match_empty_cells = 0
         for d in self.get_list():
-            for key in d.keys():
+            match = None
+            match_empty_cells = 0
+            for category_no, key in enumerate(d.keys()):
                 if d[key].upper() == item.upper():
-                    matches.append(d)
-                    matching_key = key
-                    break
+                    match = d
+                # sum up number of empty cells after matched cell
+                if match == d and len(d[key]) == 0:
+                    match_empty_cells += 1
+            # if match is found in this row, and
+            #     if the best match is not found yet, or
+            #     if the best match has less empty cells after matched cell
+            # i.e. {'animal', ''} is a better match than {'animal', 'cat'}
+            if (match is not None and
+                (best_match is None or
+                 match_empty_cells > best_match_empty_cells)):
+                best_match = match
 
-        if len(matches) == 0:
+        if best_match is None:
             raise IndexError('%s is not found in %s!' % (item, self.name))
 
-        if len(matches) == 1:
-            return matches[0]
-
-        # OBS: This works for the gcmd keywords but makes no sense for the cf
-        # standard names - therefore always search the cf standard names by
-        # standard_name only..
-        keys = matches[0].keys()
-        kw_group_index = keys.index(matching_key)
-        ii = range(kw_group_index+1, len(keys))
-        for m in matches:
-            remaining = {}
-            for i in ii:
-                remaining[keys[i]] = m[keys[i]]
-            if not any(val for val in remaining.itervalues()):
-                return m
+        return best_match
 
     def update(self):
         pass
