@@ -11,7 +11,7 @@ import pythesint as pti
 
 class GCMDVocabularyTest(unittest.TestCase):
 
-    def test_read_line_Revision(self):
+    def test_read_revision(self):
         gcmd_list = []
         line = ('"Keyword Version: 8.1","Revision: 2016-01-08 13:40:40","'
                 'Timestamp: 2016-02-26 04:46:02","Terms Of Use: See '
