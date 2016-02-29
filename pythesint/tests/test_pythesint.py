@@ -145,21 +145,5 @@ class PythesintTest(unittest.TestCase):
             mock.update.assert_called_once_with()
         pti.pythesint.vocabularies = orig_vocab
 
-    def test_update_vocabulary_specific(self):
-        orig_vocab = pti.pythesint.vocabularies
-        pti.pythesint.vocabularies = {'1': MagicMock(),
-                                      'anothervocab': MagicMock(),
-                                      'thirdvocab': MagicMock(),
-                                      'instruments': MagicMock(),
-                                      'something': MagicMock()}
-        pti.update_vocabulary('1')
-        pti.update_vocabulary('thirdvocab')
-        for key, mock in pti.pythesint.vocabularies.iteritems():
-            if (key in ['1', 'thirdvocab']):
-                mock.update.assert_called_once_with()
-            else:
-                mock.update.assert_not_called()
-        pti.pythesint.vocabularies = orig_vocab
-
 if __name__ == "__main__":
     unittest.main()
