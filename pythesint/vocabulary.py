@@ -54,7 +54,8 @@ class Vocabulary(object):
             # if match is found in this row, and
             #     if the best match is not found yet, or
             #     if the best match has less empty cells after matched cell
-            # i.e. {'animal', ''} is a better match than {'animal', 'cat'}
+            # i.e., if we search for the word 'animal', then the dictionary
+            # {'animal', ''} is a better match than {'animal', 'cat'}
             if (match is not None and
                 (best_match is None or
                  match_empty_cells > best_match_empty_cells)):
