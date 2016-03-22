@@ -100,7 +100,7 @@ class PythesintTest(unittest.TestCase):
                 collections.OrderedDict)
 
     def test_get_wkv_variable(self):
-        item = 'surface_backwards_doppler_frequency_shift_of_radar_wave'
+        item = 'surface_backwards_doppler_frequency_shift_of_radar_wave_due_to_surface_velocity'
         self.assertIsInstance(pti.get_wkv_variable(item),
                 collections.OrderedDict)
 
