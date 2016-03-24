@@ -136,7 +136,8 @@ class PythesintTest(unittest.TestCase):
 
     def test_urls(self):
         for key, voc in pti.pythesint.vocabularies.iteritems():
-            response = urllib2.urlopen(voc.url)
+            if hasattr(voc, 'url'):
+                response = urllib2.urlopen(voc.url)
 
     def test_update_all(self):
         orig_vocab = pti.pythesint.vocabularies
