@@ -16,12 +16,20 @@ from pythesint.vocabulary import Vocabulary
 class VocabularyTest(unittest.TestCase):
 
     def setUp(self):
-        self.cat = OrderedDict({'Category': 'Animal', 'Type': 'Cat'})
-        self.dog = OrderedDict({'Category': 'Animal', 'Type': 'Dog'})
-        self.mouse = OrderedDict({'Category': 'Animal', 'Type': 'Mouse'})
-        self.house = OrderedDict({'Category': 'Construction', 'Type': 'House'})
-        self.animal = OrderedDict({'Category': 'Animal', 'Type': ''})
-        self.test_list = [self.cat, self.dog, self.mouse, self.house, self.animal]
+        self.cat = OrderedDict({'Category': 'Animal', 'Type': 'Cat',
+                                'Name': ''})
+        self.dog = OrderedDict({'Category': 'Animal', 'Type': 'Dog',
+                                'Name': ''})
+        self.mouse = OrderedDict({'Category': 'Animal', 'Type': 'Mouse',
+                                  'Name': ''})
+        self.house = OrderedDict({'Category': 'Construction', 'Type': 'House',
+                                  'Name': ''})
+        self.animal = OrderedDict({'Category': 'Animal', 'Type': '',
+                                   'Name': ''})
+        # The order of this is list important for which value that is returned
+        # in case of multiple values of "best match"
+        self.test_list = [self.cat, self.animal, self.dog, self.mouse,
+                          self.house]
 
     def test_find_keyword_get_list_not_implemented(self):
         vocab = Vocabulary('VOCAB MOCK')
