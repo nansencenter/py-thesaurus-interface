@@ -40,6 +40,15 @@ class VocabularyTest(unittest.TestCase):
         self.assertEqual(vocab.find_keyword('dog'), self.dog)
         self.assertEqual(vocab.find_keyword('Animal'), self.animal)
 
+    def test_search_keyword(self):
+        vocab = Vocabulary('VOCAB MOCK')
+        vocab.get_list = MagicMock(return_value=self.test_list)
+        self.assertEqual(vocab.search('dog'), [self.dog])
+        self.assertEqual(vocab.search('Animal'), [self.cat,
+                                                  self.dog,
+                                                  self.mouse,
+                                                  self.animal])
+
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']
     unittest.main()

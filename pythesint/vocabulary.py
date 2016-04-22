@@ -65,6 +65,16 @@ class Vocabulary(object):
 
         return best_match
 
+    def search(self, keyword):
+        ''' Search for keyword in a list and return all matches '''
+        matches = []
+        for d in self.get_list():
+            for key in d.keys():
+                if keyword.upper() in d[key].upper():
+                    matches.append(d)
+
+        return matches
+
     def update(self):
         pass
 

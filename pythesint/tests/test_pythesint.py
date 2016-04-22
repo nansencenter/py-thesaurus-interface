@@ -49,6 +49,11 @@ class PythesintTest(unittest.TestCase):
         self.assertIsInstance(pti.get_gcmd_instrument(item),
                 collections.OrderedDict)
 
+    def test_search_gcmd_instrument_list(self):
+        item = 'MERIS'
+        self.assertIsInstance(pti.search_gcmd_instrument_list(item)[0],
+                collections.OrderedDict)
+
     def test_get_gcmd_science_keyword(self):
         item = 'sigma naught'
         self.assertIsInstance(pti.get_gcmd_science_keyword(item),
@@ -130,7 +135,7 @@ class PythesintTest(unittest.TestCase):
                      'update_cf_standard_name',
                      'update_iso19115_topic_category']
         for function in functions:
-            self.assertTrue(hasattr(pti, function), 'Function is missing:%s' % 
+            self.assertTrue(hasattr(pti, function), 'Function is missing:%s' %
                             (function))
 
     def test_update_all(self):
@@ -160,6 +165,7 @@ class PythesintTest(unittest.TestCase):
             else:
                 mock.update.assert_not_called()
         pti.pythesint.vocabularies = orig_vocab
+
 
 if __name__ == "__main__":
     unittest.main()

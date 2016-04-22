@@ -45,8 +45,12 @@ def _process_config():
         vocabularies[cnf['name']] = vocabulary
 
         setattr(current_module, 'get_'+cnf['name'], vocabulary.find_keyword)
-        setattr(current_module, 'get_'+cnf['name']+'_list',
+        setattr(current_module,
+                'get_'+cnf['name']+'_list',
                 vocabulary.get_list)
+        setattr(current_module,
+                'search_'+cnf['name']+'_list',
+                vocabulary.search)
         setattr(current_module, 'update_'+cnf['name'], vocabulary.update)
 
 vocabularies = {}
