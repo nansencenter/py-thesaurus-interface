@@ -5,6 +5,7 @@ import collections
 import unittest
 import os
 import shutil
+import urllib2
 from pkg_resources import resource_filename, resource_string
 
 import pythesint as pti
@@ -138,6 +139,11 @@ class PythesintTest(unittest.TestCase):
             self.assertTrue(hasattr(pti, function), 'Function is missing:%s' %
                             (function))
 
+    def test_urls(self):
+        for key, voc in pti.pythesint.vocabularies.iteritems():
+            if hasattr(voc, 'url'):
+                response = urllib2.urlopen(voc.url)
+
     def test_update_all(self):
         orig_vocab = pti.pythesint.vocabularies
         pti.pythesint.vocabularies = {'1': MagicMock(),
@@ -149,23 +155,6 @@ class PythesintTest(unittest.TestCase):
         for _, mock in pti.pythesint.vocabularies.iteritems():
             mock.update.assert_called_once_with()
         pti.pythesint.vocabularies = orig_vocab
-
-    def test_update_vocabulary_specific(self):
-        orig_vocab = pti.pythesint.vocabularies
-        pti.pythesint.vocabularies = {'1': MagicMock(),
-                                      'anothervocab': MagicMock(),
-                                      'thirdvocab': MagicMock(),
-                                      'instruments': MagicMock(),
-                                      'something': MagicMock()}
-        pti.update_vocabulary('1')
-        pti.update_vocabulary('thirdvocab')
-        for key, mock in pti.pythesint.vocabularies.iteritems():
-            if (key in ['1', 'thirdvocab']):
-                mock.update.assert_called_once_with()
-            else:
-                mock.update.assert_not_called()
-        pti.pythesint.vocabularies = orig_vocab
-
 
 if __name__ == "__main__":
     unittest.main()

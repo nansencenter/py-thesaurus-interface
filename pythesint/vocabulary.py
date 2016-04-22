@@ -45,7 +45,7 @@ class Vocabulary(object):
         for d in self.get_list():
             match = None
             match_empty_cells = 0
-            for category_no, key in enumerate(d.keys()):
+            for _, key in enumerate(d.keys()):
                 if d[key].upper() == item.upper():
                     match = d
                 # sum up number of empty cells after matched cell
@@ -54,11 +54,13 @@ class Vocabulary(object):
             # if match is found in this row, and
             #     if the best match is not found yet, or
             #     if the best match has less empty cells after matched cell
-            # i.e. {'animal', ''} is a better match than {'animal', 'cat'}
+            # i.e., if we search for the word 'animal', then the dictionary
+            # {'animal', ''} is a better match than {'animal', 'cat'}
             if (match is not None and
                 (best_match is None or
                  match_empty_cells > best_match_empty_cells)):
                 best_match = match
+                best_match_empty_cells = match_empty_cells
 
         if best_match is None:
             raise IndexError('%s is not found in %s!' % (item, self.name))
@@ -82,7 +84,7 @@ class Vocabulary(object):
         retlist = []
         for dd in list:
             line_kw = OrderedDict()
-            for i, key in enumerate(self.categories):
+            for _, key in enumerate(self.categories):
                 try:
                     line_kw[key] = dd[key]
                 except:

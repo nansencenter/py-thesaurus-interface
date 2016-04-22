@@ -4,28 +4,10 @@ from pkg_resources import resource_string
 
 import yaml
 
-
-def get_list(name):
-    ''' Get list of keywords from given vocabulary <name>
-    '''
-    return vocabularies[name].get_list()
-
-
-def get_keyword(name, item):
-    ''' Get keyword <item> from given vocabulary <name> '''
-    return vocabularies[name].find_keyword(item)
-
-
-def update_vocabulary(name):
-    ''' Update vocabulary content '''
-    vocabularies[name].update()
-
-
 def update_all_vocabularies():
     ''' Update all vocabularies '''
-    for name in vocabularies:
-        update_vocabulary(name)
-
+    for name in vocabularies.keys():
+        vocabularies[name].update()
 
 def _process_config():
     ''' Load info about all vocabularies from config and add to module '''
