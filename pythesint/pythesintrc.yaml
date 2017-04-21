@@ -28,7 +28,8 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/sciencekeywords?format=csv
+    url: https://gcmdservices.gsfc.nasa.gov/static/kms/sciencekeywords/sciencekeywords.csv
+    #url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/sciencekeywords?format=csv
     categories:
       - Category
       - Topic
@@ -67,7 +68,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/locations?format=csv
+    url: https://gcmdservices.gsfc.nasa.gov/static/kms/locations/locations.csv
     categories:
       - Location_Category
       - Location_Type
@@ -79,7 +80,8 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/horizontalresolutionrange?format=csv
+    url: https://gcmdservices.gsfc.nasa.gov/static/kms/horizontalresolutionrange/horizontalresolutionrange.csv
+    #url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/horizontalresolutionrange?format=csv
     categories:
       - Horizontal_Resolution_Range
 
@@ -87,7 +89,8 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/verticalresolutionrange?format=csv
+    url: https://gcmdservices.gsfc.nasa.gov/static/kms/verticalresolutionrange/verticalresolutionrange.csv
+    #url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/verticalresolutionrange?format=csv
     categories:
       - Vertical_Resolution_Range
 
@@ -95,7 +98,8 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/temporalresolutionrange?format=csv
+    url: https://gcmdservices.gsfc.nasa.gov/static/kms/temporalresolutionrange/temporalresolutionrange.csv
+    #url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/temporalresolutionrange?format=csv
     categories:
       - Temporal_Resolution_Range
 
@@ -113,7 +117,8 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/rucontenttype?format=csv
+    url: https://gcmdservices.gsfc.nasa.gov/static/kms/rucontenttype/rucontenttype.csv
+    #url: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/rucontenttype?format=csv
     categories:
       - Type
       - Subtype
