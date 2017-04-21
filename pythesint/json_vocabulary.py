@@ -30,4 +30,7 @@ class JSONVocabulary(Vocabulary):
 
 
 def openURL(url):
-    return urllib2.urlopen(url)
+    hdr = {'Accept':
+            'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',}
+    req = urllib2.Request(url, headers=hdr)
+    return urllib2.urlopen(req)
