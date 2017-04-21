@@ -5,7 +5,6 @@ import collections
 import unittest
 import os
 import shutil
-import urllib2
 from pkg_resources import resource_filename, resource_string
 
 import pythesint as pti
@@ -142,7 +141,7 @@ class PythesintTest(unittest.TestCase):
     def test_urls(self):
         for key, voc in pti.pythesint.vocabularies.iteritems():
             if hasattr(voc, 'url'):
-                response = urllib2.urlopen(voc.url)
+                response = pti.json_vocabulary.openURL(voc.url)
 
     def test_update_all(self):
         orig_vocab = pti.pythesint.vocabularies
