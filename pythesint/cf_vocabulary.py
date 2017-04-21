@@ -1,16 +1,16 @@
 from __future__ import absolute_import
 
-from xml.dom.minidom import parse
-
-from pythesint.json_vocabulary import JSONVocabulary, openURL
+from xml.dom.minidom import parseString
+import requests
+from pythesint.json_vocabulary import JSONVocabulary
 
 
 class CFVocabulary(JSONVocabulary):
     def _fetch_online_data(self):
         # Note the version number... Would probably be better to make it always
         # take the last version..
-        u1 = openURL(self.url)
-        dom = parse(u1)
+        r = requests.get(self.url)
+        dom = parseString(r.text.encode('utf-8').strip())
         # should only contain the standard_name_table:
         node = dom.childNodes[0]
 
