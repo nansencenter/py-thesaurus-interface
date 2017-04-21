@@ -3,7 +3,7 @@
 # Purpose:  Python interface to various metadata vocabularies
 #
 # Author:   Morten Wergeland Hansen, Anton A. Korosov, Aleksander Vines
-# Modified: 25.02.2016
+# Modified: 21.04.2017
 #
 # Created:  07.12.2015
 # Copyright:(c) NERSC
@@ -33,7 +33,7 @@ class update_vocabularies(install_scripts):
 setup(
     name=NAME,
 
-    version='1.1.1',
+    version='1.2',
 
     description='A Python interface to various metadata vocabularies',
     long_description=long_description,
@@ -46,7 +46,7 @@ setup(
 
     url='https://github.com/nansencenter/py-thesaurus-interface',
 
-    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.1.1.tar.gz',
+    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.1.2.tar.gz',
 
     packages=find_packages(),
 

@@ -15,7 +15,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/instruments/instruments.csv?ed_wiki_keywords_page
+    url: https://gcmdservices.gsfc.nasa.gov/static/kms/instruments/instruments.csv
     categories:
       - Category
       - Class
@@ -42,7 +42,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/providers/providers.csv?ed_wiki_keywords_page
+    url: https://gcmdservices.gsfc.nasa.gov/static/kms/providers/providers.csv
     categories:
       - Bucket_Level0
       - Bucket_Level1
@@ -56,7 +56,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/platforms/platforms.csv?ed_wiki_keywords_page
+    url: https://gcmdservices.gsfc.nasa.gov/static/kms/platforms/platforms.csv
     categories:
       - Category
       - Series_Entity
@@ -103,7 +103,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/projects/projects.csv?ed_wiki_keywords_page
+    url: https://gcmdservices.gsfc.nasa.gov/static/kms/projects/projects.csv
     categories:
       - Bucket
       - Short_Name
