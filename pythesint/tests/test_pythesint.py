@@ -1,6 +1,7 @@
 from __future__ import absolute_import
 from __future__ import print_function
 
+import requests
 import collections
 import unittest
 import os
@@ -27,15 +28,8 @@ class PythesintTest(unittest.TestCase):
                  'gcmd_rucontenttype', 'cf_standard_name',
                  'iso19115_topic_category']
         for name in dicts:
-            if name != 'iso19115_topic_category':
-                resource = resource_string(__name__, '../basedata/'+name)
-                with patch.object(pti.json_vocabulary, 'openURL',
-                                  return_value=resource):
-                    function = getattr(pti, 'get_' + name + '_list')
-                    self.assertIsInstance(function(), list)
-            else:
-                function = getattr(pti, 'get_' + name + '_list')
-                self.assertIsInstance(function(), list)
+            function = getattr(pti, 'get_' + name + '_list')
+            self.assertIsInstance(function(), list)
 
     def test_remove_and_get_gcmd_instrument(self):
         if os.path.exists(resource_filename('pythesint', 'json')):
@@ -141,7 +135,7 @@ class PythesintTest(unittest.TestCase):
     def test_urls(self):
         for key, voc in pti.pythesint.vocabularies.iteritems():
             if hasattr(voc, 'url'):
-                response = pti.json_vocabulary.openURL(voc.url)
+                response = requests.get(voc.url)
 
     def test_update_all(self):
         orig_vocab = pti.pythesint.vocabularies

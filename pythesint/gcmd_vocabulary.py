@@ -1,8 +1,9 @@
 from __future__ import absolute_import
 
 from collections import OrderedDict
+import requests
 
-from pythesint.json_vocabulary import JSONVocabulary, openURL
+from pythesint.json_vocabulary import JSONVocabulary
 
 
 class GCMDVocabulary(JSONVocabulary):
@@ -10,11 +11,12 @@ class GCMDVocabulary(JSONVocabulary):
         ''' Return list of GCMD standard keywords
             self.url and self.categories must be set
         '''
-        response = openURL(self.url)
+        r = requests.get(self.url)
+        rlines = [line for line in r.iter_lines()]
         gcmd_list = []
-        _read_revision(response.readline(), gcmd_list)
-        _check_categories(response.readline(), self.categories)
-        for line in response.readlines():
+        _read_revision(rlines[0], gcmd_list)
+        _check_categories(rlines[1], self.categories)
+        for line in rlines[2:]:
             _read_line(line, gcmd_list, self.categories)
 
         return gcmd_list

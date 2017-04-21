@@ -15,7 +15,7 @@ from os import path
 
 readme_file = 'README.md'
 NAME = 'pythesint'
-REQS = ['PyYAML']
+REQS = ['PyYAML', 'requests']
 
 here = path.abspath(path.dirname(path.realpath(__file__)))
 

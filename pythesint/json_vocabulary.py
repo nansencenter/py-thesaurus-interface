@@ -2,7 +2,6 @@ from __future__ import absolute_import
 
 import os
 import json
-import urllib2
 from pkg_resources import resource_filename
 
 from pythesint.vocabulary import Vocabulary
@@ -28,9 +27,3 @@ class JSONVocabulary(Vocabulary):
         with open(self.json_filename(), 'w') as out:
             json.dump(self._fetch_online_data(), out, indent=4)
 
-
-def openURL(url):
-    hdr = {'Accept':
-            'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',}
-    req = urllib2.Request(url, headers=hdr)
-    return urllib2.urlopen(req)
