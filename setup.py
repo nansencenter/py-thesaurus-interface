@@ -12,10 +12,11 @@
 from setuptools import setup, find_packages
 from setuptools.command.install_scripts import install_scripts
 from os import path
+import sys
 
 readme_file = 'README.md'
 NAME = 'pythesint'
-REQS = ['PyYAML', 'requests']
+REQS = ['PyYAML', 'requests', 'xdg;platform_system!="Windows"']
 
 here = path.abspath(path.dirname(path.realpath(__file__)))
 
