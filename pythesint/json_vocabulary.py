@@ -12,7 +12,7 @@ class JSONVocabulary(Vocabulary):
 
     def get_list(self):
         ''' Read list from JSON '''
-        if not os.path.exists(self.json_filename()):
+        if not os.path.exists(self.get_filepath()):
             self.update()
         return self.sort_list(json.load(open(self.get_filepath())))
 
