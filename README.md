@@ -13,7 +13,7 @@ pip install https://github.com/nansencenter/py-thesaurus-interface/archive/maste
 import pythesint as pti
 pti.get_gcmd_instrument('MERIS')
 pti.get_gcmd_platform('ENVISAT')
-pti.get_gcmd_data_center('NERSC')
+pti.get_gcmd_provider('NERSC')
 ```
 
 ## Standards
