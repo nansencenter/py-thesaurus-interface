@@ -34,7 +34,7 @@ class update_vocabularies(install_scripts):
 setup(
     name=NAME,
 
-    version='1.3.2',
+    version='1.4.0',
 
     description='A Python interface to various metadata vocabularies',
     long_description=long_description,
@@ -47,7 +47,7 @@ setup(
 
     url='https://github.com/nansencenter/py-thesaurus-interface',
 
-    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.3.2.tar.gz',
+    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.4.0.tar.gz',
 
     packages=find_packages(),
 
@@ -70,8 +70,9 @@ setup(
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Natural Language :: English',
         'Operating System :: OS Independent',
-        'Programming Language :: Python :: 2',
+        'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Atmospheric Science',
         'Topic :: Scientific/Engineering :: Information Analysis',

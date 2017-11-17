@@ -133,7 +133,8 @@ class PythesintTest(unittest.TestCase):
                             (function))
 
     def test_urls(self):
-        for key, voc in pti.pythesint.vocabularies.iteritems():
+        # items() in general is inefficient on Python 2, but should be no problem with just a couple items.
+        for key, voc in pti.pythesint.vocabularies.items():
             if hasattr(voc, 'url'):
                 response = requests.get(voc.url)
 
@@ -145,7 +146,8 @@ class PythesintTest(unittest.TestCase):
                                       'instruments': MagicMock(),
                                       'something': MagicMock()}
         pti.update_all_vocabularies()
-        for _, mock in pti.pythesint.vocabularies.iteritems():
+        # items() in general is inefficient on Python 2, but should be no problem with just a couple items.
+        for _, mock in pti.pythesint.vocabularies.items():
             mock.update.assert_called_once_with()
         pti.pythesint.vocabularies = orig_vocab
 
