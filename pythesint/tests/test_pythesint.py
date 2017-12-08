@@ -10,13 +10,20 @@ from pkg_resources import resource_filename, resource_string
 
 import pythesint as pti
 from mock.mock import MagicMock, patch
+from pythesint.pathsolver import DATA_HOME
 
 
 class PythesintTest(unittest.TestCase):
 
-    # Missing tests
-    # def test_write_json
-    # def test_write_json_to_path
+    @classmethod
+    def setUpClass(cls):
+        # Delete stored json data to work with a clean slate
+        shutil.rmtree(os.path.join(DATA_HOME, 'pythesint', 'json'))
+
+    def test_update_all(self):
+        pti.update_all_vocabularies()
+        for _, vocab in pti.pythesint.vocabularies.items():
+            self.assertIsInstance(vocab.get_list(), list)
 
     def test_get_list(self):
         # TODO - these should be generated from rc file!
@@ -132,13 +139,13 @@ class PythesintTest(unittest.TestCase):
             self.assertTrue(hasattr(pti, function), 'Function is missing:%s' %
                             (function))
 
-    def test_urls(self):
+    def urls(self):
         # items() in general is inefficient on Python 2, but should be no problem with just a couple items.
         for key, voc in pti.pythesint.vocabularies.items():
             if hasattr(voc, 'url'):
                 response = requests.get(voc.url)
 
-    def test_update_all(self):
+    def test_update_all_mocked(self):
         orig_vocab = pti.pythesint.vocabularies
         pti.pythesint.vocabularies = {'1': MagicMock(),
                                       'anothervocab': MagicMock(),

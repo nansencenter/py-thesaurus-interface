@@ -12,7 +12,7 @@ class GCMDVocabulary(JSONVocabulary):
             self.url and self.categories must be set
         '''
         r = requests.get(self.url)
-        rlines = [line for line in r.iter_lines()]
+        rlines = [line for line in r.text.splitlines()]
         gcmd_list = []
         _read_revision(rlines[0], gcmd_list)
         _check_categories(rlines[1], self.categories)

@@ -7,7 +7,7 @@ from pythesint.vocabulary import Vocabulary
 from pythesint.pathsolver import DATA_HOME
 
 class JSONVocabulary(Vocabulary):
-    def json_filename(self):
+    def get_relative_path(self):
         return os.path.join('pythesint', 'json', '%s_list.json' % self.name.lower())
 
     def get_list(self):
@@ -27,4 +27,4 @@ class JSONVocabulary(Vocabulary):
             json.dump(self._fetch_online_data(), out, indent=4)
 
     def get_filepath(self):
-        return DATA_HOME + os.sep + self.json_filename()
+        return os.path.join(DATA_HOME, self.get_relative_path())
