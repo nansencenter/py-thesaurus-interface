@@ -34,20 +34,20 @@ class update_vocabularies(install_scripts):
 setup(
     name=NAME,
 
-    version='1.4.0',
+    version='1.4.1',
 
     description='A Python interface to various metadata vocabularies',
     long_description=long_description,
 
     zip_safe=False,
 
-    author=('Morten W. Hansen', 'Anton A. Korosov', 'Aleksander Vines',),
+    author='Morten W. Hansen, Anton A. Korosov, Aleksander Vines',
 
     author_email='morten.hansen@nersc.no',
 
     url='https://github.com/nansencenter/py-thesaurus-interface',
 
-    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.4.0.tar.gz',
+    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.4.1.tar.gz',
 
     packages=find_packages(),
 
@@ -81,5 +81,5 @@ setup(
 
     keywords='metadata standards thesaurus vocabulary',
 
-    cmdclass = {'install_scripts': update_vocabularies},
+    cmdclass = {'install_scripts': update_vocabularies}
 )
