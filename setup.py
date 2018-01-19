@@ -47,7 +47,7 @@ setup(
 
     url='https://github.com/nansencenter/py-thesaurus-interface',
 
-    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.4.1.tar.gz',
+    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.4.2.tar.gz',
 
     packages=find_packages(),
 
