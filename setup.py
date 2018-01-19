@@ -16,7 +16,7 @@ import sys
 
 readme_file = 'README.md'
 NAME = 'pythesint'
-REQS = ['PyYAML', 'requests', 'xdg;platform_system!="Windows"']
+REQS = ['PyYAML', 'requests', 'xdg==1.0.5;platform_system!="Windows"']
 
 here = path.abspath(path.dirname(path.realpath(__file__)))
 
@@ -34,7 +34,7 @@ class update_vocabularies(install_scripts):
 setup(
     name=NAME,
 
-    version='1.4.1',
+    version='1.4.2',
 
     description='A Python interface to various metadata vocabularies',
     long_description=long_description,
