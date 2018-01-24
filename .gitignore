@@ -2,3 +2,8 @@
 pythesint/json/*
 .project
 .pydevproject
+.eggs
+build
+pythesint.egg-info
+dist
+record.txt
