@@ -12,11 +12,10 @@
 from setuptools import setup, find_packages
 from setuptools.command.install_scripts import install_scripts
 from os import path
-import sys
 
 readme_file = 'README.md'
 NAME = 'pythesint'
-REQS = ['PyYAML', 'requests', 'xdg==1.0.7;platform_system!="Windows"']
+REQS = ['PyYAML', 'requests', 'xdg<=1.0.7;platform_system!="Windows"']
 
 here = path.abspath(path.dirname(path.realpath(__file__)))
 
@@ -34,7 +33,7 @@ class update_vocabularies(install_scripts):
 setup(
     name=NAME,
 
-    version='1.4.2',
+    version='1.4.3',
 
     description='A Python interface to various metadata vocabularies',
     long_description=long_description,
@@ -47,7 +46,7 @@ setup(
 
     url='https://github.com/nansencenter/py-thesaurus-interface',
 
-    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.4.2.tar.gz',
+    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.4.3.tar.gz',
 
     packages=find_packages(),
 
@@ -72,6 +71,7 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Atmospheric Science',
