@@ -15,7 +15,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/instruments/instruments.csv
+    url: https://gcmd.nasa.gov/static/kms/instruments/instruments.csv
     categories:
       - Category
       - Class
@@ -28,7 +28,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/sciencekeywords/sciencekeywords.csv
+    url: https://gcmd.nasa.gov/static/kms/sciencekeywords/sciencekeywords.csv
     categories:
       - Category
       - Topic
@@ -42,7 +42,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/providers/providers.csv
+    url: https://gcmd.nasa.gov/static/kms/providers/providers.csv
     categories:
       - Bucket_Level0
       - Bucket_Level1
@@ -56,7 +56,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/platforms/platforms.csv
+    url: https://gcmd.nasa.gov/static/kms/platforms/platforms.csv
     categories:
       - Category
       - Series_Entity
@@ -67,7 +67,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/locations/locations.csv
+    url: https://gcmd.nasa.gov/static/kms/locations/locations.csv
     categories:
       - Location_Category
       - Location_Type
@@ -79,7 +79,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/horizontalresolutionrange/horizontalresolutionrange.csv
+    url: https://gcmd.nasa.gov/static/kms/horizontalresolutionrange/horizontalresolutionrange.csv
     categories:
       - Horizontal_Resolution_Range
 
@@ -87,7 +87,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/verticalresolutionrange/verticalresolutionrange.csv
+    url: https://gcmd.nasa.gov/static/kms/verticalresolutionrange/verticalresolutionrange.csv
     categories:
       - Vertical_Resolution_Range
 
@@ -95,7 +95,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/temporalresolutionrange/temporalresolutionrange.csv
+    url: https://gcmd.nasa.gov/static/kms/temporalresolutionrange/temporalresolutionrange.csv
     categories:
       - Temporal_Resolution_Range
 
@@ -103,7 +103,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/projects/projects.csv
+    url: https://gcmd.nasa.gov/static/kms/projects/projects.csv
     categories:
       - Bucket
       - Short_Name
@@ -113,7 +113,7 @@
   module: gcmd_vocabulary
   class: GCMDVocabulary
   kwargs:
-    url: https://gcmdservices.gsfc.nasa.gov/static/kms/rucontenttype/rucontenttype.csv
+    url: https://gcmd.nasa.gov/static/kms/rucontenttype/rucontenttype.csv
     categories:
       - Type
       - Subtype
