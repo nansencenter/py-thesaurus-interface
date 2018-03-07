@@ -11,7 +11,7 @@ class GCMDVocabulary(JSONVocabulary):
         ''' Return list of GCMD standard keywords
             self.url and self.categories must be set
         '''
-        r = requests.get(self.url)
+        r = requests.get(self.url, verify=False)
         rlines = [line for line in r.text.splitlines()]
         gcmd_list = []
         _read_revision(rlines[0], gcmd_list)
