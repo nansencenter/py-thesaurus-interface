@@ -18,7 +18,10 @@ class PythesintTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Delete stored json data to work with a clean slate
-        shutil.rmtree(os.path.join(DATA_HOME, 'pythesint', 'json'))
+        try:
+            shutil.rmtree(os.path.join(DATA_HOME, 'pythesint', 'json'))
+        except OSError:
+            pass
 
     def test_update_all(self):
         pti.update_all_vocabularies()
@@ -139,11 +142,12 @@ class PythesintTest(unittest.TestCase):
             self.assertTrue(hasattr(pti, function), 'Function is missing:%s' %
                             (function))
 
-    def urls(self):
+    def test_urls(self):
         # items() in general is inefficient on Python 2, but should be no problem with just a couple items.
         for key, voc in pti.pythesint.vocabularies.items():
             if hasattr(voc, 'url'):
                 response = requests.get(voc.url)
+                self.assertEqual(response.status_code, 200)
 
     def test_update_all_mocked(self):
         orig_vocab = pti.pythesint.vocabularies
