@@ -19,11 +19,11 @@ after_success:
   - coveralls
 
       #- stage: 'pypi deployment'
-      ##if: tag IS present  
-deploy:
-  - provider: pypi
-    user: "__token__"
-    password: "${PYPI_TOKEN}"
-    on:
-      all_branches: true
+if: yes   
+  deploy:
+    - provider: pypi
+      user: "__token__"
+      password: "${PYPI_TOKEN}"
+      on:
+        all_branches: true
       #tags: true
