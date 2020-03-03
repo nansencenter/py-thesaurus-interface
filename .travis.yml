@@ -6,21 +6,17 @@ python:
   - 2.7
   - 3.5
   - 3.6
-  jobs:
-    include:
-      # Unit tests are run
-      - name: 'install'
-          install:
-            - python setup.py sdist
-            - pip install dist/*.tar.gz
-            - pip install mock --upgrade
-            - pip install coveralls
+install:
+  - python setup.py sdist
+  - pip install dist/*.tar.gz
+  - pip install mock --upgrade
+  - pip install coveralls
 
-          script:
-            - coverage run --omit=pythesint/tests/* --source=pythesint setup.py test
+script:
+  - coverage run --omit=pythesint/tests/* --source=pythesint setup.py test
 
-          after_success:
-            - coveralls
+after_success:
+  - coveralls
 
       #- stage: 'pypi deployment'
       ##if: tag IS present  
