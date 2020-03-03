@@ -26,3 +26,4 @@ deploy:
     password: "${PYPI_TOKEN}"
     on:
       tags: true
+      
