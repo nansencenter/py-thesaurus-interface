@@ -26,4 +26,5 @@ deploy:
     password: "${PYPI_TOKEN}"
     on:
       #all_branches: true
-      tags: false
+      tags: true
+      condition: $TRAVIS_TAG =~ ^v[0-9]+\.[0-9]+\.[0-9]+
