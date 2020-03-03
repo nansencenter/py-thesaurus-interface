@@ -19,3 +19,10 @@ script:
 after_success:
   - coveralls
 
+if: tag IS present  
+deploy:
+  - provider: pypi
+    user: "__token__"
+    password: "${PYPI_TOKEN}"
+    on:
+      tags: true
