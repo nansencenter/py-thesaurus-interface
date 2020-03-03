@@ -9,7 +9,7 @@ python:
   jobs:
     include:
       # Unit tests are run
-      - stage: 'install'
+      - name: 'install'
           install:
             - python setup.py sdist
             - pip install dist/*.tar.gz
