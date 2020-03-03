@@ -20,10 +20,10 @@ after_success:
 
       #- stage: 'pypi deployment'
       ##if: tag IS present  
-      #deploy:
-      #  - provider: pypi
-      #    user: "__token__"
-      #    password: "${PYPI_TOKEN}"
-      #    on:
-      #      all_branches: true
-      #      #tags: true
+deploy:
+  - provider: pypi
+    user: "__token__"
+    password: "${PYPI_TOKEN}"
+    on:
+      all_branches: true
+      #tags: true
