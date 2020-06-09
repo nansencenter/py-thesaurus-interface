@@ -72,7 +72,7 @@ class Vocabulary(object):
         matches = []
         for d in self.get_list():
             for key in d.keys():
-                if keyword.upper() in d[key].upper():
+                if keyword.upper() in d[key].upper() and not d in matches:
                     matches.append(d)
 
         return matches

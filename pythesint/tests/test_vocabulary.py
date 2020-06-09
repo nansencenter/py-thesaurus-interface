@@ -17,13 +17,14 @@ class VocabularyTest(unittest.TestCase):
 
     def setUp(self):
         self.cat = OrderedDict([('Category', 'Animal'), ('Type', 'Cat'), ('Name', '')])
+        self.cat2 = OrderedDict([('Category', 'Animal'), ('Type', 'Cat'), ('Name', 'The cat')])
         self.dog = OrderedDict([('Category', 'Animal'), ('Type', 'Dog'), ('Name', '')])
         self.mouse = OrderedDict([('Category', 'Animal'), ('Type', 'Mouse'), ('Name', '')])
         self.house = OrderedDict([('Category', 'Construction'), ('Type', 'House'), ('Name', '')])
         self.animal = OrderedDict([('Category', 'Animal'), ('Type', ''), ('Name', '')])
         # The order of this is list important for which value that is returned
         # in case of multiple values of "best match"
-        self.test_list = [self.cat, self.animal, self.dog, self.mouse, self.house]
+        self.test_list = [self.cat, self.cat2, self.animal, self.dog, self.mouse, self.house]
 
     def test_find_keyword_get_list_not_implemented(self):
         vocab = Vocabulary('VOCAB MOCK')
@@ -47,9 +48,15 @@ class VocabularyTest(unittest.TestCase):
         vocab.get_list = MagicMock(return_value=self.test_list)
         self.assertEqual(vocab.search('dog'), [self.dog])
         self.assertEqual(vocab.search('Animal'), [self.cat,
+                                                  self.cat2,
                                                   self.animal,
                                                   self.dog,
                                                   self.mouse])
+
+    def test_no_duplicate_in_search(self):
+        vocab = Vocabulary('VOCAB MOCK')
+        vocab.get_list = MagicMock(return_value=self.test_list)
+        self.assertEqual(vocab.search('Cat'), [self.cat, self.cat2])
 
 
 if __name__ == "__main__":
