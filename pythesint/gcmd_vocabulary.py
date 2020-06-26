@@ -11,7 +11,12 @@ class GCMDVocabulary(JSONVocabulary):
         ''' Return list of GCMD standard keywords
             self.url and self.categories must be set
         '''
-        r = requests.get(self.url, verify=False)
+        try:
+            r = requests.get(self.url, verify=False)
+            r.raise_for_status()
+        except requests.RequestException:
+            print("Could not get the vocabulary file at '{}'".format(self.url))
+            raise
         rlines = [line for line in r.text.splitlines()]
         gcmd_list = []
         _read_revision(rlines[0], gcmd_list)

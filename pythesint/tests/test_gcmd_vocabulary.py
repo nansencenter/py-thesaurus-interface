@@ -6,7 +6,11 @@ Created on Feb 26, 2016
 from __future__ import absolute_import
 
 import unittest
+
+import requests
+
 import pythesint as pti
+from pythesint.gcmd_vocabulary import GCMDVocabulary
 
 
 class GCMDVocabularyTest(unittest.TestCase):
@@ -97,6 +101,11 @@ class GCMDVocabularyTest(unittest.TestCase):
         type = 'africa'
         a = pti.get_gcmd_location(type)
         self.assertEqual(a['Location_Type'], 'AFRICA')
+
+    def test_exception_on_unavailable_remote_file(self):
+        voc = GCMDVocabulary(name='test_voc', url='https://sdfghdfghd.nersc.no')
+        with self.assertRaises(requests.RequestException):
+            voc._fetch_online_data()
 
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']

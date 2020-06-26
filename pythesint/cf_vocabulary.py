@@ -9,7 +9,11 @@ class CFVocabulary(JSONVocabulary):
     def _fetch_online_data(self):
         # Note the version number... Would probably be better to make it always
         # take the last version..
-        r = requests.get(self.url)
+        try:
+            r = requests.get(self.url)
+        except requests.RequestException:
+            print("Could not get the vocabulary file at '{}'".format(self.url))
+            raise
         dom = parseString(r.text.encode('utf-8').strip())
         # should only contain the standard_name_table:
         node = dom.childNodes[0]
