@@ -133,12 +133,3 @@
   class: ISO19115Vocabulary
   kwargs:
     category: iso_topic_category
-
-- name: mmd_access_constraints
-  module: mmd_vocabulary
-  class: MMDAccessConstraints
-  kwargs:
-    url: https://github.com/metno/mmd/blob/master/thesauri/mmd_access_constraints.xml
-    categories:
-      - prefLabel
-      - definition
