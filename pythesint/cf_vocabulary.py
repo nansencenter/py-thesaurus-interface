@@ -8,8 +8,6 @@ from pythesint.json_vocabulary import JSONVocabulary
 
 class CFVocabulary(JSONVocabulary):
     def _fetch_online_data(self):
-        # Note the version number... Would probably be better to make it always
-        # take the last version..
         try:
             r = requests.get(self.url)
         except requests.RequestException:
