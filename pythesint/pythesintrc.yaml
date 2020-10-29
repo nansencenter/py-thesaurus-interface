@@ -122,11 +122,11 @@
   module: cf_vocabulary
   class: CFVocabulary
   kwargs:
-    url: https://mmisw.org/ont/api/v0/ont?format=rj&iri=http://mmisw.org/ont/cf/parameter
+    url: https://mmisw.org/ont/api/v0/ont?format=rdf&iri=http://mmisw.org/ont/cf/parameter
     categories:
       - standard_name
       - canonical_units
-      - description
+      - definition
 
 - name: iso19115_topic_category
   module: iso19115_vocabulary
