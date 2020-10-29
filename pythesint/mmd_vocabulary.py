@@ -1,5 +1,7 @@
 import xml
 import requests
+from collections import OrderedDict
+
 from pythesint.json_vocabulary import JSONVocabulary
 
 class MMDAccessConstraints(JSONVocabulary):
@@ -15,21 +17,21 @@ class MMDAccessConstraints(JSONVocabulary):
 
         label = node.getElementsByTagName('skos:prefLabel')[0].childNodes[0].data
         definition = node.getElementsByTagName('skos:definition')[0].childNodes[0].data
-        details = {
+        details = OrderedDict({
                 'aboutCollection': node.getAttribute('rdf:about'),
                 'prefLabelCollection': label,
-                'definitionCollection': definition}
+                'definitionCollection': definition})
         
         mmd_list = [details]
         for cnode in node.getElementsByTagName('skos:member'):
             if type(cnode)==xml.dom.minidom.Element:
                 concept = cnode.getElementsByTagName('skos:Concept')[0]
-                label = concept.getElementsByTagName('skos:prefLabel')[0].childNodes[0].data
-                definition = concept.getElementsByTagName('skos:definition')[0].childNodes[0].data
-                access_constraint = {
+                label = concept.getElementsByTagName('skos:prefLabel')[0].childNodes[0].data.strip()
+                definition = concept.getElementsByTagName('skos:definition')[0].childNodes[0].data.strip()
+                access_constraint = OrderedDict({
                     'label': label,
                     'definition': definition
-                }
+                })
                 mmd_list.append(access_constraint)
         return mmd_list
 
