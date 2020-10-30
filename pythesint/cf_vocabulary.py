@@ -20,13 +20,21 @@ class CFVocabulary(JSONVocabulary):
         details = {}
         metadata_details = node.getElementsByTagName('owl:Ontology')[0]
         for detail in metadata_details.childNodes:
-            if type(detail)==xml.dom.minidom.Element:
+            # This does not work in python2.7 because type(detail)=instance
+            #if type(detail)==xml.dom.minidom.Element:
+            try:
                 details[detail.nodeName] = detail.childNodes[0].data
+            except (AttributeError, IndexError):
+                continue
 
         cf_list = [details]
         for cnode in node.getElementsByTagName('Standard_Name')[0].childNodes:
-            if type(cnode)==xml.dom.minidom.Element:
+            #if type(cnode)==xml.dom.minidom.Element:
+            try:
                 entry = cnode.getElementsByTagName('Standard_Name')[0]
+            except (AttributeError, IndexError):
+                continue
+            else:
                 standard_name = entry.getAttribute('rdf:about')
                 units = ''
                 if entry.getElementsByTagName('canonical_units'):
