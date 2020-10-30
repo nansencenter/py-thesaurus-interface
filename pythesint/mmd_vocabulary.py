@@ -29,7 +29,7 @@ class MMDAccessConstraints(JSONVocabulary):
                 label = concept.getElementsByTagName('skos:prefLabel')[0].childNodes[0].data.strip()
                 definition = concept.getElementsByTagName('skos:definition')[0].childNodes[0].data.strip()
                 access_constraint = OrderedDict({
-                    'label': label,
+                    'prefLabel': label,
                     'definition': definition
                 })
                 mmd_list.append(access_constraint)
