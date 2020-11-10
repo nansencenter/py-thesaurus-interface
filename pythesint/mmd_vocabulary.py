@@ -1,10 +1,12 @@
+from __future__ import absolute_import
+
 import xml
 import requests
 from collections import OrderedDict
 
 from pythesint.json_vocabulary import JSONVocabulary
 
-class MMDAccessConstraints(JSONVocabulary):
+class MMDBaseVocabulary(JSONVocabulary):
     def _fetch_online_data(self):
         try:
             r = requests.get(self.url)
@@ -35,17 +37,20 @@ class MMDAccessConstraints(JSONVocabulary):
                 mmd_list.append(access_constraint)
         return mmd_list
 
-class MMDActivityType(MMDAccessConstraints):
+class AccessConstraints(MMDBaseVocabulary):
     pass
 
-class MMDAreas(MMDAccessConstraints):
+class MMDActivityType(MMDBaseVocabulary):
     pass
 
-class MMDOperStatus(MMDAccessConstraints):
+class MMDAreas(MMDBaseVocabulary):
     pass
 
-class MMDPlatformType(MMDAccessConstraints):
+class MMDOperStatus(MMDBaseVocabulary):
     pass
 
-class MMDUseConstraintType(MMDAccessConstraints):
+class MMDPlatformType(MMDBaseVocabulary):
+    pass
+
+class MMDUseConstraintType(MMDBaseVocabulary):
     pass
