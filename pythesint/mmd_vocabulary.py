@@ -37,7 +37,7 @@ class MMDBaseVocabulary(JSONVocabulary):
                 mmd_list.append(access_constraint)
         return mmd_list
 
-class AccessConstraints(MMDBaseVocabulary):
+class MMDAccessConstraints(MMDBaseVocabulary):
     pass
 
 class MMDActivityType(MMDBaseVocabulary):
