@@ -26,8 +26,13 @@ class MMDBaseVocabulary(JSONVocabulary):
         
         mmd_list = [details]
         for cnode in node.getElementsByTagName('skos:member'):
-            if type(cnode)==xml.dom.minidom.Element:
+            # This does not work in python2.7 because type(detail)=instance
+            #if type(cnode)==xml.dom.minidom.Element:
+            try:
                 concept = cnode.getElementsByTagName('skos:Concept')[0]
+            except (AttributeError, IndexError):
+                continue
+            else:
                 label = concept.getElementsByTagName('skos:prefLabel')[0].childNodes[0].data.strip()
                 definition = concept.getElementsByTagName('skos:definition')[0].childNodes[0].data.strip()
                 access_constraint = OrderedDict({
