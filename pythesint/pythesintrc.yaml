@@ -133,3 +133,57 @@
   class: ISO19115Vocabulary
   kwargs:
     category: iso_topic_category
+
+- name: mmd_access_constraints
+  module: mmd_vocabulary
+  class: MMDAccessConstraints
+  kwargs:
+    url: https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd_access_constraints.xml
+    categories:
+      - prefLabel
+      - definition
+
+- name: mmd_activity_type
+  module: mmd_vocabulary
+  class: MMDActivityType
+  kwargs:
+    url: https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd_activity_type.xml
+    categories:
+      - prefLabel
+      - definition
+
+- name: mmd_areas
+  module: mmd_vocabulary
+  class: MMDAreas
+  kwargs:
+    url: https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd_areas.xml
+    categories:
+      - prefLabel
+      - definition
+
+- name: mmd_operstatus
+  module: mmd_vocabulary
+  class: MMDOperStatus
+  kwargs:
+    url: https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd_operstatus.xml
+    categories:
+      - prefLabel
+      - definition
+
+- name: mmd_platform_type
+  module: mmd_vocabulary
+  class: MMDPlatformType
+  kwargs:
+    url: https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd_platform_type.xml
+    categories:
+      - prefLabel
+      - definition
+
+- name: mmd_use_constraint_type
+  module: mmd_vocabulary
+  class: MMDUseConstraintType
+  kwargs:
+    url: https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd_use_constraint_type.xml
+    categories:
+      - prefLabel
+      - definition

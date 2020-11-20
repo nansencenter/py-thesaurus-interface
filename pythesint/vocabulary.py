@@ -87,8 +87,8 @@ class Vocabulary(object):
             for _, key in enumerate(self.categories):
                 try:
                     line_kw[key] = dd[key]
-                except:
-                    line_kw = dd
+                except KeyError:
+                    continue
             retlist.append(line_kw)
         return retlist
 

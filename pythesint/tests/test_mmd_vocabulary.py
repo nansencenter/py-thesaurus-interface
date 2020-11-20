@@ -1,10 +1,11 @@
 import unittest
 import requests
 
-from pythesint.cf_vocabulary import CFVocabulary
+from pythesint.mmd_vocabulary import MMDBaseVocabulary
 
-class CFVocabularyTest(unittest.TestCase):
+class MMDVocabularyTest(unittest.TestCase):
     def test_exception_on_unavailable_remote_file(self):
-        voc = CFVocabulary(name='test_voc', url='https://sdfghdfghd.nersc.no')
+        voc = MMDBaseVocabulary(name='test_voc', url='https://sdfghdfghd.nersc.no')
         with self.assertRaises(requests.RequestException):
             voc._fetch_online_data()
+

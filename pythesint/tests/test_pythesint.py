@@ -36,7 +36,14 @@ class PythesintTest(unittest.TestCase):
                  'gcmd_verticalresolutionrange',
                  'gcmd_temporalresolutionrange', 'gcmd_project',
                  'gcmd_rucontenttype', 'cf_standard_name',
-                 'iso19115_topic_category']
+                 'iso19115_topic_category',
+                 'mmd_access_constraints',
+                 'mmd_activity_type',
+                 'mmd_areas',
+                 'mmd_operstatus',
+                 'mmd_platform_type',
+                 'mmd_use_constraint_type'
+                 ]
         for name in dicts:
             function = getattr(pti, 'get_' + name + '_list')
             self.assertIsInstance(function(), list)
@@ -123,6 +130,36 @@ class PythesintTest(unittest.TestCase):
         self.assertIsInstance(pti.get_iso19115_topic_category(item),
                 collections.OrderedDict)
 
+    def test_get_mmd_access_constraints(self):
+        item = 'open'
+        self.assertIsInstance(pti.get_mmd_access_constraints(item),
+                collections.OrderedDict)
+
+    def test_get_mmd_activity_type(self):
+        item = 'Maps/Charts/Photographs'
+        self.assertIsInstance(pti.get_mmd_activity_type(item),
+                collections.OrderedDict)
+
+    def test_get_mmd_areas(self):
+        item = 'Norwegian Sea'
+        self.assertIsInstance(pti.get_mmd_areas(item),
+                collections.OrderedDict)
+
+    def test_get_mmd_operstatus(self):
+        item = 'scientific'
+        self.assertIsInstance(pti.get_mmd_operstatus(item),
+                collections.OrderedDict)
+
+    def test_get_mmd_platform_type(self):
+        item = 'maps/charts/photographs'
+        self.assertIsInstance(pti.get_mmd_platform_type(item),
+                collections.OrderedDict)
+
+    def test_get_mmd_use_constraint_type(self):
+        item = 'CC-BY-4.0'
+        self.assertIsInstance(pti.get_mmd_use_constraint_type(item),
+                collections.OrderedDict)
+
     def test_get_fake_instrument(self):
         item = 'FakeItem'
         self.assertRaises(IndexError, pti.get_gcmd_instrument, item)
@@ -137,7 +174,14 @@ class PythesintTest(unittest.TestCase):
                      'update_gcmd_temporalresolutionrange',
                      'update_gcmd_project', 'update_gcmd_rucontenttype',
                      'update_cf_standard_name',
-                     'update_iso19115_topic_category']
+                     'update_iso19115_topic_category',
+                     'update_mmd_access_constraints',
+                     'update_mmd_activity_type',
+                     'update_mmd_areas',
+                     'update_mmd_operstatus',
+                     'update_mmd_platform_type',
+                     'update_mmd_use_constraint_type'
+                     ]
         for function in functions:
             self.assertTrue(hasattr(pti, function), 'Function is missing:%s' %
                             (function))
