@@ -58,6 +58,12 @@ class VocabularyTest(unittest.TestCase):
         vocab.get_list = MagicMock(return_value=self.test_list)
         self.assertEqual(vocab.search('Cat'), [self.cat, self.cat2])
 
+    def test_no_empty_dict_in_sort_output(self):
+        vocabulary = Vocabulary('test_vocabulary', categories=['foo', 'bar'])
+        entry = {'foo': 'a', 'bar': 'b'}
+        vocabulary_list = [{'Revision': '2016-01-08 13:40:40'}, entry]
+        self.assertListEqual(vocabulary.sort_list(vocabulary_list), [OrderedDict(entry)])
+
 
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']

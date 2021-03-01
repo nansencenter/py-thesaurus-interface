@@ -84,11 +84,11 @@ class Vocabulary(object):
         retlist = []
         for dd in list:
             line_kw = OrderedDict()
-            for _, key in enumerate(self.categories):
-                try:
+            try:
+                for key in self.categories:
                     line_kw[key] = dd[key]
-                except KeyError:
-                    continue
+            except KeyError:
+                continue
             retlist.append(line_kw)
         return retlist
 
