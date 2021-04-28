@@ -138,7 +138,7 @@
   module: mmd_vocabulary
   class: MMDAccessConstraints
   kwargs:
-    url: https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd_access_constraints.xml
+    url: https://raw.githubusercontent.com/metno/mmd/6a5904264faa9b99aff221e4268e39c3af0f411c/thesauri/mmd_access_constraints.xml
     categories:
       - prefLabel
       - definition
@@ -147,7 +147,7 @@
   module: mmd_vocabulary
   class: MMDActivityType
   kwargs:
-    url: https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd_activity_type.xml
+    url: https://raw.githubusercontent.com/metno/mmd/6a5904264faa9b99aff221e4268e39c3af0f411c/thesauri/mmd_activity_type.xml
     categories:
       - prefLabel
       - definition
@@ -156,7 +156,7 @@
   module: mmd_vocabulary
   class: MMDAreas
   kwargs:
-    url: https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd_areas.xml
+    url: https://raw.githubusercontent.com/metno/mmd/6a5904264faa9b99aff221e4268e39c3af0f411c/thesauri/mmd_areas.xml
     categories:
       - prefLabel
       - definition
@@ -165,7 +165,7 @@
   module: mmd_vocabulary
   class: MMDOperStatus
   kwargs:
-    url: https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd_operstatus.xml
+    url: https://raw.githubusercontent.com/metno/mmd/6a5904264faa9b99aff221e4268e39c3af0f411c/thesauri/mmd_operstatus.xml
     categories:
       - prefLabel
       - definition
@@ -174,7 +174,7 @@
   module: mmd_vocabulary
   class: MMDPlatformType
   kwargs:
-    url: https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd_platform_type.xml
+    url: https://raw.githubusercontent.com/metno/mmd/6a5904264faa9b99aff221e4268e39c3af0f411c/thesauri/mmd_platform_type.xml
     categories:
       - prefLabel
       - definition
@@ -183,7 +183,7 @@
   module: mmd_vocabulary
   class: MMDUseConstraintType
   kwargs:
-    url: https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd_use_constraint_type.xml
+    url: https://raw.githubusercontent.com/metno/mmd/6a5904264faa9b99aff221e4268e39c3af0f411c/thesauri/mmd_use_constraint_type.xml
     categories:
       - prefLabel
       - definition

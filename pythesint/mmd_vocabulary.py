@@ -34,7 +34,7 @@ class MMDBaseVocabulary(JSONVocabulary):
                 continue
             else:
                 label = concept.getElementsByTagName('skos:prefLabel')[0].childNodes[0].data.strip()
-                definition = concept.getElementsByTagName('skos:definition')[0].childNodes[0].data.strip()
+                definition = concept.getElementsByTagName('skos:definition')[0].childNodes[0].data.strip() if concept.getElementsByTagName('skos:definition')[0].childNodes else ''
                 access_constraint = OrderedDict({
                     'prefLabel': label,
                     'definition': definition
