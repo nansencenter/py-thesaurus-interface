@@ -1,12 +1,22 @@
 from __future__ import absolute_import
 
-import xml
+import xml.dom.minidom
 import requests
 from collections import OrderedDict
 
 from pythesint.json_vocabulary import JSONVocabulary
 
 class MMDBaseVocabulary(JSONVocabulary):
+    @staticmethod
+    def get_subnode_data(node, subnode_name):
+        """Get the data contained in a subnode. Return an empty string
+        if the subnode does not contain any data.
+        """
+        try:
+            return node.getElementsByTagName(subnode_name)[0].childNodes[0].data.strip()
+        except IndexError:
+            return ''
+
     def _fetch_online_data(self):
         try:
             r = requests.get(self.url)
@@ -17,13 +27,13 @@ class MMDBaseVocabulary(JSONVocabulary):
         # should only contain the standard_name_table:
         node = dom.childNodes[0].getElementsByTagName('skos:Collection')[0]
 
-        label = node.getElementsByTagName('skos:prefLabel')[0].childNodes[0].data
-        definition = node.getElementsByTagName('skos:definition')[0].childNodes[0].data
+        label = self.get_subnode_data(node, 'skos:prefLabel')
+        definition = self.get_subnode_data(node, 'skos:definition')
         details = OrderedDict({
                 'aboutCollection': node.getAttribute('rdf:about'),
                 'prefLabelCollection': label,
                 'definitionCollection': definition})
-        
+
         mmd_list = [details]
         for cnode in node.getElementsByTagName('skos:member'):
             # This does not work in python2.7 because type(detail)=instance
@@ -33,8 +43,9 @@ class MMDBaseVocabulary(JSONVocabulary):
             except (AttributeError, IndexError):
                 continue
             else:
-                label = concept.getElementsByTagName('skos:prefLabel')[0].childNodes[0].data.strip()
-                definition = concept.getElementsByTagName('skos:definition')[0].childNodes[0].data.strip()
+                label = self.get_subnode_data(concept, 'skos:prefLabel')
+                definition = self.get_subnode_data(concept, 'skos:definition')
+
                 access_constraint = OrderedDict({
                     'prefLabel': label,
                     'definition': definition
