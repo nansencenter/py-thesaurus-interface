@@ -151,7 +151,7 @@ class PythesintTest(unittest.TestCase):
                 collections.OrderedDict)
 
     def test_get_mmd_platform_type(self):
-        item = 'maps/charts/photographs'
+        item = 'Sentinel-2A'
         self.assertIsInstance(pti.get_mmd_platform_type(item),
                 collections.OrderedDict)
 
