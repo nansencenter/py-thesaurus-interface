@@ -7,6 +7,10 @@ from pythesint.vocabulary import Vocabulary
 from pythesint.pathsolver import DATA_HOME
 
 class JSONVocabulary(Vocabulary):
+
+    def _fetch_online_data(self, version=None):
+        raise NotImplementedError
+
     def get_relative_path(self):
         return os.path.join('pythesint', 'json', '%s_list.json' % self.name.lower())
 
