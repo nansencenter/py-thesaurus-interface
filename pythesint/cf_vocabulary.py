@@ -8,8 +8,13 @@ from pythesint.json_vocabulary import JSONVocabulary
 
 class CFVocabulary(JSONVocabulary):
     def _fetch_online_data(self, version=None):
+        if version:
+            params = {'version': version}
+        else:
+            params = {}
+
         try:
-            r = requests.get(self.url)
+            r = requests.get(self.url, params=params)
         except requests.RequestException:
             print("Could not get the vocabulary file at '{}'".format(self.url))
             raise

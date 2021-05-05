@@ -4,10 +4,18 @@ from pkg_resources import resource_string
 
 import yaml
 
-def update_all_vocabularies():
+def update_all_vocabularies(versions=None):
     ''' Update all vocabularies '''
+    if not versions:
+            versions = {}
     for name in vocabularies.keys():
-        vocabularies[name].update()
+        version = versions.get(name)
+        if not version:
+            try:
+                version = vocabularies[name].version
+            except AttributeError:
+                version = None
+        vocabularies[name].update(version=version)
 
 def _process_config():
     ''' Load info about all vocabularies from config and add to module '''
