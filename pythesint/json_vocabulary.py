@@ -18,7 +18,7 @@ class JSONVocabulary(Vocabulary):
             result = json.load(opened_file)
         return self.sort_list(result)
 
-    def update(self):
+    def update(self, version=None):
         ''' Write vocabulary to a JSON file '''
         print('Downloading and writing json file for %s' % self.name)
         json_path = os.path.split(self.get_filepath())[0]
@@ -26,7 +26,7 @@ class JSONVocabulary(Vocabulary):
         if not os.path.exists(json_path):
             os.makedirs(json_path)
         with open(self.get_filepath(), 'w') as out:
-            json.dump(self._fetch_online_data(), out, indent=4)
+            json.dump(self._fetch_online_data(version=version), out, indent=4)
 
     def get_filepath(self):
         return os.path.join(DATA_HOME, self.get_relative_path())

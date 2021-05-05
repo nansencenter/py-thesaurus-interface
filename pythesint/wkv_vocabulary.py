@@ -7,7 +7,7 @@ from pythesint.json_vocabulary import JSONVocabulary
 
 
 class WKVVocabulary(JSONVocabulary):
-    def _fetch_online_data(self):
+    def _fetch_online_data(self, version=None):
         ''' Return list of Well Known Variables from Nansat        '''
         try:
             r = requests.get(self.url)
