@@ -36,10 +36,10 @@ class MMDBaseVocabulary(JSONVocabulary):
 
         label = self.get_subnode_data(node, 'skos:prefLabel')
         definition = self.get_subnode_data(node, 'skos:definition')
-        details = OrderedDict({
-                'aboutCollection': node.getAttribute('rdf:about'),
-                'prefLabelCollection': label,
-                'definitionCollection': definition})
+        details = OrderedDict([
+            ('aboutCollection', node.getAttribute('rdf:about')),
+            ('prefLabelCollection', label),
+            ('definitionCollection', definition)])
 
         if version:
             details['version'] = version
@@ -56,10 +56,10 @@ class MMDBaseVocabulary(JSONVocabulary):
                 label = self.get_subnode_data(concept, 'skos:prefLabel')
                 definition = self.get_subnode_data(concept, 'skos:definition')
 
-                access_constraint = OrderedDict({
-                    'prefLabel': label,
-                    'definition': definition
-                })
+                access_constraint = OrderedDict([
+                    ('prefLabel', label),
+                    ('definition', definition)
+                ])
                 mmd_list.append(access_constraint)
         return mmd_list
 
