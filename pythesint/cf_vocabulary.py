@@ -1,6 +1,5 @@
 from __future__ import absolute_import
 
-import xml
 from xml.dom.minidom import parseString
 import requests
 from pythesint.json_vocabulary import JSONVocabulary
