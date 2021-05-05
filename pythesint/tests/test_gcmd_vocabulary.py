@@ -25,7 +25,9 @@ class GCMDVocabularyTest(unittest.TestCase):
                 '/instruments/?format=xml"')
         pti.gcmd_vocabulary._read_revision(line, gcmd_list)
         self.assertEqual(len(gcmd_list), 1)
-        self.assertDictEqual(gcmd_list[0], {'Revision': '2016-01-08 13:40:40'})
+        self.assertDictEqual(
+            gcmd_list[0],
+            {'Keyword Version': '8.1', 'Revision': '2016-01-08 13:40:40'})
 
     def test_check_categories(self):
         line = ('Category,Class,Type,Subtype,Short_Name,Long_Name,UUID')

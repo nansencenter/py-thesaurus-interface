@@ -194,17 +194,25 @@ class PythesintTest(unittest.TestCase):
                 self.assertEqual(response.status_code, 200)
 
     def test_update_all_mocked(self):
-        orig_vocab = pti.pythesint.vocabularies
-        pti.pythesint.vocabularies = {'1': MagicMock(),
-                                      'anothervocab': MagicMock(),
-                                      'thirdvocab': MagicMock(),
-                                      'instruments': MagicMock(),
-                                      'something': MagicMock()}
-        pti.update_all_vocabularies()
-        # items() in general is inefficient on Python 2, but should be no problem with just a couple items.
-        for _, mock in pti.pythesint.vocabularies.items():
-            mock.update.assert_called_once_with()
-        pti.pythesint.vocabularies = orig_vocab
+        vocabularies_names = (
+            '1',
+            'anothervocab',
+            'thirdvocab',
+            'instruments',
+            'something'
+        )
+
+        vocabularies = {}
+        for name in vocabularies_names:
+            vocabulary_mock = MagicMock()
+            vocabulary_mock.version = None
+            vocabularies[name] = vocabulary_mock
+
+        with patch('pythesint.pythesint.vocabularies', vocabularies):
+            pti.update_all_vocabularies()
+            # items() in general is inefficient on Python 2, but should be no problem with just a couple items.
+            for _, mock in pti.pythesint.vocabularies.items():
+                mock.update.assert_called_once_with(version=None)
 
 if __name__ == "__main__":
     unittest.main()
