@@ -8,5 +8,5 @@ def set_github_version(url, version):
     """
     return re.sub(
         r'(https://raw.githubusercontent.com/([^/]+/){2})[^/]+/',
-        r'\1{}/'.format(version),
+        r'\g<1>{}/'.format(version),
         url)
