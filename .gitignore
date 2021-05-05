@@ -7,3 +7,4 @@ build
 pythesint.egg-info
 dist
 record.txt
+.coverage
