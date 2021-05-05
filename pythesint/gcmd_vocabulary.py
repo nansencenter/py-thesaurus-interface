@@ -11,8 +11,13 @@ class GCMDVocabulary(JSONVocabulary):
         ''' Return list of GCMD standard keywords
             self.url and self.categories must be set
         '''
+        if version:
+            params = {'version': version}
+        else:
+            params = {}
+
         try:
-            r = requests.get(self.url, verify=False)
+            r = requests.get(self.url, verify=False, params=params)
             r.raise_for_status()
         except requests.RequestException:
             print("Could not get the vocabulary file at '{}'".format(self.url))
@@ -34,7 +39,10 @@ def _read_revision(line, gcmd_list):
     # TODO: Cast exception if not found?
     if 'Keyword Version' and 'Revision' in line:
         meta = line.split('","')
-        gcmd_list.append({'Revision': meta[1][10:]})
+        gcmd_list.append({
+            'Revision': meta[1][10:],
+            'Keyword Version': meta[0].split(': ')[1]
+        })
 
 
 def _check_categories(line, categories):

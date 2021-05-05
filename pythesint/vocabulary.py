@@ -77,7 +77,7 @@ class Vocabulary(object):
 
         return matches
 
-    def update(self):
+    def update(self, version=None):
         pass
 
     def sort_list(self, list):

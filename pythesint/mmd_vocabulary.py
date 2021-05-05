@@ -1,9 +1,11 @@
 from __future__ import absolute_import
 
 import xml.dom.minidom
+import re
 import requests
 from collections import OrderedDict
 
+import pythesint.utils as utils
 from pythesint.json_vocabulary import JSONVocabulary
 
 class MMDBaseVocabulary(JSONVocabulary):
@@ -18,8 +20,13 @@ class MMDBaseVocabulary(JSONVocabulary):
             return ''
 
     def _fetch_online_data(self, version=None):
+        if version:
+            url = utils.set_github_version(self.url, version)
+        else:
+            url = self.url
+
         try:
-            r = requests.get(self.url)
+            r = requests.get(url)
         except requests.RequestException:
             print("Could not get the vocabulary file at '{}'".format(self.url))
             raise
@@ -33,6 +40,9 @@ class MMDBaseVocabulary(JSONVocabulary):
                 'aboutCollection': node.getAttribute('rdf:about'),
                 'prefLabelCollection': label,
                 'definitionCollection': definition})
+
+        if version:
+            details['version'] = version
 
         mmd_list = [details]
         for cnode in node.getElementsByTagName('skos:member'):
