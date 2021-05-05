@@ -24,6 +24,11 @@ class JSONVocabulary(Vocabulary):
 
     def update(self, version=None):
         ''' Write vocabulary to a JSON file '''
+        if not version:
+            try:
+                version = self.version
+            except AttributeError:
+                version = None
         print('Downloading and writing json file for %s' % self.name)
         json_path = os.path.split(self.get_filepath())[0]
         print(json_path)
