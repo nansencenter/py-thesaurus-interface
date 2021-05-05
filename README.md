@@ -16,6 +16,28 @@ pti.get_gcmd_platform('ENVISAT')
 pti.get_gcmd_provider('NERSC')
 ```
 
+For JSON vocabularies, it is possible to update the local files using a specific version.
+The format of the version depends on the provider.
+If no version is provided, the latest version is retrieved.
+
+```python
+import pythesint as pti
+pti.update_gcmd_instrument(version='9.1.5')
+pti.update_cf_standard_name(version='20210119T185509')
+pti.update_mmd_platform_type(version='a5c8573')
+```
+
+or
+
+```python
+import pythesint as pti
+pti.update_all_vocabularies(versions={
+    'gcmd_instrument': '9.1.5',
+    'cf_standard_name': '20210119T185509',
+    'mmd_platform_type': 'a5c8573'
+})
+```
+
 ## Standards
 
 The package follows the standards defined at NASA's Global Change Master Directory (GCMD) (http://gcmd.gsfc.nasa.gov) and the NetCDF-CF conventions (http://cfconventions.org/), plus possibly others that will be added as needs emerge... The standards are mapped in Python dictionaries and saved to json-files.
