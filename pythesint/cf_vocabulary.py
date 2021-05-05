@@ -7,7 +7,7 @@ from pythesint.json_vocabulary import JSONVocabulary
 
 
 class CFVocabulary(JSONVocabulary):
-    def _fetch_online_data(self):
+    def _fetch_online_data(self, version=None):
         try:
             r = requests.get(self.url)
         except requests.RequestException:

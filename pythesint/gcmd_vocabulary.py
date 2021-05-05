@@ -7,7 +7,7 @@ from pythesint.json_vocabulary import JSONVocabulary
 
 
 class GCMDVocabulary(JSONVocabulary):
-    def _fetch_online_data(self):
+    def _fetch_online_data(self, version=None):
         ''' Return list of GCMD standard keywords
             self.url and self.categories must be set
         '''
