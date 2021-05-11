@@ -33,7 +33,7 @@ class update_vocabularies(install_scripts):
 setup(
     name=NAME,
 
-    version='1.5.0',
+    version='1.5.1',
 
     description='A Python interface to various metadata vocabularies',
     long_description=long_description,
