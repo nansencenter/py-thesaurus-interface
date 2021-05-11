@@ -21,8 +21,10 @@ here = path.abspath(path.dirname(path.realpath(__file__)))
 
 # Get the long description from the README file
 long_description = ''
+long_description_content_type = 'text/plain'
 if path.exists(path.join(here, readme_file)):
     long_description = open(path.join(here, readme_file)).read()
+    long_description_content_type='text/markdown'
 
 class update_vocabularies(install_scripts):
     def run(self):
@@ -37,6 +39,7 @@ setup(
 
     description='A Python interface to various metadata vocabularies',
     long_description=long_description,
+    long_description_content_type=long_description_content_type,
 
     zip_safe=False,
 
