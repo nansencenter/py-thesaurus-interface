@@ -22,9 +22,12 @@ jobs:
         pip install --upgrade dist/*.tar.gz coveralls mock
 
     - name: Run unit tests
+      run: coverage run --omit=pythesint/tests/* --source=pythesint setup.py test
+
+    - name: Publish coverage
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}"
-      run: coverage run --omit=pythesint/tests/* --source=pythesint setup.py test && coveralls
+      run: coveralls --service=github
 
     - name: Publish Python package
       if: github.event_name == 'release'
