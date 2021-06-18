@@ -9,6 +9,7 @@
 # Copyright:(c) NERSC
 # License:  GPLv3
 #-------------------------------------------------------------------------------
+import os
 from setuptools import setup, find_packages
 from setuptools.command.install_scripts import install_scripts
 from os import path
@@ -35,7 +36,7 @@ class update_vocabularies(install_scripts):
 setup(
     name=NAME,
 
-    version='1.5.1',
+    version=os.getenv('PYTHESINT_RELEASE', '0.0.0dev').lstrip('v'),
 
     description='A Python interface to various metadata vocabularies',
     long_description=long_description,
