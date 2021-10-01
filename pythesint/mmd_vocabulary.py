@@ -69,9 +69,7 @@ class MMDVocabulary(JSONVocabulary):
         local_sha = self._get_local_file_github_blob_sha(self.base_file)
         remote_sha = self._get_remote_file_github_blob_sha(version)
 
-        if (not os.path.isfile(self.base_file)
-                or os.path.getsize(self.base_file) == 0
-                or local_sha != remote_sha):
+        if (not os.path.isfile(self.base_file) or local_sha != remote_sha):
             with closing(requests.get(url, stream=True)) as response:
                 with open(self.base_file, 'wb') as f_h:
                     f_h.write(response.content)
