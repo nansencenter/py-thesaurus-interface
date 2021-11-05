@@ -7,9 +7,16 @@ from pythesint.json_vocabulary import JSONVocabulary
 
 
 class GCMDVocabulary(JSONVocabulary):
+
+    def _check_categories(self, categories):
+        '''Print a warning if the categories are not the expected ones
+        '''
+        if set(self.categories) != set(categories):
+            print(f"Unexpected categories {categories}")
+
     def _fetch_online_data(self, version=None):
         ''' Return list of GCMD standard keywords
-            self.url and self.categories must be set
+            self.url must be set
         '''
         if version:
             params = {'version': version}
@@ -24,10 +31,14 @@ class GCMDVocabulary(JSONVocabulary):
             raise
         rlines = [line for line in r.text.splitlines()]
         gcmd_list = []
+
         _read_revision(rlines[0], gcmd_list)
-        _check_categories(rlines[1], self.categories)
+
+        categories = _get_categories(rlines)
+        self._check_categories(categories)
+
         for line in rlines[2:]:
-            _read_line(line, gcmd_list, self.categories)
+            _read_line(line, gcmd_list, categories)
 
         return gcmd_list
 
@@ -45,14 +56,9 @@ def _read_revision(line, gcmd_list):
         })
 
 
-def _check_categories(line, categories):
-    ''' Throws an exception if the line does not match categories
-    '''
-    kw_groups = line.split(',')
-    kw_groups.pop(-1)
-    # Make sure the group items are as expected
-    if kw_groups != categories:
-        raise TypeError('%s is not equal to %s' % (kw_groups, categories))
+def _get_categories(lines):
+    '''Get the categories from the lines read from the source'''
+    return lines[1].split(',')[:-1]
 
 
 def _read_line(line, gcmd_list, categories):
