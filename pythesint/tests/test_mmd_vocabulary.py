@@ -39,11 +39,11 @@ class MMDVocabularyTest(unittest.TestCase):
             self.voc.get_subnode_data(collection, 'skos:definition'),
             'Concept definition')
 
-    def test_get_collection(self):
+    def test_get_element_by_label(self):
         """Test getting the collection having a particular label"""
         dom = xml.dom.minidom.parseString(self.base_file_contents)
         self.assertEqual(
-            self.voc.get_collection(dom, 'Concept label'),
+            self.voc.get_element_by_label(dom.documentElement, 'skos:Collection', 'Concept label'),
             dom.childNodes[0].getElementsByTagName('skos:Collection')[0])
 
 

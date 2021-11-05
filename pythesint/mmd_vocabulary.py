@@ -28,11 +28,11 @@ class MMDVocabulary(JSONVocabulary):
         except IndexError:
             return ''
 
-    def get_collection(self, dom, label):
+    def get_element_by_label(self, parent, node_type, label):
         """Returns the collection which has the given label"""
-        for collection in dom.childNodes[0].getElementsByTagName('skos:Collection'):
-            if self.get_subnode_data(collection, 'skos:prefLabel') == label:
-                return collection
+        for node in parent.getElementsByTagName(node_type):
+            if self.get_subnode_data(node, 'skos:prefLabel') == label:
+                return node
         return None
 
     @staticmethod
@@ -87,9 +87,9 @@ class MMDVocabulary(JSONVocabulary):
         with open(self.base_file, 'r', encoding='utf-8') as f_h:
             dom = xml.dom.minidom.parse(f_h)
 
-        # should only contain the standard_name_table:
-        # node = dom.childNodes[0].getElementsByTagName('skos:Collection')[0]
-        collection = self.get_collection(dom, self.collection_label)
+        document = dom.documentElement
+
+        collection = self.get_element_by_label(document, 'skos:Collection', self.collection_label)
 
         if collection is None:
             raise ValueError(f"'{self.collection_label}' is not a valid collection label")
@@ -105,19 +105,30 @@ class MMDVocabulary(JSONVocabulary):
 
         mmd_list = [details]
         for cnode in collection.getElementsByTagName('skos:member'):
-            # This does not work in python2.7 because type(detail)=instance
-            #if type(cnode)==xml.dom.minidom.Element:
             try:
+                # some concepts are directly defined in the collection
+                # members...
                 concept = cnode.getElementsByTagName('skos:Concept')[0]
             except (AttributeError, IndexError):
-                continue
-            else:
-                label = self.get_subnode_data(concept, 'skos:prefLabel')
-                definition = self.get_subnode_data(concept, 'skos:definition')
+                # ...while others are defined outside of the collection
+                # and need to be retrieved using their resource URL
+                resource_name = cnode.getAttribute('rdf:resource')
 
-                access_constraint = OrderedDict([
-                    ('prefLabel', label),
-                    ('definition', definition)
-                ])
-                mmd_list.append(access_constraint)
+                concept = None
+                for concept_element in document.getElementsByTagName('skos:Concept'):
+                    if concept_element.getAttribute('rdf:about') == resource_name:
+                        concept = concept_element
+                        break
+
+                if not concept:
+                    continue
+
+            label = self.get_subnode_data(concept, 'skos:prefLabel')
+            definition = self.get_subnode_data(concept, 'skos:definition')
+            access_constraint = OrderedDict([
+                ('prefLabel', label),
+                ('definition', definition)
+            ])
+            mmd_list.append(access_constraint)
+
         return mmd_list
