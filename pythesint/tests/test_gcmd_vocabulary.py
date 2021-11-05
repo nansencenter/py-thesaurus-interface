@@ -31,17 +31,13 @@ class GCMDVocabularyTest(unittest.TestCase):
             {'Keyword Version': '8.1', 'Revision': '2016-01-08 13:40:40'})
 
     def test_check_categories(self):
-        line = ('Category,Class,Type,Subtype,Short_Name,Long_Name,UUID')
+        lines = [
+            'Revision',
+            'Category,Class,Type,Subtype,Short_Name,Long_Name,UUID'
+        ]
         categories = ['Category', 'Class', 'Type', 'Subtype', 'Short_Name',
                       'Long_Name']
-        pti.gcmd_vocabulary._check_categories(line, categories)
-
-    def test_check_categories_wrong(self):
-        line = ('Category,Class,Type,Subtype,Short_Name,Long_Name,UUID')
-        categories = ['Category', 'Type', 'Class', 'Subtype', 'Short_Name',
-                      'Long_Name']
-        with self.assertRaises(TypeError):
-            pti.gcmd_vocabulary._check_categories(line, categories)
+        self.assertListEqual(pti.gcmd_vocabulary._get_categories(lines), categories)
 
     def test_read_line_simple(self):
         gcmd_list = [{'Revision': '2016-01-08 13:40:40'}]
