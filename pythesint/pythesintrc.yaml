@@ -58,10 +58,14 @@
   kwargs:
     url: https://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/platforms/?format=csv
     categories:
-      - Category
-      - Series_Entity
-      - Short_Name
-      - Long_Name
+      # these aliases ensure backwards compatibility for the time being
+      # the format is category_name: alias
+      # where category_name is the category name defined by the provider
+      Basis: Category
+      Category: Series_Entity
+      Sub_Category: ''
+      Short_Name: Short_Name
+      Long_Name: Long_Name
 
 - name: gcmd_location
   module: gcmd_vocabulary
