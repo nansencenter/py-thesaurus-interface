@@ -64,6 +64,36 @@ class VocabularyTest(unittest.TestCase):
         vocabulary_list = [{'Revision': '2016-01-08 13:40:40'}, entry]
         self.assertListEqual(vocabulary.sort_list(vocabulary_list), [OrderedDict(entry)])
 
+    def test_sort_list(self):
+        vocabulary = Vocabulary('test_vocabulary', categories=['Category', 'Type', 'Name'])
+        self.assertListEqual(
+            vocabulary.sort_list(self.test_list),
+            [
+                OrderedDict([('Category', 'Animal'), ('Type', 'Cat'), ('Name', '')]),
+                OrderedDict([('Category', 'Animal'), ('Type', 'Cat'), ('Name', 'The cat')]),
+                OrderedDict([('Category', 'Animal'), ('Type', ''), ('Name', '')]),
+                OrderedDict([('Category', 'Animal'), ('Type', 'Dog'), ('Name', '')]),
+                OrderedDict([('Category', 'Animal'), ('Type', 'Mouse'), ('Name', '')]),
+                OrderedDict([('Category', 'Construction'), ('Type', 'House'), ('Name', '')]),
+            ])
+
+    def test_sort_list_aliases(self):
+        vocabulary = Vocabulary('test_vocabulary', categories={
+            'Category': 'class',
+            'Type': 'kind',
+            'Name': ''
+        })
+        self.assertListEqual(
+            vocabulary.sort_list(self.test_list),
+            [
+                OrderedDict([('class', 'Animal'), ('kind', 'Cat'), ('Name', '')]),
+                OrderedDict([('class', 'Animal'), ('kind', 'Cat'), ('Name', 'The cat')]),
+                OrderedDict([('class', 'Animal'), ('kind', ''), ('Name', '')]),
+                OrderedDict([('class', 'Animal'), ('kind', 'Dog'), ('Name', '')]),
+                OrderedDict([('class', 'Animal'), ('kind', 'Mouse'), ('Name', '')]),
+                OrderedDict([('class', 'Construction'), ('kind', 'House'), ('Name', '')]),
+            ])
+
 
 if __name__ == "__main__":
     # import sys;sys.argv = ['', 'Test.testName']
