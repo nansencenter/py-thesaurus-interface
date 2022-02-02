@@ -84,9 +84,18 @@ class Vocabulary(object):
         retlist = []
         for dd in list:
             line_kw = OrderedDict()
+            has_aliases = isinstance(self.categories, dict)
             try:
                 for key in self.categories:
-                    line_kw[key] = dd[key]
+                    if has_aliases:
+                        # self.categories is a dict defining aliases
+                        alias = self.categories.get(key)
+                        # if an empty alias is defined, use the original category name
+                        field_name = alias if alias else key
+                    else:
+                        # no alias is defined, just use the category name
+                        field_name = key
+                    line_kw[field_name] = dd[key]
             except KeyError:
                 continue
             retlist.append(line_kw)
