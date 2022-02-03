@@ -1,3 +1,8 @@
+---
+# The categories for each vocabulary can be specified as a list or a
+# dictionary. The dictionary option enables to define aliases.
+# In that case the format is category_name: alias
+# where category_name is the category name defined by the provider
 - name: wkv_variable
   module: wkv_vocabulary
   class: WKVVocabulary
@@ -58,14 +63,10 @@
   kwargs:
     url: https://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/platforms/?format=csv
     categories:
-      # these aliases ensure backwards compatibility for the time being
-      # the format is category_name: alias
-      # where category_name is the category name defined by the provider
-      Basis: Category
-      Category: Series_Entity
-      Sub_Category: ''
-      Short_Name: Short_Name
-      Long_Name: Long_Name
+      - Category
+      - Series_Entity
+      - Short_Name
+      - Long_Name
 
 - name: gcmd_location
   module: gcmd_vocabulary
@@ -191,3 +192,4 @@
     categories:
       - prefLabel
       - definition
+...
