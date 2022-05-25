@@ -1,4 +1,4 @@
-"Keyword Version: 8.1","Revision: 2015-04-07 14:37:24","Timestamp: 2016-02-26 04:47:18","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/locations/?format=xml"
+"Keyword Version: 8.1","Revision: 2015-04-07 14:37:24","Timestamp: 2016-02-26 04:47:18","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme/locations/?format=xml"
 Location_Category,Location_Type,Location_Subregion1,Location_Subregion2,Location_Subregion3,UUID
 "CONTINENT","","","","","0a672f19-dad5-4114-819a-2eb55bdbb56a"
 "CONTINENT","AFRICA","","","","2ca1b865-5555-4375-aa81-72811335b695"

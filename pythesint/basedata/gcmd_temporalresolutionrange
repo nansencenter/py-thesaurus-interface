@@ -1,4 +1,4 @@
-"Keyword Version: 8.1","Revision: 2012-10-19 14:09:54","Timestamp: 2016-02-26 04:48:34","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/temporalresolutionrange/?format=xml"
+"Keyword Version: 8.1","Revision: 2012-10-19 14:09:54","Timestamp: 2016-02-26 04:48:34","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme/temporalresolutionrange/?format=xml"
 Temporal_Resolution_Range,UUID
 "1 minute - < 1 hour","bca20202-2b06-4657-a425-5b0e416bce0c"
 "1 second - < 1 minute","48ff676f-836c-4cff-bc88-4c4cc06b2e1b"

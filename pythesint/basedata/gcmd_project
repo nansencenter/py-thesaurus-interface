@@ -1,4 +1,4 @@
-"Keyword Version: 8.1","Revision: 2016-01-10 17:41:43","Timestamp: 2016-02-26 04:48:50","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/projects/?format=xml"
+"Keyword Version: 8.1","Revision: 2016-01-10 17:41:43","Timestamp: 2016-02-26 04:48:50","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme/projects/?format=xml"
 Bucket,Short_Name,Long_Name,UUID
 "A - C","","","0c89f3f4-7ab1-43ce-89ee-795d35f0e30a"
 "A - C","AA","ARCATLAS","a30ac9a7-82b0-42b6-93db-2764bd7535ca"

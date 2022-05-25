@@ -1,4 +1,4 @@
-"Keyword Version: 8.1","Revision: 2015-12-29 15:16:49","Timestamp: 2016-02-26 04:46:44","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/providers/?format=xml"
+"Keyword Version: 8.1","Revision: 2015-12-29 15:16:49","Timestamp: 2016-02-26 04:46:44","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme/providers/?format=xml"
 Bucket_Level0,Bucket_Level1,Bucket_Level2,Bucket_Level3,Short_Name,Long_Name,Data_Center_URL,UUID
 "ACADEMIC","","","","","","","7700280b-68ee-4644-bf5e-84e7a6adf897"
 "ACADEMIC","","","","AALTO","Aalto University","","d50d54e6-6ea5-4579-bbc7-98afffd8b443"
