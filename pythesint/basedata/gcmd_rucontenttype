@@ -1,4 +1,4 @@
-"Keyword Version: 8.1","Revision: 2016-01-07 13:31:43","Timestamp: 2016-02-26 04:49:04","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/rucontenttype/?format=xml"
+"Keyword Version: 8.1","Revision: 2016-01-07 13:31:43","Timestamp: 2016-02-26 04:49:04","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme/rucontenttype/?format=xml"
 Type,Subtype,UUID
 "GET DATA","","750f6c61-0f15-4185-94d8-c029dec04bc5"
 "GET DATA","DATACAST URL","2fc3797c-71b5-4d01-8ae1-d5634ec625ce"

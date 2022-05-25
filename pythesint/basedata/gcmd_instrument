@@ -1,4 +1,4 @@
-"Keyword Version: 8.1","Revision: 2016-01-08 13:40:40","Timestamp: 2016-02-26 04:46:02","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/instruments/?format=xml"
+"Keyword Version: 8.1","Revision: 2016-01-08 13:40:40","Timestamp: 2016-02-26 04:46:02","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme/instruments/?format=xml"
 Category,Class,Type,Subtype,Short_Name,Long_Name,UUID
 "Earth Remote Sensing Instruments","","","","","","6015ef7b-f3bd-49e1-9193-cc23db566b69"
 "Earth Remote Sensing Instruments","Active Remote Sensing","","","","","c8fe757b-b530-4d67-a553-e4903f4430a5"

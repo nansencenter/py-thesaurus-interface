@@ -22,7 +22,7 @@ class GCMDVocabularyTest(unittest.TestCase):
                 'Timestamp: 2016-02-26 04:46:02","Terms Of Use: See '
                 'http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML'
                 ' representations can be found here: '
-                'http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme'
+                'http://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme'
                 '/instruments/?format=xml"')
         pti.gcmd_vocabulary._read_revision(line, gcmd_list)
         self.assertEqual(len(gcmd_list), 1)

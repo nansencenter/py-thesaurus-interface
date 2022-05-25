@@ -1,4 +1,4 @@
-"Keyword Version: 8.1","Revision: 2016-01-11 15:05:11","Timestamp: 2016-02-26 04:47:04","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmdservices.gsfc.nasa.gov/kms/concepts/concept_scheme/platforms/?format=xml"
+"Keyword Version: 8.1","Revision: 2016-01-11 15:05:11","Timestamp: 2016-02-26 04:47:04","Terms Of Use: See http://gcmd.nasa.gov/r/l/TermsOfUse","The most up to date XML representations can be found here: http://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme/platforms/?format=xml"
 Category,Series_Entity,Short_Name,Long_Name,UUID
 "Aircraft","","","","227d9c3d-f631-402d-84ed-b8c5a562fc27"
 "Aircraft","","A340-600","Airbus A340-600","bab77f95-aa34-42aa-9a12-922d1c9fae63"
