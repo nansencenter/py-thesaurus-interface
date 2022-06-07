@@ -2,6 +2,7 @@ from __future__ import absolute_import
 
 from collections import OrderedDict
 import requests
+import warnings
 
 from pythesint.json_vocabulary import JSONVocabulary
 
@@ -12,7 +13,8 @@ class GCMDVocabulary(JSONVocabulary):
         '''Print a warning if the categories are not the expected ones
         '''
         if set(self.categories) != set(categories):
-            print(f"Unexpected categories {categories}")
+            mismatch_categories = set(self.categories).difference(set(categories))
+            warnings.warn(f'Unknown categories {mismatch_categories} in {self.name}')
 
     def _fetch_online_data(self, version=None):
         ''' Return list of GCMD standard keywords
@@ -71,9 +73,15 @@ def _read_line(line, gcmd_list, categories):
         return
     # Remove last item (the ID is not needed)
     gcmd_keywords.pop(-1)
-    if len(gcmd_keywords) != len(categories):
+    # skip record if it is longer than the definition of categories
+    if len(gcmd_keywords) > len(categories):
         return
     line_kw = OrderedDict()
     for i, key in enumerate(categories):
-        line_kw[key] = gcmd_keywords[i]
+        if i < len(gcmd_keywords):
+            # if the record is equal to definition of categories
+            line_kw[key] = gcmd_keywords[i]
+        else:
+            # if the record is shorter than definition of categories: add empty string
+            line_kw[key] = ""
     gcmd_list.append(line_kw)

@@ -25,7 +25,7 @@ class WKVVocabulary(JSONVocabulary):
             wkv_list = [{'version': version}]
         else:
             wkv_list = []
-        wkv_list.extend(yaml.load(r.text))
+        wkv_list.extend(yaml.safe_load(r.text))
 
         return wkv_list
 
