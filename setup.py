@@ -50,7 +50,7 @@ setup(
 
     url='https://github.com/nansencenter/py-thesaurus-interface',
 
-    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.4.9.tar.gz',
+    download_url='https://github.com/nansencenter/py-thesaurus-interface/archive/v1.6.5.tar.gz',
 
     packages=find_packages(),
 
@@ -74,9 +74,6 @@ setup(
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: Atmospheric Science',
         'Topic :: Scientific/Engineering :: Information Analysis',
