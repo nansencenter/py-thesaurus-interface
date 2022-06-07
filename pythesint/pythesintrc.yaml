@@ -28,6 +28,7 @@
       - Subtype
       - Short_Name
       - Long_Name
+    version: 13.6
 
 - name: gcmd_science_keyword
   module: gcmd_vocabulary
@@ -42,6 +43,7 @@
       - Variable_Level_2
       - Variable_Level_3
       - Detailed_Variable
+    version: 13.6
 
 - name: gcmd_provider
   module: gcmd_vocabulary
@@ -56,6 +58,7 @@
       - Short_Name
       - Long_Name
       - Data_Center_URL
+    version: 13.6
 
 - name: gcmd_platform
   module: gcmd_vocabulary
@@ -63,10 +66,12 @@
   kwargs:
     url: https://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme/platforms/?format=csv
     categories:
+      - Basis
       - Category
-      - Series_Entity
+      - Sub_Category
       - Short_Name
       - Long_Name
+    version: 13.6
 
 - name: gcmd_location
   module: gcmd_vocabulary
@@ -79,6 +84,8 @@
       - Location_Subregion1
       - Location_Subregion2
       - Location_Subregion3
+      - Location_Subregion4
+    version: 13.6
 
 - name: gcmd_horizontalresolutionrange
   module: gcmd_vocabulary
@@ -87,6 +94,7 @@
     url: https://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme/horizontalresolutionrange/?format=csv
     categories:
       - Horizontal_Resolution_Range
+    version: 13.6
 
 - name: gcmd_verticalresolutionrange
   module: gcmd_vocabulary
@@ -95,6 +103,7 @@
     url: https://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme/verticalresolutionrange/?format=csv
     categories:
       - Vertical_Resolution_Range
+    version: 13.6
 
 - name: gcmd_temporalresolutionrange
   module: gcmd_vocabulary
@@ -103,6 +112,7 @@
     url: https://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme/temporalresolutionrange/?format=csv
     categories:
       - Temporal_Resolution_Range
+    version: 13.6
 
 - name: gcmd_project
   module: gcmd_vocabulary
@@ -113,6 +123,7 @@
       - Bucket
       - Short_Name
       - Long_Name
+    version: 13.6
 
 - name: gcmd_rucontenttype
   module: gcmd_vocabulary
@@ -120,8 +131,10 @@
   kwargs:
     url: https://gcmd.earthdata.nasa.gov/kms/concepts/concept_scheme/rucontenttype/?format=csv
     categories:
+      - URLContentType
       - Type
       - Subtype
+    version: 13.6
 
 - name: cf_standard_name
   module: cf_vocabulary
