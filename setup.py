@@ -27,12 +27,6 @@ if path.exists(path.join(here, readme_file)):
     long_description = open(path.join(here, readme_file)).read()
     long_description_content_type='text/markdown'
 
-class update_vocabularies(install_scripts):
-    def run(self):
-        install_scripts.run(self)
-        import pythesint as pti
-        pti.update_all_vocabularies()
-
 setup(
     name=NAME,
 
@@ -82,5 +76,4 @@ setup(
 
     keywords='metadata standards thesaurus vocabulary',
 
-    cmdclass = {'install_scripts': update_vocabularies}
 )
