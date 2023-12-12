@@ -43,6 +43,7 @@ jobs:
   build_publish_package:
     runs-on: 'ubuntu-latest'
     needs: tests
+    if: github.event_name == 'release'
     steps:
     - uses: actions/checkout@v4
 
@@ -52,13 +53,11 @@ jobs:
         python-version: '3'
 
     - name: Build Python package
-      if: github.event_name == 'release'
       run: >
         PYTHESINT_RELEASE="${{ github.ref_name }}"
         python setup.py sdist bdist_wheel
 
     - name: Publish Python package
-      if: github.event_name == 'release'
       uses: pypa/gh-action-pypi-publish@release/v1
       with:
         # Storing the PyPI URL in the repositories' secrets makes
