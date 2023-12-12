@@ -52,6 +52,9 @@ jobs:
       with:
         python-version: '3'
 
+    - name: Install build tools
+      run: pip install setuptools wheel
+
     - name: Build Python package
       run: >
         PYTHESINT_RELEASE="${{ github.ref_name }}"
