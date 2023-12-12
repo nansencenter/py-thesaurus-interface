@@ -7,22 +7,24 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    env:
+      latest: ${{ matrix.python_version == '3.11' && 'true' || '' }}
     strategy:
       matrix:
-        version:
-          - {'python': '3.6', 'latest': false}
-          - {'python': '3.7', 'latest': false}
-          - {'python': '3.8', 'latest': false}
-          - {'python': '3.9', 'latest': false}
-          - {'python': '3.10', 'latest': false}
-          - {'python': '3.11', 'latest': true}
+        python_version:
+          - '3.6'
+          - '3.7'
+          - '3.8'
+          - '3.9'
+          - '3.10'
+          - '3.11'
     steps:
     - uses: actions/checkout@v4
 
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python.version }}
+        python-version: ${{ matrix.python_version }}
 
     - name: Install dependencies
       run: |
@@ -33,7 +35,7 @@ jobs:
       run: coverage run --omit=pythesint/tests/* --source=pythesint setup.py test
 
     - name: Publish coverage
-      if: ${{ matrix.version.latest }}
+      if: ${{ env.latest }}
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: coveralls --service=github
