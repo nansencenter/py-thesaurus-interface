@@ -23,7 +23,7 @@ def _process_config():
     # http://stackoverflow.com/questions/4821104/python-dynamic-instantiation-from-string-name-of-a-class-in-dynamically-imported
 
     # load config file
-    config = yaml.load(resource_string(__name__, 'pythesintrc.yaml'), Loader=yaml.FullLoader)
+    config = yaml.safe_load(resource_string(__name__, 'pythesintrc.yaml'))
     current_module = __import__(__name__)
 
     # add get_ and update_ functions
