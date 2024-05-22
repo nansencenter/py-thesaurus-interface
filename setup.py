@@ -30,8 +30,6 @@ if path.exists(path.join(here, readme_file)):
 setup(
     name=NAME,
 
-    version=os.getenv('PYTHESINT_RELEASE', '0.0.0dev').lstrip('v'),
-
     description='A Python interface to various metadata vocabularies',
     long_description=long_description,
     long_description_content_type=long_description_content_type,
@@ -53,8 +51,6 @@ setup(
     setup_requires=REQS,
 
     install_requires=REQS,
-
-    test_suite='pythesint.tests',
 
     license='GPLv3',
 
