@@ -3,3 +3,32 @@ requires = ["setuptools", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
+
+[project]
+name = "pythesint"
+description = "A Python interface to various metadata vocabularies"
+authors = [
+    {name = "Morten W. Hansen"},
+    {name = "Anton A. Korosov", email="anton.korosov@nersc.no"},
+    {name = "Aleksander Vines"}
+]
+license = {file = "LICENSE"}
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Plugins",
+    "Environment :: Console",
+    "Intended Audience :: Information Technology",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Topic :: Scientific/Engineering",
+    "Topic :: Scientific/Engineering :: Atmospheric Science",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+    "Topic :: Utilities",
+]
+keywords = ["metadata", "standards", "thesaurus", "vocabulary"]
+dependencies = ["PyYAML", "requests", 'xdg;platform_system!="Windows"']
+urls = {Repository = "https://github.com/nansencenter/py-thesaurus-interface"}
+dynamic = ["version"]
