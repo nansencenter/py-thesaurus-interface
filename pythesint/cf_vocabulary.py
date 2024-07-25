@@ -1,7 +1,9 @@
 from __future__ import absolute_import
-
 from xml.dom.minidom import parseString
+
 import requests
+from rapidfuzz.fuzz import partial_ratio, ratio
+
 from pythesint.json_vocabulary import JSONVocabulary
 
 
@@ -55,3 +57,6 @@ class CFVocabulary(JSONVocabulary):
                 cf_list.append(stdname)
         return cf_list
 
+    def fuzzy_search(self, search_string):
+        return self._fuzzy_search(search_string, scorer=ratio,
+                                  results_limit=10, min_score=90.0)
