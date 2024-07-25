@@ -1,5 +1,10 @@
 from collections import OrderedDict
 
+from rapidfuzz.fuzz import token_set_ratio
+from rapidfuzz.process import extract
+from rapidfuzz.utils import default_process
+
+
 class Vocabulary(object):
     def __init__(self, name, **kwargs):
         self.name = name
@@ -104,3 +109,29 @@ class Vocabulary(object):
     def get_list(self):
         raise NotImplementedError
 
+    def _fuzzy_search(self, search_string, scorer=token_set_ratio, processor=default_process,
+                     results_limit=10, min_score=50.0):
+        """Perform a fuzzy search on the vocabulary.
+        Fully parameterized, meant to be called by self.fuzzy_search()
+        """
+        terms_list = self.get_list()
+        choices = (' '.join(ordered_dict.values()).lower() for ordered_dict in terms_list)
+        # returns a list of tuples (choice, similarity, index)
+        # similarity is a float in [0.0, 100.0], 100.0 meaning the
+        # search string is a subset of the choice string
+        results = extract(search_string.lower(), choices,
+                          scorer=scorer, processor=processor, limit=results_limit)
+
+        # find results matching the minimmum similarity score
+        # the results list is sorted by decreasing similarity score
+        max_index = 0
+        for i, result in enumerate(results):
+            max_index = i
+            if result[1] < min_score:
+                break
+
+        return [terms_list[results[i][2]] for i in range(max_index)]
+
+    def fuzzy_search(self, search_string):
+        """Perform a fuzzy search on the vocabulary terms"""
+        return self._fuzzy_search(search_string)

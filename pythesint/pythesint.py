@@ -42,6 +42,7 @@ def _process_config():
                 'search_'+cnf['name']+'_list',
                 vocabulary.search)
         setattr(current_module, 'update_'+cnf['name'], vocabulary.update)
+        setattr(current_module, 'fuzzy_search_' + cnf['name'], vocabulary.fuzzy_search)
 
 vocabularies = {}
 _process_config()
