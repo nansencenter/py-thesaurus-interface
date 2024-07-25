@@ -30,6 +30,6 @@ classifiers = [
     "Topic :: Utilities",
 ]
 keywords = ["metadata", "standards", "thesaurus", "vocabulary"]
-dependencies = ["PyYAML", "requests", "xdg;platform_system != 'Windows'"]
+dependencies = ["PyYAML", "rapidfuzz", "requests", "xdg;platform_system != 'Windows'"]
 urls = {Repository = "https://github.com/nansencenter/py-thesaurus-interface"}
 dynamic = ["version"]
