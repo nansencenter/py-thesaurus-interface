@@ -122,7 +122,7 @@ class Vocabulary(object):
         results = extract(search_string.lower(), choices,
                           scorer=scorer, processor=processor, limit=results_limit)
 
-        # find results matching the minimmum similarity score
+        # find results matching the minimum similarity score
         # the results list is sorted by decreasing similarity score
         max_index = 0
         for i, result in enumerate(results):
