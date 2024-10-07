@@ -8,7 +8,7 @@ from __future__ import absolute_import
 from collections import OrderedDict
 
 import unittest
-from mock.mock import MagicMock
+import unittest.mock as mock
 
 from pythesint.vocabulary import Vocabulary
 
@@ -33,19 +33,19 @@ class VocabularyTest(unittest.TestCase):
 
     def test_find_keyword_not_found(self):
         vocab = Vocabulary('VOCAB MOCK')
-        vocab.get_list = MagicMock(return_value=self.test_list)
+        vocab.get_list = mock.MagicMock(return_value=self.test_list)
         with self.assertRaises(IndexError):
             vocab.find_keyword('Horse')
 
     def test_find_keyword(self):
         vocab = Vocabulary('VOCAB MOCK')
-        vocab.get_list = MagicMock(return_value=self.test_list)
+        vocab.get_list = mock.MagicMock(return_value=self.test_list)
         self.assertEqual(vocab.find_keyword('dog'), self.dog)
         self.assertEqual(vocab.find_keyword('Animal'), self.animal)
 
     def test_search_keyword(self):
         vocab = Vocabulary('VOCAB MOCK')
-        vocab.get_list = MagicMock(return_value=self.test_list)
+        vocab.get_list = mock.MagicMock(return_value=self.test_list)
         self.assertEqual(vocab.search('dog'), [self.dog])
         self.assertEqual(vocab.search('Animal'), [self.cat,
                                                   self.cat2,
@@ -55,7 +55,7 @@ class VocabularyTest(unittest.TestCase):
 
     def test_no_duplicate_in_search(self):
         vocab = Vocabulary('VOCAB MOCK')
-        vocab.get_list = MagicMock(return_value=self.test_list)
+        vocab.get_list = mock.MagicMock(return_value=self.test_list)
         self.assertEqual(vocab.search('Cat'), [self.cat, self.cat2])
 
     def test_no_empty_dict_in_sort_output(self):
@@ -93,6 +93,29 @@ class VocabularyTest(unittest.TestCase):
                 OrderedDict([('class', 'Animal'), ('kind', 'Mouse'), ('Name', '')]),
                 OrderedDict([('class', 'Construction'), ('kind', 'House'), ('Name', '')]),
             ])
+
+    def test_fuzzy_search(self):
+        """Test that we get results in the right order using fuzzy
+        search
+        """
+        vocabulary = Vocabulary('test')
+        with mock.patch.object(vocabulary, 'get_list') as mock_get_list:
+            d1 = {'a': 'foo', 'b': 'bar'}
+            d2 = {'a': 'baz', 'b': 'qux'}
+            d3 = {'a': 'quz', 'b': 'quux'}
+            mock_get_list.return_value = [d1, d2, d3]
+
+            self.assertEqual(vocabulary._fuzzy_search('baz', min_score=10.), [d2, d1, d3])
+            self.assertEqual(vocabulary._fuzzy_search('baz', min_score=30.), [d2, d1])
+            self.assertEqual(vocabulary._fuzzy_search('baz', min_score=50.), [d2])
+
+    def test_default_fuzzy_search(self):
+        """Test that _fuzzy_search is called with the default parameters
+        """
+        vocabulary = Vocabulary('test')
+        with mock.patch.object(vocabulary, '_fuzzy_search') as mock_fuzzy_search:
+            vocabulary.fuzzy_search('foo')
+        mock_fuzzy_search.assert_called_once_with('foo')
 
 
 if __name__ == "__main__":
