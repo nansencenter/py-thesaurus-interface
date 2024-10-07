@@ -126,5 +126,10 @@ class Vocabulary(object):
         return [terms_list[result[2]] for result in results]
 
     def fuzzy_search(self, search_string):
-        """Perform a fuzzy search on the vocabulary terms"""
+        """Perform a fuzzy search on the vocabulary terms.
+        Uses default parameters, can be overriden in subclasses.
+        The default scorer uses token set ratio, which gives the
+        highest score when one of the strings is a subset of the other.
+        Words order does not matter.
+        """
         return self._fuzzy_search(search_string)
