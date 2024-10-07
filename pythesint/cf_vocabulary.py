@@ -58,5 +58,11 @@ class CFVocabulary(JSONVocabulary):
         return cf_list
 
     def fuzzy_search(self, search_string):
+        """Use a simple ratio scorer (Lehvenstein distance)
+        We want to find variable names which are close to the search
+        string, but it is rare that one will be a subset of the other,
+        so a simple ratio scorer is more suited than the default token
+        set ratio scorer.
+        """
         return self._fuzzy_search(search_string, scorer=ratio,
                                   results_limit=10, min_score=90.0)
