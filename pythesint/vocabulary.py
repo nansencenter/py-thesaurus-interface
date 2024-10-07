@@ -110,7 +110,7 @@ class Vocabulary(object):
         raise NotImplementedError
 
     def _fuzzy_search(self, search_string, scorer=token_set_ratio, processor=default_process,
-                     results_limit=10, min_score=50.0):
+                      results_limit=10, min_score=50.0):
         """Perform a fuzzy search on the vocabulary.
         Fully parameterized, meant to be called by self.fuzzy_search()
         """
@@ -120,17 +120,10 @@ class Vocabulary(object):
         # similarity is a float in [0.0, 100.0], 100.0 meaning the
         # search string is a subset of the choice string
         results = extract(search_string.lower(), choices,
-                          scorer=scorer, processor=processor, limit=results_limit)
+                          scorer=scorer, processor=processor,
+                          limit=results_limit, score_cutoff=min_score)
 
-        # find results matching the minimum similarity score
-        # the results list is sorted by decreasing similarity score
-        max_index = 0
-        for i, result in enumerate(results):
-            max_index = i
-            if result[1] < min_score:
-                break
-
-        return [terms_list[results[i][2]] for i in range(max_index)]
+        return [terms_list[result[2]] for result in results]
 
     def fuzzy_search(self, search_string):
         """Perform a fuzzy search on the vocabulary terms"""
