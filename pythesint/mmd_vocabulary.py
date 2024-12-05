@@ -35,26 +35,6 @@ class MMDVocabulary(JSONVocabulary):
                 return node
         return None
 
-    @staticmethod
-    def _get_local_file_github_blob_sha(file_path):
-        """Get the local file's blob SHA hash as used by github"""
-        if os.path.isfile(file_path):
-            with open(file_path, 'rb') as f_h:
-                contents = f_h.read()
-            header_string = f"blob {len(contents)}\0"
-            blob = bytes(header_string, encoding='utf-8') + contents
-            return hashlib.sha1(blob).hexdigest()
-        return None
-
-    def _get_remote_file_github_blob_sha(self, version):
-        """Get the remote file's blob sha hash from github"""
-        endpoint = f"https://api.github.com/repos/metno/mmd/git/trees/{version}:thesauri"
-        result = json.loads(requests.get(endpoint).text)
-        for file_info in result['tree']:
-            if file_info['path'] == 'mmd-vocabulary.xml':
-                return file_info['sha']
-        return None
-
     def _download_data_file(self, version=None):
         """Download the file containing all the vocabularies
         definitions if it is not already present
@@ -64,12 +44,7 @@ class MMDVocabulary(JSONVocabulary):
         else:
             url = self.base_url
 
-        # by comparing the hashes, we can check if we need to
-        # download the file or not
-        local_sha = self._get_local_file_github_blob_sha(self.base_file)
-        remote_sha = self._get_remote_file_github_blob_sha(version)
-
-        if (not os.path.isfile(self.base_file) or local_sha != remote_sha):
+        if not os.path.isfile(self.base_file):
             with closing(requests.get(url, stream=True)) as response:
                 with open(self.base_file, 'wb') as f_h:
                     f_h.write(response.content)
