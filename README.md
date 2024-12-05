@@ -1,4 +1,4 @@
-[![Run unit tests and build Python package](https://github.com/nansencenter/py-thesaurus-interface/actions/workflows/tests_build.yml/badge.svg)](https://github.com/nansencenter/py-thesaurus-interface/actions/workflows/tests_build.yml)
+[![Run unit tests and build Python package](https://github.com/nansencenter/py-thesaurus-interface/actions/workflows/ci.yml/badge.svg)](https://github.com/nansencenter/py-thesaurus-interface/actions/workflows/ci.yml)
 [![Coverage Status](https://coveralls.io/repos/github/nansencenter/py-thesaurus-interface/badge.svg?branch=master)](https://coveralls.io/github/nansencenter/py-thesaurus-interface?branch=master)
 
 ## py-thesaurus-interface
