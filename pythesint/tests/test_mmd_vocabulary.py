@@ -87,59 +87,12 @@ class MMDVocabularyTest(unittest.TestCase):
             self.assertCountEqual(self.voc._fetch_online_data(version=version), expected_list)
             mock_download.assert_called_with(version='a5c8573')
 
-    def test_get_local_file_github_blob_sha(self):
-        """Test that the correct hash is returned"""
-        buffer = io.BytesIO(b'file contents\n')
-        with mock.patch('pythesint.mmd_vocabulary.open') as mock_open, \
-                mock.patch('os.path.isfile', return_value=True):
-            mock_open.return_value.__enter__.return_value = buffer
-            self.assertEqual(
-                MMDVocabulary._get_local_file_github_blob_sha('test.txt'),
-                'd03e2425cf1c82616e12cb430c69aaa6cc08ff84')
-
-    def test_get_remote_file_github_blob_sha(self):
-        """Test that the correct sha is fetched from github's API"""
-        response = '''{
-            "sha": "20b5eab06834b02b609097e9285dba1e2d266fe0",
-            "url": "https://api.github.com/repos/metno/mmd/git/trees/20b5eab06834b02b609097e9285dba1e2d266fe0",
-            "tree": [
-                {
-                "path": "mmd-vocabulary.ttl",
-                "mode": "100644",
-                "type": "blob",
-                "sha": "21bc582a136d0dac8461f66e169f25e067f05e3b",
-                "size": 89829,
-                "url": "https://api.github.com/repos/metno/mmd/git/blobs/21bc582a136d0dac8461f66e169f25e067f05e3b"
-                },
-                {
-                "path": "mmd-vocabulary.xml",
-                "mode": "100644",
-                "type": "blob",
-                "sha": "4105803f5f54789116ba840afb5b4e7c22cb4286",
-                "size": 114697,
-                "url": "https://api.github.com/repos/metno/mmd/git/blobs/4105803f5f54789116ba840afb5b4e7c22cb4286"
-                }
-            ],
-            "truncated": false
-            }
-            '''
-        with mock.patch('requests.get') as mock_get:
-            mock_get.return_value.text = response
-            self.assertEqual(
-                self.voc._get_remote_file_github_blob_sha('master'),
-                '4105803f5f54789116ba840afb5b4e7c22cb4286')
-            mock_get.assert_called_with(
-                'https://api.github.com/repos/metno/mmd/git/trees/master:thesauri')
-
 
 class DownloadTestCase(unittest.TestCase):
     """Tests for the MMDVocabulary._download_data_file() method"""
 
     def setUp(self):
         self.voc = MMDVocabulary(name='test_voc', collection_label='foo')
-        self.mock_local_sha = mock.patch.object(self.voc, '_get_local_file_github_blob_sha').start()
-        self.mock_remote_sha = mock.patch.object(
-            self.voc, '_get_remote_file_github_blob_sha').start()
         self.mock_open = mock.patch('pythesint.mmd_vocabulary.open').start()
         self.mock_get = mock.patch('requests.get').start()
         self.addCleanup(mock.patch.stopall)
@@ -150,24 +103,6 @@ class DownloadTestCase(unittest.TestCase):
             self.voc._download_data_file()
 
         self.mock_get.assert_called_with(self.voc.base_url, stream=True)
-
-    def test_download_data_file_if_sha_does_not_match(self):
-        """The file should be downloaded if the sha hashes do not match"""
-        with mock.patch('os.path.isfile', return_value=True):
-            self.mock_local_sha.return_value = 'a4b5'
-            self.mock_remote_sha.return_value = 'b4c2'
-            self.voc._download_data_file()
-
-        self.mock_get.assert_called_with(self.voc.base_url, stream=True)
-
-    def test_dont_download_data_file_if_sha_match(self):
-        """The file should not be downloaded if the sha hashes match"""
-        with mock.patch('os.path.isfile', return_value=True):
-            self.mock_local_sha.return_value = 'a4b5'
-            self.mock_remote_sha.return_value = 'a4b5'
-            self.voc._download_data_file()
-
-        self.mock_get.assert_not_called()
 
     def test_download_data_file_version(self):
         """Test that the specified version is downloaded"""
