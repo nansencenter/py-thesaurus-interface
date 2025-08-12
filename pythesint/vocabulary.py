@@ -108,6 +108,9 @@ class Vocabulary(object):
 
     def get_list(self):
         raise NotImplementedError
+    
+    def get_version(self):
+        return None
 
     def _fuzzy_search(self, search_string, scorer=token_set_ratio, processor=default_process,
                       results_limit=10, min_score=50.0):

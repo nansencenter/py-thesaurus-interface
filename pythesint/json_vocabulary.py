@@ -8,18 +8,24 @@ from pythesint.pathsolver import DATA_HOME
 
 class JSONVocabulary(Vocabulary):
 
+    version_attribute = None
+
     def _fetch_online_data(self, version=None):
         raise NotImplementedError
 
     def get_relative_path(self):
         return os.path.join('pythesint', 'json', '%s_list.json' % self.name.lower())
 
-    def get_list(self):
-        ''' Read list from JSON '''
+    def _get_raw_list(self):
+        '''Return list from JSON without any filtering'''
         if not os.path.exists(self.get_filepath()):
             self.update()
         with open(self.get_filepath(), 'r') as opened_file:
-            result = json.load(opened_file)
+            return json.load(opened_file)
+
+    def get_list(self):
+        ''' Read list from JSON '''
+        result = self._get_raw_list()
         return self.sort_list(result)
 
     def update(self, version=None):
@@ -39,3 +45,10 @@ class JSONVocabulary(Vocabulary):
 
     def get_filepath(self):
         return os.path.join(DATA_HOME, self.get_relative_path())
+
+    def get_version(self):
+        if self.version_attribute:
+            for kw in self._get_raw_list():
+                if self.version_attribute in kw:
+                    return kw[self.version_attribute]
+        return None

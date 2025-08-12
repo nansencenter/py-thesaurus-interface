@@ -39,6 +39,9 @@ def _process_config():
                 'get_'+cnf['name']+'_list',
                 vocabulary.get_list)
         setattr(current_module,
+                'get_'+cnf['name']+'_version',
+                vocabulary.get_version)
+        setattr(current_module,
                 'search_'+cnf['name']+'_list',
                 vocabulary.search)
         setattr(current_module, 'update_'+cnf['name'], vocabulary.update)
