@@ -8,7 +8,7 @@ from pythesint.pathsolver import DATA_HOME
 
 class JSONVocabulary(Vocabulary):
 
-    version_attribute = None
+    version_attributes = None
 
     def _fetch_online_data(self, version=None):
         raise NotImplementedError
@@ -47,8 +47,8 @@ class JSONVocabulary(Vocabulary):
         return os.path.join(DATA_HOME, self.get_relative_path())
 
     def get_version(self):
-        if self.version_attribute:
+        if self.version_attributes:
             for kw in self._get_raw_list():
-                if self.version_attribute in kw:
-                    return kw[self.version_attribute]
+                if set(self.version_attributes).issubset(set(kw)):
+                    return '-'.join(kw[v] for v in self.version_attributes)
         return None

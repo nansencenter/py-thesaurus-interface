@@ -9,7 +9,7 @@ from pythesint.json_vocabulary import JSONVocabulary
 
 class CFVocabulary(JSONVocabulary):
 
-    version_attribute = 'omvm:origVocVersionId'
+    version_attributes = ('omvm:origVocVersionId',)
 
     def _fetch_online_data(self, version=None):
         if version:
