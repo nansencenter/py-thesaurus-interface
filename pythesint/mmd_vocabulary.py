@@ -17,6 +17,7 @@ from pythesint.pathsolver import DATA_HOME
 class MMDVocabulary(JSONVocabulary):
     base_url = 'https://raw.githubusercontent.com/metno/mmd/master/thesauri/mmd-vocabulary.xml'
     base_file = os.path.join(DATA_HOME, 'pythesint', 'mmd-vocabulary.xml')
+    version_attributes = ('version',)
 
     @staticmethod
     def get_subnode_data(node, subnode_name):

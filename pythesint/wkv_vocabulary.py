@@ -8,6 +8,8 @@ from pythesint.json_vocabulary import JSONVocabulary
 
 
 class WKVVocabulary(JSONVocabulary):
+    version_attribute = None
+
     def _fetch_online_data(self, version=None):
         '''Return list of Well Known Variables from Nansat'''
         if version:
@@ -28,4 +30,3 @@ class WKVVocabulary(JSONVocabulary):
         wkv_list.extend(yaml.safe_load(r.text))
 
         return wkv_list
-

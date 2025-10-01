@@ -10,6 +10,8 @@ from pythesint.json_vocabulary import JSONVocabulary
 
 class GCMDVocabulary(JSONVocabulary):
 
+    version_attributes = ('Keyword Version', 'Revision')
+
     def _check_categories(self, categories):
         '''Print a warning if the categories are not the expected ones
         '''
